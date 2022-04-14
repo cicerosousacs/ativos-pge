@@ -15,7 +15,15 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
+#DO PROJETO####
+gem 'devise' #cria e gerencia o login e usuarios
+gem 'rails-i18n', '~> 5.1' #tradução
+gem 'tty-spinner' #animalçoes de progresso
+gem 'awesome_print' #ajuda a visualizar melhor no rails console, "ap" antes
+gem 'kaminari' #paginação
+gem 'kaminari-i18n' #tradução da paginação
+gem 'cocoon' #formularios aninhados
+#########
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
