@@ -1,0 +1,2 @@
+module AtivoPge::WelcomeHelper
+end
