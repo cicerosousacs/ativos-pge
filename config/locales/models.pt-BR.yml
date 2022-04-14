@@ -1,0 +1,28 @@
+'pt-BR':
+  activerecord:
+    models:
+      admin:
+        one: Administradores
+        other: Administradores
+      ativo:
+        one: Ativo
+        other: Ativos
+    attributes:
+      admin:
+        id: ID
+        login: "Logar-se"
+        email: Email
+        created_at: Criado em
+        updated_at: Atualizado em
+        password: Senha
+        password_confirmation: Confirmação de Senha
+      ativo:
+        id: ID
+        type: Tipo
+        brand: Marca
+        model: Modelo
+        serial: Serial
+        tombo: Tombo
+        specification: Especificaçôes
+        created_at: Criado em
+        updated_at: Atualizado em
