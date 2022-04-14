@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   namespace :ativo_pge do
+    get 'admins/index'
+  end
+
+  namespace :ativo_pge do
     get 'welcome/index'
   end
+  
   devise_for :admins
 
   root to: 'ativo_pge/welcome#index'
