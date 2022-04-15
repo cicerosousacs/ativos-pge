@@ -1,2 +1,104 @@
-<h1>AtivoPge::Ativos#index</h1>
-<p>Find me in app/views/ativo_pge/ativos/index.html.erb</p>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div>
+      <%= link_to new_ativo_pge_ativo_path do %>
+        <button class="btn btn-success" type="button">Novo Ativo</button>
+      <% end %>
+      <button type="button" id="btn-vincular" class="btn btn-info">Vincular ao Déposito</button>
+    </div>
+    <div>
+      <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
+        <div class="input-group">
+          <%= form_tag(ativo_pge_admins_path, method: :post) do %>
+            <%= text_field_tag 'search', nil, class:"form-control border-1 small", placeholder:'Tombo, Serial ou Modelo'%>
+          <% end %>
+          <div class="input-group-append">
+            <%= button_tag type:'submit', class:"btn btn-primary" do %>
+              <i class="fas fa-search fa-sm"></i>
+            <% end %>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th style="width: 10px">
+            <input type="checkbox" id="all_ativos" title="Marcar todos os Ativos"></input>
+          </th>
+          <th>Descrição</th>
+          <th>Tombo</th>
+          <th>Serial</th>
+          <th>
+          <th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ativos.each do |ativo| %>
+          <tr>
+            <td><%= check_box_tag("ativos_ids[]", ativo.id, false, class:'marcar') %></td>
+            <td><%= ativo.ativo_description %></td>
+            <td><%= ativo.tombo %></td>
+            <td><%= ativo.serial %></td>
+            <td style="width: 10px">
+              <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+            <td style="width: 10px">
+              <%= link_to ativo_pge_ativo_path(ativo), method: :delete, data: {confirm: "Certeza?"} do %>
+                <i class="fas fa-trash"></i>
+              <% end %>  
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+    <div class="card-header py-3">
+      <div></div>
+      <div>
+        <%= paginate @ativos %>
+      </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'ativos' %>
+
+<script>
+  $(document).ready(function () {
+    $('#btn-vincular').click(function () {
+      var ativos_ids = $('.marcar:checked').map(function () {
+          return $(this).val();
+      }).get();
+      if (ativos_ids == '') {
+          alert('Selecione pelo menos um Ativo');
+      } else {
+          if (this.id == 'btn-vincular') {
+              $.post('<%= url_for({ :controller => 'ativos', :action => 'vincular_deposito' })%>?ativos_ids=' + ativos_ids)
+          }
+      }
+    });
+
+    $("#all_ativos").change(function () {
+        $('.marcar').prop('checked', $(this).prop("checked"));
+    });
+
+    $("#all_ativos").click(function(){
+        $('.marcar').not(this).prop('checked', this.checked);
+    });
+
+    var all_ativos = $("#all_ativos");
+    all_ativos.click(function () {
+      if ( $(this).is(':checked') ){
+        $('.marcar').prop("checked", true);
+      }else{
+        $('.marcar').prop("checked", false);
+      }
+    });
+  });
+</script>
+
+

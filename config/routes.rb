@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   namespace :ativo_pge do
     resources :admins
-    resources :ativos
+    resources :ativos do
+      collection do
+        match :vincular_deposito, via: %i[get post]
+        get :vincular_deposito
+      end
+    end
+    
   end
 
   namespace :ativo_pge do

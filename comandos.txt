@@ -1,11 +1,44 @@
-TABELA AQUISIÇÂO
+TABLE ACQUISITION(aquisição)
 
-rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date  contract_number:string company:string interested_party:string modality:interger source:interger
+	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
+	contract_number:string company:string interested_party:string modality:interger source:interger
 
-TABELA ATIVOS:
+TABLE ACTIVE(ativo)
 
-rails g model Ativo type:string brand:string model:string serial:string tombo:string specification:text acquisition:references
+	rails g model Active type:string brand:string model:string serial:string tombo:string
+	specification:text acquisition:references
 
-rails g controller ativo_pge::admins index
-rails g controller ativo_pge::ativos index
-rails g controller ativo_pge::acquisitions index
+TABLE USER(usuario)
+
+	rails g model User name:string email:string has_many_bond:boolean
+
+TABLE AREA
+
+	rails g model Area description:string
+
+TABLE SUBAREA
+
+	rails g model Subarea area:references description:string
+
+TABLE BOND(vinculo)
+
+	rails g model Bond subarea:references user:references note:text
+
+TABLE 
+
+#########################################
+
+CONTROLLER
+
+	rails g controller ativo_pge::admins index
+	
+	rails g controller ativo_pge::ativos index
+	rails g controller ativo_pge::acquisitions index
+	
+	rails g controller ativo_pge::users index
+	rails g controller ativo_pge::areas index
+	rails g controller ativo_pge::subareas index
+	
+	rails g controller ativo_pge::bonds index
+	rails g controller ativo_pge::
+	

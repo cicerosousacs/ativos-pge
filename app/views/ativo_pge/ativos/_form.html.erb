@@ -1,0 +1,61 @@
+<% if @ativo.errors.any? %>
+  <div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <% @ativo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary"></h6>
+  </div>
+  <div class="card-body">
+    <%= form_with(model: [ :ativo_pge, @ativo ], local: true ) do |form| %>
+      <div class="row g-3">
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :type %> <br>
+          <%= form.text_field :type, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :brand %> <br>
+          <%= form.text_field :brand, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :model %> <br>
+          <%= form.text_field :model, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :serial %> <br>
+          <%= form.text_field :serial, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :tombo %> <br>
+          <%= form.text_field :tombo, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :contract_number, "Nº Processo" %>
+          <%= form.select("acquisition_id", @acquisition_selects, {include_blank: 'Selecione...'}, class:"form-control") %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :specification %> <br>
+          <%= form.text_area :specification, class:"form-control" %>
+        </div>
+      </div>
+
+      <hr/>
+      <code>* Campos obrigatorios</code>
+      <div class="text-right">
+        <%= form.submit "Salvar", class:"btn btn-primary" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

@@ -29,27 +29,7 @@ namespace :dev do
         password_confirmation: DEFAULT_PASSWORD
       )
     end
-    
-    desc "Adicionando Tipos"
-    task add_tipo: :environment do
-      file_name = 'types.txt'
-      file_path = File.join(DEFAULT_FILE_PATH, file_name)
-  
-      File.open(file_path, 'r').each do |line|
-      Tipo.create!(descricao: line.strip)
-      end
-    end
-
-    desc "Adicionando Marcas"
-    task add_marca: :environment do
-      file_name = 'marcas.txt'
-      file_path = File.join(DEFAULT_FILE_PATH, file_name)
-  
-      File.open(file_path, 'r').each do |line|
-      Marca.create!(nome: line.strip)
-      end
-    end
-  
+     
     desc "Adicionando Condicoes"
     task add_condicao: :environment do
       file_name = 'condicao.txt'
