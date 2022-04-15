@@ -1,0 +1,11 @@
+TABELA AQUISIÇÂO
+
+rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date  contract_number:string company:string interested_party:string modality:interger source:interger
+
+TABELA ATIVOS:
+
+rails g model Ativo type:string brand:string model:string serial:string tombo:string specification:text acquisition:references
+
+rails g controller ativo_pge::admins index
+rails g controller ativo_pge::ativos index
+rails g controller ativo_pge::acquisitions index

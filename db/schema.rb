@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_14_183126) do
+ActiveRecord::Schema.define(version: 2022_04_15_030610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acquisitions", force: :cascade do |t|
+    t.string "item", null: false
+    t.string "quantity", null: false
+    t.float "value", null: false
+    t.string "manager", null: false
+    t.date "acquisition_date", null: false
+    t.string "contract_number"
+    t.string "company", null: false
+    t.string "interested_party", null: false
+    t.integer "modality", null: false
+    t.integer "source", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +42,18 @@ ActiveRecord::Schema.define(version: 2022_04_14_183126) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "ativos", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "brand", null: false
+    t.string "model", null: false
+    t.string "serial", null: false
+    t.string "tombo", null: false
+    t.text "specification"
+    t.bigint "acquisition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["acquisition_id"], name: "index_ativos_on_acquisition_id"
+  end
+
+  add_foreign_key "ativos", "acquisitions"
 end

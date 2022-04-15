@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  brand: MyString
+  model: MyString
+  serial: MyString
+  tombo: MyString
+  specification: MyText
+  acquisition: one
+
+two:
+  type: 
+  brand: MyString
+  model: MyString
+  serial: MyString
+  tombo: MyString
+  specification: MyText
+  acquisition: two

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :ativo_pge do
-    get 'admins/index'
+    resources :admins
+    resources :ativos
   end
 
   namespace :ativo_pge do

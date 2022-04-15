@@ -1,4 +1,40 @@
-<h1>Administradores</h1>
-<p>Find me in app/views/ativo_pge/admins/index.html.erb</p>
+<div class="row ">
+  <div class="col-lg-12">
+    <h1>Administradores</h1>    
+  </div>
+</div>
 
- 
+<div>
+  <%= link_to new_ativo_pge_admin_path do %>
+    <i class="fa fa-plus btn-sm btn-success" style="color:write"></i>
+  <% end %>
+</div>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nome
+      <th>Email
+      <th>Status
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admins.each do |admin| %>
+      <tr>
+        <td><#%= admin.nome %></td>
+        <td><%= admin.email %></td>
+        <td><#%= admin.check_status %></td>
+        <td style="width: 10px">
+          <%= link_to edit_ativo_pge_admin_path(admin) do %>
+            <i class="fa fa-edit"></i>
+          <% end %>
+        <td style="width: 10px">
+          <%= link_to ativo_pge_admin_path(admin), method: :delete, data: {confirm: "Certeza?"} do %>
+            <i class="fa fa-trash" style="color:red"></i>
+          <% end %>  
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
