@@ -1,5 +1,13 @@
 {
   "name": "ativos-pge",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "4.6.0",
+    "bootstrap-growl-ifightcrime": "^1.1.0",
+    "fontawesome-free": "^1.0.4",
+    "jquery": "3.6.0",
+    "jquery-easing": "^0.0.1",
+    "jquery.easing": "1.4.1",
+    "popper.js": "^1.16.1"
+  }
 }
