@@ -66,7 +66,7 @@ class AtivoPge::AtivosController < AtivosController
   private
 
   def parmas_ativo
-    params.require(:ativo).permit(:type, :brand, :model, :tombo, :serial, :specification, :acquisition_id)
+    params.require(:ativo).permit(:type, :brand, :model, :tombo, :serial, :specification, :acquisition_id, :status)
   end
 
   def set_aivo

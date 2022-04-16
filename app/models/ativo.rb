@@ -37,5 +37,14 @@ class Ativo < ApplicationRecord
     )
   }
 
+  #ENUM STATUS DO ATIVO
+  enum status: { 
+                DISPONIVEL: 'DISPONÍVEL', 
+                VINCULADO: 'VINCULADO', 
+                "VINCULADO EM USO": 'VÍNCULADO EM USO', 
+                DEFEITO: 'DEFEITO', 
+                INSERVIVEL: 'INSERVÍVEL', 
+                "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+              }
 
 end

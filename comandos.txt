@@ -1,14 +1,41 @@
-TABLE ACQUISITION(aquisição)
+TABLE MODEL ACQUISITION(aquisição)
 
 	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
-	contract_number:string company:string interested_party:string modality:interger source:interger
+	contract_number:string company:string interested_party:string modality:integer source:integer
+	
+  enum modality: { 
+						      DISPONIVEL: 'DISPONÍVEL', 
+						      VINCULADO: 'VINCULADO', 
+						      "VINCULADO EM USO": 'VÍNCULADO EM USO', 
+						      DEFEITO: 'DEFEITO', 
+						      INSERVIVEL: 'INSERVÍVEL', 
+						      "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+						    }
+          
+  enum source: { 
+								DISPONIVEL: 'DISPONÍVEL', 
+								VINCULADO: 'VINCULADO', 
+								"VINCULADO EM USO": 'VÍNCULADO EM USO', 
+								DEFEITO: 'DEFEITO', 
+								INSERVIVEL: 'INSERVÍVEL', 
+								"AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+							}
 
-TABLE ACTIVE(ativo)
+TABLE MODEL ACTIVE(ativo)
 
 	rails g model Active type:string brand:string model:string serial:string tombo:string
-	specification:text acquisition:references
+	specification:text acquisition:references state:string
+	
+  enum status: { 
+		            DISPONIVEL: 'DISPONÍVEL', 
+		            VINCULADO: 'VINCULADO', 
+		            "VINCULADO EM USO": 'VÍNCULADO EM USO', 
+		            DEFEITO: 'DEFEITO', 
+		            INSERVIVEL: 'INSERVÍVEL', 
+		            "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+		          }
 
-TABLE USER(usuario)
+TABLE MODEL USER(usuario)
 
 	rails g model User name:string email:string has_many_bond:boolean
 
@@ -26,6 +53,8 @@ TABLE BOND(vinculo)
 
 TABLE 
 
+	rails g model Include_ativo ativo:references status:references note:string
+	
 #########################################
 
 CONTROLLER
