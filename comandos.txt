@@ -4,13 +4,13 @@ TABLE MODEL ACQUISITION(aquisição)
 	contract_number:string company:string interested_party:string modality:integer source:integer
 	
   enum modality: { 
-						      CONCORRÊNCIA: 'CONCORRÊNCIA', 
-						      PREGÃO: 'PREGÃO', 
-						      LEILÃO: 'LEILÃO', 
-						      CONCURSO: 'CONCURSO', 
-						      "COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
-						      "DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
-						    }
+									CONCORRÊNCIA: 'CONCORRÊNCIA', 
+									PREGÃO: 'PREGÃO', 
+									LEILÃO: 'LEILÃO', 
+									CONCURSO: 'CONCURSO', 
+									"COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
+									"DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
+								}
           
   enum source: { 
 								MAPP: 'MAPP', 
@@ -46,7 +46,7 @@ TABLE SUBAREA
 
 TABLE BOND(vinculo)
 
-	rails g model Bond subarea:references user:references note:text
+	rails g model Bond subarea:references user:references note:string
 
 TABLE 
 

@@ -22,7 +22,7 @@ class AtivoPge::AcquisitionsController < AtivosController
   end
 
   def update
-    if @acquisition.update(params_acquisitio)
+    if @acquisition.update(params_acquisition)
       redirect_to ativo_pge_acquisitions_path, notice: "Aquisição atualizada. Parabéns!"
     else
       render :edit
