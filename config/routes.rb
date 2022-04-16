@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :users
     resources :areas
     resources :subareas
+    resources :acquisitions
   end
 
   namespace :ativo_pge do

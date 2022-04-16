@@ -1,0 +1,2 @@
+module AtivoPge::AcquisitionsHelper
+end

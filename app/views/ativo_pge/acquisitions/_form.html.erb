@@ -1,0 +1,82 @@
+<% if @acquisition.errors.any? %>
+  <div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+      <% @acquisition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary"></h6>
+  </div>
+  <div class="card-body">
+    <%= form_with(model: [ :ativo_pge, @acquisition ], local: true ) do |form| %>
+      <div class="row g-3">
+        <div class="form-group col-md-8">
+          <%= form.label :item, "Item" %> <br>
+          <%= form.text_field :item, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <%= form.label :quantity, "Quantidade" %> <br>
+          <%= form.text_field :quantity, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <%= form.label :value, "Valor Aquisição" %> <br>
+          <%= form.text_field :value, class:"form-control"%>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :manager, "Gestor do Contrato" %> <br>
+          <%= form.text_field :manager, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :modality, "Modalidade da Aquisição" %>
+          <%= form.select :modality, Acquisition.modalities.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <code>*</code>
+          <%= form.label :source, "Origem da Aquisição" %>
+          <%= form.select :source, Acquisition.sources.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :interested_party %> <br>
+          <%= form.text_field :interested_party, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= form.label :acquisition_date %> <br>
+          <%= form.date_field :acquisition_date, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= form.label :contract_number, "Nº Contrato" %> <br>
+          <%= form.text_field :contract_number, class:"form-control masc-contrato" %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :company %> <br>
+          <%= form.text_field :company, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :observacao, "Observações" %> <br>
+          <%= form.text_field :empresa_contratada, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-6">
+          <code>*</code>
+          <%= form.label :anexar_contrato, "Anexar Contrato", title:"Apenas arquivos PDF" %>
+          <%= form.file_field :anexo_contrato, class:"form-control-file", id:"file_contrato"%>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :anexar_aditivo, "Anexar Aditivo" %>
+          <%= form.file_field :anexo_aditivo, class:"form-control-file", id:"file_aditivo" %>
+        </div>
+      </div>
+      <hr/>
+      <code>* Campos obrigatorios</code><br>
+      <div class="text-right">
+        <%= form.submit "Salvar", class:"btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

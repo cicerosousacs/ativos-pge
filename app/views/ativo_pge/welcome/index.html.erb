@@ -1,5 +1,58 @@
-<h1>AtivoPge::Welcome#index</h1>
-<p>Find me in app/views/ativo_pge/welcome/index.html.erb</p>
+<div class="row">  
+  <div class="col-lg">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#vinculos" class="d-block card-header py-3" data-toggle="collapse"
+        role="button" aria-expanded="true" aria-controls="vinculos">
+        <h6 class="m-0 font-weight-bold text-primary">Vinculos: <#%= @total_vinculos %></h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="vinculos">
+        <div class="card-body">
+          <#% @vinculos.each do |vinculo| %>
+            <div class="mb-2">
+              <code><#%= vinculo.vinculo_descricao %></code>
+            </div>
+          <#% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card shadow mb-4">
+      <a href="#aquisicao" class="d-block card-header py-3" data-toggle="collapse"
+        role="button" aria-expanded="true" aria-controls="aquisicao">
+        <h6 class="m-0 font-weight-bold text-primary">Aquisições</h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="aquisicao">
+        <div class="card-body">
+          Aqui
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Sair', destroy_admin_session_path, method: :delete %>
+  <div class="col-lg-6">
+    <div class="card shadow mb-4">
+      <a href="#ativos" class="d-block card-header py-3" data-toggle="collapse"
+        role="button" aria-expanded="true" aria-controls="ativos">
+        <h6 class="m-0 font-weight-bold text-primary">Ativos: <#%= @total_ativos %></h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="ativos">
+        <div class="card-body">
+          <code>
+            <#% @tipos.each do |tipo|%>
+              <li style="list-style:none;">
+                <#%= "#{tipo.descricao} - #{tipo.ativos_count}" %>
+              </li>
+            <#% end %>
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
 
