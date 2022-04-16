@@ -1,0 +1,38 @@
+<div class="row ">
+  <div class="col-lg-12">
+    <h1>Áreas</h1>    
+  </div>
+</div>
+
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>
+        <%= link_to new_ativo_pge_area_path do %>
+          <i class="fa fa-plus btn-sm btn-success" style="color:write"></i>
+        <% end %>
+      <th> 
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @areas.each do |area| %>
+      <tr>
+        <td><%= area.description %></td>
+        <td style="width: 10px">
+          <%= link_to edit_ativo_pge_area_path(area) do %>
+            <i class="fa fa-edit"></i>
+          <% end %>
+        <td style="width: 10px">
+          <%= link_to ativo_pge_area_path(area), method: :delete, data: {confirm: "Certeza?"} do %>
+            <i class="fa fa-trash" style="color:red"></i>
+          <% end %>  
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

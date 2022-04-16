@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_15_230553) do
+ActiveRecord::Schema.define(version: 2022_04_16_013708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,12 @@ ActiveRecord::Schema.define(version: 2022_04_15_230553) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "areas", force: :cascade do |t|
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ativos", force: :cascade do |t|
     t.string "type", null: false
     t.string "brand", null: false
@@ -56,5 +62,21 @@ ActiveRecord::Schema.define(version: 2022_04_15_230553) do
     t.index ["acquisition_id"], name: "index_ativos_on_acquisition_id"
   end
 
+  create_table "subareas", force: :cascade do |t|
+    t.bigint "area_id"
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_subareas_on_area_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "has_many_bond"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "ativos", "acquisitions"
+  add_foreign_key "subareas", "areas"
 end

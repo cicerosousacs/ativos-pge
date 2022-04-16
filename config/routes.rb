@@ -7,7 +7,9 @@ Rails.application.routes.draw do
         get :vincular_deposito
       end
     end
-    
+    resources :users
+    resources :areas
+    resources :subareas
   end
 
   namespace :ativo_pge do
