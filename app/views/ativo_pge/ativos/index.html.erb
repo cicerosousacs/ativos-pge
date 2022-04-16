@@ -11,7 +11,7 @@
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
         <div class="input-group">
           <%= form_tag(ativo_pge_admins_path, method: :post) do %>
-            <%= text_field_tag 'search', nil, class:"form-control border-1 small", placeholder:'Tombo, Serial ou Modelo'%>
+            <%= text_field_tag 'search', nil, class:"form-control border-1 small", placeholder:'Faça sua busca'%>
           <% end %>
           <div class="input-group-append">
             <%= button_tag type:'submit', class:"btn btn-primary" do %>
@@ -59,15 +59,10 @@
       </tbody>
     </table>
   </div>
-    <div class="card-header py-3">
-      <div></div>
-      <div>
-        <%= paginate @ativos %>
-      </div>
-  </div>
 </div>
 
-<%= javascript_include_tag 'ativos' %>
+
+<%= javascript_include_tag 'application' %>
 
 <script>
   $(document).ready(function () {
@@ -103,4 +98,4 @@
   });
 </script>
 
-
+<%= paginate @ativos %>

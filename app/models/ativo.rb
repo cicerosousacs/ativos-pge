@@ -27,8 +27,9 @@ class Ativo < ApplicationRecord
 
   # PESQUISA DE ATIVOS
   scope :search, -> (query) { 
-    text = "%#{query}%"
-    search_columns = %w[model tombo serial type brand]
+    order(:created_at, :desc)
+    text = "%#{query}%".upcase
+    search_columns = %w[model tombo serial type brand status]
     where(
       search_columns
         .map { |field| "#{field} LIKE :search" }
@@ -39,11 +40,11 @@ class Ativo < ApplicationRecord
 
   #ENUM STATUS DO ATIVO
   enum status: { 
-                DISPONIVEL: 'DISPONÍVEL', 
-                VINCULADO: 'VINCULADO', 
-                "VINCULADO EM USO": 'VÍNCULADO EM USO', 
+                DISPONÍVEL: 'DISPONÍVEL', 
+                VÍNCULADO: 'VÍNCULADO', 
+                "VÍNCULADO EM USO": 'VÍNCULADO EM USO', 
                 DEFEITO: 'DEFEITO', 
-                INSERVIVEL: 'INSERVÍVEL', 
+                INSERVÍVEL: 'INSERVÍVEL', 
                 "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
               }
 

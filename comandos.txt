@@ -4,21 +4,18 @@ TABLE MODEL ACQUISITION(aquisição)
 	contract_number:string company:string interested_party:string modality:integer source:integer
 	
   enum modality: { 
-						      DISPONIVEL: 'DISPONÍVEL', 
-						      VINCULADO: 'VINCULADO', 
-						      "VINCULADO EM USO": 'VÍNCULADO EM USO', 
-						      DEFEITO: 'DEFEITO', 
-						      INSERVIVEL: 'INSERVÍVEL', 
-						      "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+						      CONCORRÊNCIA: 'CONCORRÊNCIA', 
+						      PREGÃO: 'PREGÃO', 
+						      LEILÃO: 'LEILÃO', 
+						      CONCURSO: 'CONCURSO', 
+						      "COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
+						      "DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
 						    }
           
   enum source: { 
-								DISPONIVEL: 'DISPONÍVEL', 
-								VINCULADO: 'VINCULADO', 
-								"VINCULADO EM USO": 'VÍNCULADO EM USO', 
-								DEFEITO: 'DEFEITO', 
-								INSERVIVEL: 'INSERVÍVEL', 
-								"AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
+								MAPP: 'MAPP', 
+								FUNPECE: 'FUNPECE', 
+								"PGE FUNDO": 'PGE FUNDO'
 							}
 
 TABLE MODEL ACTIVE(ativo)
@@ -70,4 +67,9 @@ CONTROLLER
 	
 	rails g controller ativo_pge::bonds index
 	rails g controller ativo_pge::
+	
+	################################################
+	
+	PAGINAÇÂO VIEW
+	rails g kaminari:views bootstrap4
 	
