@@ -24,6 +24,7 @@ class AtivoPge::AdminsController < AtivosController
 
   def update
     if @admin.update(params_admin)
+      sign_in(@admin, bypass: true)
       redirect_to ativo_pge_admins_path, notice: "Administrador atualizado. Sucesso!"
     else
       render :edit

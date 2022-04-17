@@ -45,7 +45,7 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def vincular_deposito
-    Vinculo.find_or_create_by!(
+    Bond.find_or_create_by!(
       area_id: "1",
       subarea_id: "1",
       usuario_id: "1",
@@ -55,7 +55,7 @@ class AtivoPge::AtivosController < AtivosController
     vincula_ativos = params[:ativos_ids].split(',')
     
     vincula_ativos.each do |ativo|
-      Addativo.find_or_create_by!(
+      AttachAtivo.find_or_create_by!(
         vinculo_id:"1",
         ativo_id: ativo.to_i,
         condicao_id:"1"
