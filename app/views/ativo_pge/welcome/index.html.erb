@@ -4,16 +4,16 @@
       <!-- Card Header - Accordion -->
       <a href="#vinculos" class="d-block card-header py-3" data-toggle="collapse"
         role="button" aria-expanded="true" aria-controls="vinculos">
-        <h6 class="m-0 font-weight-bold text-primary">Vinculos: <#%= @total_vinculos %></h6>
+        <h6 class="m-0 font-weight-bold text-primary">Vinculos: <%= @total_bonds %></h6>
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="vinculos">
         <div class="card-body">
-          <#% @vinculos.each do |vinculo| %>
+          <% @bonds.each do |bond| %>
             <div class="mb-2">
-              <code><#%= vinculo.vinculo_descricao %></code>
+              <code><%= bond.bond_description %></code>
             </div>
-          <#% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -39,17 +39,17 @@
     <div class="card shadow mb-4">
       <a href="#ativos" class="d-block card-header py-3" data-toggle="collapse"
         role="button" aria-expanded="true" aria-controls="ativos">
-        <h6 class="m-0 font-weight-bold text-primary">Ativos: <#%= @total_ativos %></h6>
+        <h6 class="m-0 font-weight-bold text-primary">Ativos: <%= @total_ativos %></h6>
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="ativos">
         <div class="card-body">
           <code>
-            <#% @ativos.each do |ativo|%>
+            <% @type_count.each do |type|%>
               <li style="list-style:none;">
-                <#%= "#{tipo.descricao} - #{tipo.ativos_count}" %>
+                <%= type %>
               </li>
-            <#% end %>
+            <% end %>
           </code>
         </div>
       </div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bond: one
+  ativo: one
+  note: MyString
+
+two:
+  bond: two
+  ativo: two
+  note: MyString

@@ -1,2 +1,50 @@
-<h1>AtivoPge::Bonds#index</h1>
-<p>Find me in app/views/ativo_pge/bonds/index.html.erb</p>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <%= link_to new_ativo_pge_bond_path do %>
+      <button class="btn btn-success" style="color:write">Novo Vinculo</button>
+    <% end %> 
+  </div>
+  <div class="card-body">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Área</th>
+          <th>Subárea</th>
+          <th>Usuário</th>
+          <th>Observação</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bonds.each do |bond| %>
+          <tr data-toggle="collapse" data-target="#lista_ativos<%=bond.id%>">
+            <td><%= bond.subarea.area.description %></td>
+            <td><%= bond.subarea.description %></td>
+            <td><%= bond.user.name %></td>
+            <td><%= bond.note %></td>
+            <td style="width: 12px">
+              <%= link_to edit_ativo_pge_bond_path(bond) do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
+            <td style="width: 12px">
+              <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "Certeza?"} do %>
+                <i class="fa fa-trash"></i>
+              <% end %>  
+            </td>
+          </tr>
+          <% bond.attach_ativo.each do |ativo| %>
+            <tr id="lista_ativos<%=bond.id%>" class="collapse">
+              <td class="table-light" colspan="6">
+                <%= ativo.ativo.tombo %> -
+                <%= ativo.ativo.ativo_description %> - 
+                <%= ativo.status %> - 
+                <%= ativo.note %>
+              </td>  
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

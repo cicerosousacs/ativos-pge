@@ -63,8 +63,8 @@ namespace :dev do
     desc "Contador de Ativos por Tipo"
     task count_ativos: :environment do
       show_spinner("Calculando quantidade de Ativos...") do
-        Tipo.find_each do |tipo|
-          Tipo.reset_counters(tipo.id, :ativos)
+        Ativo.find_each do |type|
+          Ativo.reset_counters(type, :ativos)
         end
       end
     end

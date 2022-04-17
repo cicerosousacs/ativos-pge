@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_013708) do
+ActiveRecord::Schema.define(version: 2022_04_16_212902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,31 @@ ActiveRecord::Schema.define(version: 2022_04_16_013708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.integer "type_count"
     t.index ["acquisition_id"], name: "index_ativos_on_acquisition_id"
+  end
+
+  create_table "attach_ativos", force: :cascade do |t|
+    t.bigint "bond_id", null: false
+    t.bigint "ativo_id", null: false
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "status"
+    t.index ["ativo_id"], name: "index_attach_ativos_on_ativo_id"
+    t.index ["bond_id"], name: "index_attach_ativos_on_bond_id"
+  end
+
+  create_table "bonds", force: :cascade do |t|
+    t.bigint "subarea_id", null: false
+    t.bigint "user_id", null: false
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "area", null: false
+    t.index ["subarea_id"], name: "index_bonds_on_subarea_id"
+    t.index ["user_id"], name: "index_bonds_on_user_id"
   end
 
   create_table "subareas", force: :cascade do |t|
@@ -78,5 +102,9 @@ ActiveRecord::Schema.define(version: 2022_04_16_013708) do
   end
 
   add_foreign_key "ativos", "acquisitions"
+  add_foreign_key "attach_ativos", "ativos"
+  add_foreign_key "attach_ativos", "bonds"
+  add_foreign_key "bonds", "subareas"
+  add_foreign_key "bonds", "users"
   add_foreign_key "subareas", "areas"
 end

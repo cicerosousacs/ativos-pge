@@ -1,0 +1,69 @@
+<% if @bond.errors.any? %>
+  <div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+      <li>
+        <% @bond.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: [ :ativo_pge, @bond ], local: true ) do |form| %>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+
+        <div class="control col-md-4">
+        <code>*</code>
+          <%= form.label :area %> <br>
+          <%= form.select("area", @area_select, {include_blank: 'Selecione...'}, class:"form-control subaarea_select") %>
+        </div>
+
+        <div class="control col-md-4">
+        <code>*</code>
+          <%= form.label :subarea %> <br>
+          <%= form.select("subarea_id", @subarea_select, {include_blank: 'Selecione...'}, class:"form-control subaarea_select") %>
+        </div>
+
+        <div class="control col-md-4">
+        <code>*</code>
+          <%= form.label :usuario %> <br>
+          <%= form.select("user_id", @user_select, {include_blank: 'Selecione...'}, class:"form-control select2") %>
+        </div>
+
+        <div class="control col-md-12">
+          <%= form.label :note %> <br>
+          <%= form.text_field :note, class:"form-control border-6 small" %>
+        </div>
+      </div>
+      <br>
+      <h5>Ativos Vinculados</h5>
+      <hr>
+        <div class="links">
+          <%= link_to_add_association(form, :attach_ativo, class: "btn-sm btn-success",
+            'data-association-insertion-node' => "#attach_ativo",
+            'data-association-insertion-method' => "append") do %>
+            <i class="fa fa-plus" style="color:white"></i>
+          <% end %>
+        </div>
+        <br>
+
+        <div id='attach_ativo'>
+          <%= form.fields_for :attach_ativo do |attach_ativo| %>
+            <%= render partial: "attach_ativo_fields", locals: { f: attach_ativo } %>
+          <% end %>
+        </div>
+      <hr>
+      <div class="text-right">
+        <%= form.submit "Salvar", class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

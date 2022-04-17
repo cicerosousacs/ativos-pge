@@ -25,6 +25,10 @@ class Ativo < ApplicationRecord
     Ativo.includes(:acquisition).order("created_at DESC") 
   end
 
+  def self.status_ativo
+    Ativo.statuses.keys
+  end
+
   # PESQUISA DE ATIVOS
   scope :search, -> (query) { 
     order(:created_at, :desc)
@@ -47,5 +51,7 @@ class Ativo < ApplicationRecord
                 INSERVÍVEL: 'INSERVÍVEL', 
                 "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
               }
+
+
 
 end

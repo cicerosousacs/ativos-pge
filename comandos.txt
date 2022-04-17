@@ -1,4 +1,4 @@
-TABLE MODEL ACQUISITION(aquisição)
+	TABLE MODEL ACQUISITION(aquisição)
 
 	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
 	contract_number:string company:string interested_party:string modality:integer source:integer
@@ -18,7 +18,7 @@ TABLE MODEL ACQUISITION(aquisição)
 								"PGE FUNDO": 'PGE FUNDO'
 							}
 
-TABLE MODEL ACTIVE(ativo)
+	TABLE MODEL ACTIVE(ativo)
 
 	rails g model Active type:string brand:string model:string serial:string tombo:string
 	specification:text acquisition:references state:string
@@ -32,29 +32,29 @@ TABLE MODEL ACTIVE(ativo)
 		            "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
 		          }
 
-TABLE MODEL USER(usuario)
+	TABLE MODEL USER(usuario)
 
 	rails g model User name:string email:string has_many_bond:boolean
 
-TABLE AREA
+	TABLE AREA
 
 	rails g model Area description:string
 
-TABLE SUBAREA
+	TABLE SUBAREA
 
 	rails g model Subarea area:references description:string
 
-TABLE BOND(vinculo)
+	TABLE BOND(vinculo)
 
 	rails g model Bond subarea:references user:references note:string
 
-TABLE 
+	TABLE 
 
-	rails g model Include_ativo ativo:references status:references note:string
+	rails g model attach_ativos bond:references ativo:references description:string status:string note:string
 	
-#########################################
+	#########################################
 
-CONTROLLER
+	CONTROLLER
 
 	rails g controller ativo_pge::admins index
 	
@@ -66,10 +66,52 @@ CONTROLLER
 	rails g controller ativo_pge::subareas index
 	
 	rails g controller ativo_pge::bonds index
-	rails g controller ativo_pge::
 	
 	################################################
 	
 	PAGINAÇÂO VIEW
 	rails g kaminari:views bootstrap4
-	
+
+
+RETORNAM O MESMO VALOR DE CONTAGEM
+
+  Ativo.where(type:'NOBREAK').count
+  Ativo.where(type:'NOBREAK').size
+
+	CONTA A QUANTIDADE E AGRUPA
+	Ativo.select(:type).group(:type).count
+type_count = Ativo.select(:type).group(:type).count
+type_count.keys
+type_count.values
+
+@type_count.each do |type|
+type
+end
+
+
+SELECT COUNT(type) AS type_count FROM public.ativos WHERE type = 'VOIP ';
+                <%= "#{ativo.type} - #{ativo.type_count}" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
