@@ -6,7 +6,7 @@ class AtivoPge::BondsController < AtivosController
   before_action :set_ativo_select, only: [:new, :create, :edit, :update]
 
   def index
-    @bonds = Bond.includes(:user, :subarea).order("created_at DESC")
+    @bonds = Bond.includes(:user, :subarea, :attach_ativo).order("created_at DESC")
   end
 
   def new

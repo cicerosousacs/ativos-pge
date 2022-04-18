@@ -1,5 +1,5 @@
 class AtivoPge::AtivosController < AtivosController
-  before_action :set_aivo, only: [:edit, :update, :destroy]
+  before_action :set_ativo, only: [:edit, :update, :destroy]
   before_action :set_acquisition_selects, only: [:new, :create, :edit, :update]
   # desativa a proteção CSRF apenas para esse metodo
   protect_from_forgery except: :vincular_deposito
@@ -66,15 +66,15 @@ class AtivoPge::AtivosController < AtivosController
   private
 
   def parmas_ativo
-    params.require(:ativo).permit(:type, :brand, :model, :tombo, :serial, :specification, :acquisition_id, :status)
+    params.require(:ativo).permit(:type, :brand, :model, :tombo, :serial, :specification, :acquisition_id)
   end
 
-  def set_aivo
+  def set_ativo
     @ativo = Ativo.find(params[:id])
   end
 
   def set_acquisition_selects
-    @acquisition_selects = Acquisition.all.pluck(:contract_number, :id)
+    @acquisition_selects = Acquisition.pluck(:contract_number, :id)
   end
 
 end
