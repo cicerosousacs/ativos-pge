@@ -45,20 +45,15 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def vincular_deposito
-    Bond.find_or_create_by!(
-      area_id: "1",
-      subarea_id: "1",
-      usuario_id: "1",
-      observacao: "Relação de Ativos Disponíveis"
-    )
 
-    vincula_ativos = params[:ativos_ids].split(',')
+
+    attach_ativos = params[:ativos_ids].split(',')
     
-    vincula_ativos.each do |ativo|
+    attach_ativos.each do |ativo|
       AttachAtivo.find_or_create_by!(
-        vinculo_id:"1",
+        bond_id:"1",
         ativo_id: ativo.to_i,
-        condicao_id:"1"
+        status:"DISPONÍVEL"
       )  
     end
   end
