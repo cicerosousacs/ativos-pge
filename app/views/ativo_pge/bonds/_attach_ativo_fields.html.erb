@@ -5,7 +5,7 @@
     </div>
 
     <div class="control col-md-4">
-      <%= f.collection_select :ativo_id, Ativo.last_ativo, :id, :ativo_description, {include_blank: 'Descrição'}, class:"form-control" %>
+      <%= f.collection_select :ativo_id, Ativo.all, :id, :ativo_description, {include_blank: 'Descrição'}, class:"form-control" %>
     </div>
 
     <div class="control col-md-2">

@@ -4,7 +4,7 @@ class Ativo < ApplicationRecord
 
   # RELACIONAMENTOS
   belongs_to :acquisition
-
+  has_one :attach_ativo
   has_one :user, through: :bond
 
   # PAGINAÇÂO
@@ -20,7 +20,7 @@ class Ativo < ApplicationRecord
 
   # N+1 e ordaneção por ultimo criado
   scope :ultimo_ativo, -> (page) {
-    Ativo.includes(:acquisition).order("created_at DESC").page(page)
+    Ativo.includes(:acquisition, :attach_ativo).order("created_at DESC").page(page)
   }
 
   def self.last_ativo

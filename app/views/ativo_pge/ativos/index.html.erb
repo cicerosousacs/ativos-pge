@@ -44,7 +44,11 @@
             <td><%= ativo.ativo_description %></td>
             <td><%= ativo.tombo %></td>
             <td><%= ativo.serial %></td>
-            <td><#%= ativo.attach_ativo %></td>
+            <% if ativo.attach_ativo %>
+              <td><%= ativo.attach_ativo.status %></td>
+            <% else %>
+              <td><%= "-" %></td>
+            <% end %>
             <td style="width: 10px">
               <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
                 <i class="fas fa-edit"></i>
