@@ -22,19 +22,19 @@
         <div class="control col-md-4">
         <code>*</code>
           <%= form.label :area %> <br>
-          <%= form.select("area", @area_select, {include_blank: 'Selecione...'}, class:"form-control subaarea_select") %>
+          <%= form.select("area", @area_select, {include_blank: 'Selecione...'}, class:"form-control ") %>
         </div>
 
         <div class="control col-md-4">
         <code>*</code>
           <%= form.label :subarea %> <br>
-          <%= form.select("subarea_id", @subarea_select, {include_blank: 'Selecione...'}, class:"form-control subaarea_select") %>
+          <%= form.select("subarea_id", @subarea_select, {include_blank: 'Selecione...'}, class:"form-control") %>
         </div>
 
         <div class="control col-md-4">
         <code>*</code>
           <%= form.label :usuario %> <br>
-          <%= form.select("user_id", @user_select, {include_blank: 'Selecione...'}, class:"form-control select2") %>
+          <%= form.select("user_id", @user_select, {include_blank: 'Selecione...'}, class:"form-control") %>
         </div>
 
         <div class="control col-md-12">
@@ -67,3 +67,11 @@
   </div>
 
 <% end %>
+
+<%= javascript_include_tag 'ativos' %>
+
+<script>
+  $(document).ready(function() {
+      $('.subaarea_select').select2();
+  });
+</script>

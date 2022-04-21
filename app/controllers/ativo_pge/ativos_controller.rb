@@ -46,7 +46,6 @@ class AtivoPge::AtivosController < AtivosController
 
   def vincular_deposito
 
-
     attach_ativos = params[:ativos_ids].split(',')
     
     attach_ativos.each do |ativo|
