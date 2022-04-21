@@ -27,7 +27,7 @@ class Ativo < ApplicationRecord
   }
 
   def self.last_ativo
-    Ativo.includes(:acquisition).order("created_at DESC") 
+    Ativo.includes(:acquisition, :attach_ativo).order("created_at DESC") 
   end
 
   # PESQUISA DE ATIVOS
