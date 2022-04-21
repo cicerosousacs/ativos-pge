@@ -18,4 +18,6 @@ class Bond < ApplicationRecord
   validates :attach_ativo, presence: { message: "É necessario incluir ao menos um Ativo!"}
   validates :user_id, uniqueness: true, unless: -> { user.has_many_bond == true }
 
+  
+
 end

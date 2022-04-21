@@ -4,8 +4,11 @@ class Ativo < ApplicationRecord
 
   # RELACIONAMENTOS
   belongs_to :acquisition
+  
   has_one :attach_ativo
-  has_one :user, through: :bond
+  has_one :user, through: :attach_ativo
+  has_one :area, through: :attach_ativo
+  has_one :subarea, through: :attach_ativo
 
   # PAGINAÇÂO
   paginates_per 10

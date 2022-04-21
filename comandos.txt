@@ -80,6 +80,7 @@ RETORNAM O MESMO VALOR DE CONTAGEM
 
 	CONTA A QUANTIDADE E AGRUPA
 	Ativo.select(:type).group(:type).count
+	
 type_count = Ativo.select(:type).group(:type).count
 type_count.keys
 type_count.values
@@ -93,7 +94,11 @@ SELECT COUNT(type) AS type_count FROM public.ativos WHERE type = 'VOIP ';
                 <%= "#{ativo.type} - #{ativo.type_count}" %>
 
 
-
+ @ativos.find(id = 3297).attach_ativo.status
+ Ativo.find(id = 3297).attach_ativo.status
+ 
+   @ativos_available = AttachAtivo.DISPONÍVEL.count
+    @ativos_linked = AttachAtivo.VÍNCULADO.count
 
 
 

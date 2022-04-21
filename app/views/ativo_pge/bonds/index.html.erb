@@ -33,13 +33,13 @@
               <% end %>  
             </td>
           </tr>
-          <% bond.attach_ativo.each do |attach_ativo| %>
+          <% bond.attach_ativo.each do |show_ativo| %>
             <tr id="lista_ativos<%=bond.id%>" class="collapse">
               <td class="table-light" colspan="6">
-                <%= attach_ativo.ativo.tombo %> -
-                <%= attach_ativo.ativo.ativo_description %> - 
-                <%= attach_ativo.status %> - 
-                <%= attach_ativo.note %>
+                <%= show_ativo.ativo.tombo %> -
+                <%= show_ativo.ativo.ativo_description %> - 
+                <%= show_ativo.status %> - 
+                <%= show_ativo.note %>
               </td>  
             </tr>
           <% end %>

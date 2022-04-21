@@ -6,7 +6,7 @@ class AtivoPge::BondsController < AtivosController
   before_action :set_ativo_select, only: [:new, :create, :edit, :update]
 
   def index
-    @bonds = Bond.last_bond.order("created_at DESC")
+    @bonds = Bond.last_bond
   end
 
   def new
