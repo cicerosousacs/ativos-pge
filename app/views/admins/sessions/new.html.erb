@@ -1,30 +1,63 @@
-<h2>Log in</h2>
-
 <% flash.each do |key, value| %>
   <div class="flash <%= key %>"><%= value %></div>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<head>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<title >Ativos PGE - Login</title>
+    
+
+<%= stylesheet_link_tag 'ativos_session' %>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+      <!-- Outer Row -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body">
+            <!-- Nested Row within Card Body -->
+            <div class="row justify-content-center">
+              <div class="col-lg-11">
+                <div class="p-5">
+                  <div class="text-center">
+                      <h1 class="h4  mb-4"><i class="fas fa-cubes"></i> ATIVOS PGE</h1>   
+                  </div>
+                  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <div class="field">
+                      <%= f.label :email,"Login" %><br />
+                      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                    </div>
+                      <br>
+                    <div class="field">
+                      <%= f.label :password %><br />
+                      <%= f.password_field :password, class: "form-control" %>
+                    </div>
+                      <hr>
+                    <div class="actions">
+                      <%= f.submit "Entrar", class: "btn btn-primary btn-user btn-block" %>
+                    </div>                
+                  <% end %>                                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
 
-<%= render "admins/shared/links" %>
+<% javascript_include_tag 'ativos_session' %>
+
+</body>
+
+</html>

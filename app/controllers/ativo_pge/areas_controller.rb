@@ -2,7 +2,7 @@ class AtivoPge::AreasController < AtivosController
   before_action :set_area, only: [:edit, :update, :destroy]
 
   def index
-    @areas = Area.all
+    @areas = Area.all.page(params[:page])
   end
 
   def new

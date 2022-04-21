@@ -101,7 +101,16 @@ SELECT COUNT(type) AS type_count FROM public.ativos WHERE type = 'VOIP ';
     @ativos_linked = AttachAtivo.VÍNCULADO.count
 
 
+SESSION LOGIN ########################
 
+<%= render "admins/shared/links" %>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
 
 
 

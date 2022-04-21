@@ -12,7 +12,7 @@ namespace :csv do
             serial: linha[2],
             model: linha[3],
             brand: linha[4],
-            acquisition_id: "1")
+            acquisition_id: "2")
         end
       end
     end

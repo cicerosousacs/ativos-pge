@@ -14,7 +14,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # /APP/ASSETS
-Rails.application.config.assets.precompile += %w( ativos.js ativos.css )
+Rails.application.config.assets.precompile += %w( ativos.js ativos.css
+                                                  ativos_session.js ativos_session.css )
 
 # /LIB/ASSETS
 Rails.application.config.assets.precompile += %w( sb-admin-2.js sb-admin-2.css
