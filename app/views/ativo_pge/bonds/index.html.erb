@@ -24,6 +24,10 @@
             <td><%= bond.user.name %></td>
             <td><%= bond.note %></td>
             <td style="width: 12px">
+              <%= link_to "edit_ativo_pge_bond_path(bond)" do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+            <td style="width: 12px">
               <%= link_to edit_ativo_pge_bond_path(bond) do %>
                 <i class="fa fa-edit"></i>
               <% end %>

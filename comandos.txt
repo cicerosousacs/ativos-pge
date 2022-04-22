@@ -86,7 +86,7 @@ type_count.keys
 type_count.values
 
 @type_count.each do |type|
-type
+	type
 end
 
 
@@ -94,23 +94,23 @@ SELECT COUNT(type) AS type_count FROM public.ativos WHERE type = 'VOIP ';
                 <%= "#{ativo.type} - #{ativo.type_count}" %>
 
 
- @ativos.find(id = 3297).attach_ativo.status
- Ativo.find(id = 3297).attach_ativo.status
+@ativos.find(id = 3297).attach_ativo.status
+Ativo.find(id = 3297).attach_ativo.status
  
-   @ativos_available = AttachAtivo.DISPONÍVEL.count
-    @ativos_linked = AttachAtivo.VÍNCULADO.count
+@ativos_available = AttachAtivo.DISPONÍVEL.count
+@ativos_linked = AttachAtivo.VÍNCULADO.count
 
 
 SESSION LOGIN ########################
 
 <%= render "admins/shared/links" %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+<% if devise_mapping.rememberable? %>
+	<div class="field">
+		<%= f.check_box :remember_me %>
+		<%= f.label :remember_me %>
+	</div>
+<% end %>
 
 
 

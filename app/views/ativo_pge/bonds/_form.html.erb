@@ -22,7 +22,7 @@
         <div class="control col-md-4">
         <code>*</code>
           <%= form.label :area %> <br>
-          <%= form.select("area", @area_select, {include_blank: 'Selecione...'}, class:"form-control ") %>
+          <%= form.select("area", @area_select, {include_blank: 'Selecione...'}, class:"form-control") %>
         </div>
 
         <div class="control col-md-4">
@@ -67,11 +67,3 @@
   </div>
 
 <% end %>
-
-<%= javascript_include_tag 'ativos' %>
-
-<script>
-  $(document).ready(function() {
-      $('.subaarea_select').select2();
-  });
-</script>

@@ -2,6 +2,7 @@
   "name": "ativos-pge",
   "private": true,
   "dependencies": {
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
     "bootstrap": "4.6.0",
     "bootstrap-growl-ifightcrime": "^1.1.0",
     "fontawesome-free": "^1.0.4",

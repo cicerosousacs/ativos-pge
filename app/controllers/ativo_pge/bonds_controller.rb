@@ -11,6 +11,7 @@ class AtivoPge::BondsController < AtivosController
 
   def new
     @bond = Bond.new
+    @ativos = Ativo.all
   end
 
   def create

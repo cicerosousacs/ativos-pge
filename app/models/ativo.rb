@@ -10,6 +10,8 @@ class Ativo < ApplicationRecord
   has_one :area, through: :attach_ativo
   has_one :subarea, through: :attach_ativo
 
+  has_many :bonds
+
   # PAGINAÇÂO
   paginates_per 10
 

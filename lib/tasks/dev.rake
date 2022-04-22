@@ -10,8 +10,8 @@ namespace :dev do
         #show_spinner("Criando BD...") { %x(rails db:create) }
         #show_spinner("Migrando BD...") { %x(rails db:migrate) }
         show_spinner("Admin padrão...") { %x(rails dev:add_default_admin) }
-        show_spinner("Ajustes 1 de 5...") { %x(rails dev:add_areas) }
-        #show_spinner("Ajustes 2 de 5...") { %x(rails dev:add_marca) }
+        show_spinner("Ajustes 1 de 2...") { %x(rails dev:add_areas) }
+        show_spinner("Ajustes 2 de 2...") { %x(rails dev:add_users) }
         #show_spinner("Ajustes 3 de 5...") { %x(rails dev:add_condicao) }
         #show_spinner("Ajustes 4 de 5...") { %x(rails dev:add_origem) }
         #show_spinner("Ajustes 5 de 5...") { %x(rails dev:add_modalidade) }
@@ -40,6 +40,15 @@ namespace :dev do
       end
     end
 
+    desc "Adicionando Usuarios"
+    task add_users: :environment do
+      file_name = 'usuarios.txt'
+      file_path = File.join(DEFAULT_FILE_PATH, file_name)
+  
+      File.open(file_path, 'r').each do |line|
+      User.create!(name: line.strip)
+      end
+    end
 ##################################################################
     desc "Contador de Ativos por Tipo"
     task count_ativos: :environment do
