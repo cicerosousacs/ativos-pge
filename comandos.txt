@@ -113,6 +113,8 @@ SESSION LOGIN ########################
 	</div>
 <% end %>
 
+ap b = Bond.where("id = '3'", "area = '8'")
+
 
 
 
