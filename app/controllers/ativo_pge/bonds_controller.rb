@@ -57,6 +57,7 @@ class AtivoPge::BondsController < AtivosController
                                 :area, 
                                 :subarea_id, 
                                 :note,
+                                :homeoffice,
                                 attach_ativo_attributes: [:id, :ativo_id, :description, :status, :note, :_destroy]
                                 )
   end

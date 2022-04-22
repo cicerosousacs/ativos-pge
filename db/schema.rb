@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_18_002934) do
+ActiveRecord::Schema.define(version: 2022_04_22_171630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,7 @@ ActiveRecord::Schema.define(version: 2022_04_18_002934) do
   create_table "attach_ativos", force: :cascade do |t|
     t.bigint "bond_id", null: false
     t.bigint "ativo_id", null: false
-    t.string "description", null: false
-    t.string "string", null: false
+    t.string "description"
     t.string "status", null: false
     t.string "note"
     t.datetime "created_at", null: false
@@ -81,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_04_18_002934) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "area", null: false
+    t.boolean "homeoffice"
     t.index ["subarea_id"], name: "index_bonds_on_subarea_id"
     t.index ["user_id"], name: "index_bonds_on_user_id"
   end

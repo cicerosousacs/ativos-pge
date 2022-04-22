@@ -14,7 +14,6 @@
 <%= form_with(model: [ :ativo_pge, @bond ], local: true ) do |form| %>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-
     </div>
     <div class="card-body">
       <div class="row g-3">
@@ -36,11 +35,17 @@
           <%= form.label :usuario %> <br>
           <%= form.select("user_id", @user_select, {include_blank: 'Selecione...'}, class:"form-control") %>
         </div>
+      
+        <div class="control col-md-1">
+          <%= form.label :homeoffice %> <br>
+          <%= form.check_box :homeoffice %>
+        </div>
 
-        <div class="control col-md-12">
-          <%= form.label :note %> <br>
+        <div class="control col-md-11">
+          <%= form.label :note %>
           <%= form.text_field :note, class:"form-control border-6 small" %>
         </div>
+
       </div>
       <br>
       <h5>Ativos Vinculados</h5>
