@@ -54,6 +54,9 @@
       <code>* Campos obrigatorios</code>
       <div class="text-right">
         <%= form.submit "Salvar", class:"btn btn-primary" %>
+        <%= link_to ativo_pge_ativos_path do %>
+          <button class="btn btn-danger" type="button">Cancelar</button>
+        <% end %>
       </div>
 
     <% end %>

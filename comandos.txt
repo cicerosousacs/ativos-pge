@@ -91,6 +91,7 @@ end
 
 
 SELECT COUNT(type) AS type_count FROM public.ativos WHERE type = 'VOIP ';
+
                 <%= "#{ativo.type} - #{ativo.type_count}" %>
 
 
