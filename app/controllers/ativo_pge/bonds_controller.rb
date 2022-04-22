@@ -23,6 +23,13 @@ class AtivoPge::BondsController < AtivosController
     end
   end
 
+  def show
+    @bonds = Bond.last_bond.find(params[:id])
+    respond_to do |format|
+      format.js { render partial: 'ativo_pge/bonds/exibir' }
+    end
+  end
+
   def edit
   end
 

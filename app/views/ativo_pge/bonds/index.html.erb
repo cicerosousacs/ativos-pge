@@ -18,13 +18,13 @@
       </thead>
       <tbody>
         <% @bonds.each do |bond| %>
-          <tr data-toggle="collapse" data-target="#lista_ativos<%=bond.id%>">
+          <tr>
             <td><%= bond.subarea.area.description %></td>
             <td><%= bond.subarea.description %></td>
             <td><%= bond.user.name %></td>
             <td><%= bond.note %></td>
             <td style="width: 12px">
-              <%= link_to "edit_ativo_pge_bond_path(bond)" do %>
+              <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
                 <i class="fa fa-eye"></i>
               <% end %>
             <td style="width: 12px">
@@ -37,39 +37,8 @@
               <% end %>  
             </td>
           </tr>
-          <% bond.attach_ativo.each do |show_ativo| %>
-            <tr id="lista_ativos<%=bond.id%>" class="collapse">
-              <td class="table-light" colspan="6">
-                <%= show_ativo.ativo.tombo %> -
-                <%= show_ativo.ativo.ativo_description %> - 
-                <%= show_ativo.status %> - 
-                <%= show_ativo.note %>
-              </td>  
-            </tr>
-          <% end %>
-          <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ativos vinculados</h5>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
-

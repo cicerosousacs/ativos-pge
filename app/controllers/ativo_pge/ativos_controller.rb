@@ -50,7 +50,7 @@ class AtivoPge::AtivosController < AtivosController
     
     attach_ativos.each do |ativo|
       AttachAtivo.find_or_create_by!(
-        bond_id:"2",
+        bond_id:"3",
         ativo_id: ativo.to_i,
         status:"DISPONÍVEL"
       )  
