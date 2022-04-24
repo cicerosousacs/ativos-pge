@@ -52,6 +52,7 @@ class AtivoPge::AtivosController < AtivosController
       AttachAtivo.find_or_create_by!(
         bond_id:"3",
         ativo_id: ativo.to_i,
+        description: ativo.to_i,
         status:"DISPONÍVEL"
       )  
     end

@@ -64,8 +64,9 @@ ActiveRecord::Schema.define(version: 2022_04_22_171630) do
   create_table "attach_ativos", force: :cascade do |t|
     t.bigint "bond_id", null: false
     t.bigint "ativo_id", null: false
-    t.string "description"
+    t.string "description", null: false
     t.string "status", null: false
+    t.string "string", null: false
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -2,7 +2,7 @@ class AttachAtivo < ApplicationRecord
   belongs_to :bond
   belongs_to :ativo
 
-  #ENUM STATUS DO ATIVO
+  # ENUM STATUS DO ATIVO
   enum status: { 
     DISPONÍVEL: 'DISPONÍVEL', 
     VÍNCULADO: 'VÍNCULADO', 
@@ -12,4 +12,7 @@ class AttachAtivo < ApplicationRecord
     "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
   }
 
+  # VALIDAÇÔES
+  validates :ativo_id, uniqueness: true
+  
 end

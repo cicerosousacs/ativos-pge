@@ -106,6 +106,8 @@ SESSION LOGIN ########################
 
 <%= render "admins/shared/links" %>
 
+######################################
+
 <% if devise_mapping.rememberable? %>
 	<div class="field">
 		<%= f.check_box :remember_me %>
@@ -115,7 +117,10 @@ SESSION LOGIN ########################
 
 ap b = Bond.where("id = '3'", "area = '8'")
 
+Contagem de Ativos passando o id da Area
+Bond.joins(:attach_ativo).where(area:'1').length
 
+Bond.select(:area).group(:area)
 
 
 

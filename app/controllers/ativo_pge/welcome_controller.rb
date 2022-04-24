@@ -14,5 +14,9 @@ class AtivoPge::WelcomeController < AtivosController
 
   end
 
+  private
+
+  def area_description
+  end
 
 end

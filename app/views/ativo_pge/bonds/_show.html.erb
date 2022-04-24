@@ -3,13 +3,11 @@
   </thead>
   <tbody>
       <% @bonds.attach_ativo.each do |show_ativo| %>
-        <tr>
-          <td class="table-light">
-            <%= show_ativo.ativo.tombo %> -
-            <%= show_ativo.ativo.ativo_description %> - 
-            <%= show_ativo.status %> - 
-            <%= show_ativo.note %>
-          </td>  
+        <tr class="table-light">
+          <td><%= show_ativo.ativo.tombo %>
+          <td><%= show_ativo.ativo.ativo_description %> 
+          <td><%= show_ativo.status %>
+          <td><%= show_ativo.note %>
         </tr>
       <% end %>
   </tbody>
