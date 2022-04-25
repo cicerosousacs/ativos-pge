@@ -16,16 +16,20 @@ class AtivoPge::BondsController < AtivosController
 
   def create
     @bond = Bond.new(params_bond)
-    if @bond.save()
-      redirect_to ativo_pge_bonds_path, notice: "Vinculo criado, Parabéns!"
-    else
-      render :new
+    respond_to do |format|
+      if @bond.save
+        format.html { redirect_to ativo_pge_bonds_path, notice: "Vinculo criado, Parabéns!" }
+        format.json { render json: @bond }
+      else
+        render :new
+      end
     end
   end
 
   def show
     @bonds = Bond.last_bond.find(params[:id])
     respond_to do |format|
+      format.json { render json: @bond }
       format.js { render partial: 'ativo_pge/bonds/exibir' }
     end
   end

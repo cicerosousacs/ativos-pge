@@ -1,7 +1,7 @@
 <div class="control-group nested-fields">
   <div class="row g-3">
     <div class="control col-md-2">
-      <%= f.select("ativo_id", @ativo_select, {include_blank: 'Tombo'}, class:"form-control")%>
+      <%= f.select("ativo_id", @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo")%>
     </div>
 
     <div class="control col-md-4">
@@ -25,6 +25,15 @@
 </div>
 <br>
 
-<%= javascript_tag do %>
+<script>
 
-<% end %>
+$(document).ready(function(){
+
+    $('.select_tombo').select2
+  ({
+    //theme: 'bootstrap'
+  });
+
+});
+
+</script>
