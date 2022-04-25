@@ -122,12 +122,14 @@ Bond.joins(:attach_ativo).where(area:'1').length
 
 Bond.select(:area).group(:area)
 
-
 descobrir o ativo a ser removido do vinculo:
-
-params_bond[:attach_ativo_attributes]["1"][:ativo_id]
-
 ativo_move = params_bond[:attach_ativo_attributes]["1"][:ativo_id]
+
+pesquisar vinculo:
+AttachAtivo.joins(:ativo)
+
+pesquisar vinculo, passando o id:
+AttachAtivo.joins(:ativo).where(bond_id:'4').count
 
 "https://mailtrap.io/inboxes/1711410/messages/2739803459"
 
