@@ -2,7 +2,21 @@
   <div class="card-header py-3">
     <%= link_to new_ativo_pge_bond_path do %>
       <button class="btn btn-success" style="color:write">Novo Vinculo</button>
-    <% end %> 
+    <% end %>
+    <div>
+      <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
+        <div class="input-group">
+          <%= form_tag(ativo_pge_admins_path, method: :post) do %>
+            <%= text_field_tag 'search_bond', nil, class:"form-control border-1 small", placeholder:'Faça sua busca'%>
+          <% end %>
+          <div class="input-group-append">
+            <%= button_tag type:'submit', class:"btn btn-primary" do %>
+              <i class="fas fa-search fa-sm"></i>
+            <% end %>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="card-body">
     <table class="table table-hover table-bordered">
@@ -11,6 +25,7 @@
           <th>Área</th>
           <th>Subárea</th>
           <th>Usuário</th>
+          <th>Observação</th>
           <th>Modalidade</th>
           <th></th>
           <th></th>
@@ -22,6 +37,7 @@
             <td><%= bond.subarea.area.description %></td>
             <td><%= bond.subarea.description %></td>
             <td><%= bond.user.name %></td>
+            <td><%= bond.note %></td>
             <td><%= bond.check_home_office %></td>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
