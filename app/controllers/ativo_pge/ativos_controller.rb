@@ -5,11 +5,17 @@ class AtivoPge::AtivosController < AtivosController
   protect_from_forgery except: :vincular_deposito
 
   def index
-    if params[:search]
-      @ativos = Ativo.last_ativo.search(params[:search]).page(params[:page])
-    else
-      @ativos = Ativo.ultimo_ativo(params[:page])
+    respond_to do |format|
+      format.html {
+        if params[:search]
+          @ativos = Ativo.last_ativo.search(params[:search]).page(params[:page])
+        else
+          @ativos = Ativo.ultimo_ativo(params[:page])
+        end
+      }
+      format.pdf { @ativos = Ativo.pdf_ativo }
     end
+    @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
   end
 
   def new
@@ -45,17 +51,18 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def vincular_deposito
-
-    attach_ativos = params[:ativos_ids].split(',')
-    
+    attach_ativos = params[:ativos_ids].split(',') 
     attach_ativos.each do |ativo|
       AttachAtivo.find_or_create_by!(
         bond_id:"3",
         ativo_id: ativo.to_i,
         description: ativo.to_i,
         status:"DISPONÍVEL"
-      )  
+      ) 
     end
+  end
+
+  def gerar_pdf_ativo
   end
 
   private

@@ -5,8 +5,23 @@ class AtivoPge::BondsController < AtivosController
   before_action :set_subarea_select, only: [:new, :create, :edit, :update]
   before_action :set_ativo_select, only: [:new, :create, :edit, :update]
 
+  protect_from_forgery except: :pdf_termo_responsabilidade_ativo
+
   def index
-    @bonds = Bond.last_bond
+    respond_to do |format|
+      format.html { @bonds = Bond.last_bond }
+      format.json { render json: (@bonds = Bond.all.order(:id)) }
+    end
+  end
+
+  def pdf_termo_responsabilidade_ativo
+    pdf_data = Pdfs::TermoResponsabilidadeAtivoPdf.gerar((params[:bonds_ids]).split(','))
+    if params["bonds_ids"].split(',').size == 1
+      usuario_vinculo = Bond.where('id = ?', params["bonds_ids"].split(',')).first.user_id
+      send_data(pdf_data, filename: "termo_#{usuario_vinculo}.pdf", :type => 'application/pdf', :disposition => 'inline')
+    else
+      send_data(pdf_data, filename: "termo.pdf", :type => 'application/pdf', :disposition => 'inline')
+    end
   end
 
   def new
@@ -21,7 +36,7 @@ class AtivoPge::BondsController < AtivosController
         format.html { redirect_to ativo_pge_bonds_path, notice: "Vinculo criado, Parabéns!" }
         format.json { render json: @bond }
       else
-        render :new
+        format.html { render :new }
       end
     end
   end
@@ -29,8 +44,8 @@ class AtivoPge::BondsController < AtivosController
   def show
     @bonds = Bond.last_bond.find(params[:id])
     respond_to do |format|
-      format.json { render json: @bond }
       format.js { render partial: 'ativo_pge/bonds/exibir' }
+      format.json { render json: @bond }
     end
   end
 
@@ -38,6 +53,7 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def update
+    byebug
     if @bond.update(params_bond)
       redirect_to ativo_pge_bonds_path, notice: "Vinculo atualizado, Sucesso!"
     else

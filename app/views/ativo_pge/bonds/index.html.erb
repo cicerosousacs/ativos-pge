@@ -1,13 +1,16 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <%= link_to new_ativo_pge_bond_path do %>
-      <button class="btn btn-success" style="color:write">Novo Vinculo</button>
-    <% end %>
+    <div>
+      <%= link_to new_ativo_pge_bond_path do %>
+        <button class="btn btn-success" style="color:write">Novo Vinculo</button>
+      <% end %>
+        <button type="button" id="btn-termo" class="btn btn-warning" style="color:write">Gerar Termo</button>
+    </div>
     <div>
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
         <div class="input-group">
           <%= form_tag(ativo_pge_admins_path, method: :post) do %>
-            <%= text_field_tag 'search_bond', nil, class:"form-control border-1 small", placeholder:'Faça sua busca'%>
+            <%= text_field_tag 'search_bond', nil, class:"form-control border-1 small", placeholder:'Pesquise pelo usuário'%>
           <% end %>
           <div class="input-group-append">
             <%= button_tag type:'submit', class:"btn btn-primary" do %>
@@ -22,18 +25,20 @@
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
+          <th style="width: 10px">
+            <input type="checkbox" id="all_bonds" title="Selecione um Vinculo"></input>
+          </th>
           <th>Área</th>
           <th>Subárea</th>
           <th>Usuário</th>
           <th>Observação</th>
           <th>Modalidade</th>
-          <th></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @bonds.each do |bond| %>
           <tr>
+            <td><%= check_box_tag("bonds_ids[]", bond.id, false, class:'marcar') %></td>
             <td><%= bond.subarea.area.description %></td>
             <td><%= bond.subarea.description %></td>
             <td><%= bond.user.name %></td>
@@ -58,3 +63,39 @@
     </table>
   </div>
 </div>
+
+<%= javascript_include_tag 'application' %>
+
+<script>
+  $(document).ready(function () {
+    $('#btn-termo').click(function () {
+      var bonds_ids = $('.marcar:checked').map(function () {
+          return $(this).val();
+      }).get();
+      if (bonds_ids == '') {
+          alert('Selecione pelo menos um vinculo');
+      } else {
+          if (this.id == 'btn-termo') {
+              window.open('<%= url_for({ :controller => 'bonds', :action => 'pdf_termo_responsabilidade_ativo' })%>?bonds_ids=' + bonds_ids)
+          }
+      }
+    });
+
+    $("#all_bonds").change(function () {
+        $('.marcar').prop('checked', $(this).prop("checked"));
+    });
+
+    $("#all_bonds").click(function(){
+        $('.marcar').not(this).prop('checked', this.checked);
+    });
+
+    var all_bonds = $("#all_bonds");
+    all_bonds.click(function () {
+      if ( $(this).is(':checked') ){
+        $('.marcar').prop("checked", true);
+      }else{
+        $('.marcar').prop("checked", false);
+      }
+    });
+  });
+</script>

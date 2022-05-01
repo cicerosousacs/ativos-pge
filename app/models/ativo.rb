@@ -32,6 +32,10 @@ class Ativo < ApplicationRecord
     Ativo.includes(:acquisition, :attach_ativo).order("created_at DESC") 
   end
 
+  def self.pdf_ativo
+    Ativo.includes(:acquisition, :attach_ativo).order(:tombo) 
+  end
+
   # PESQUISA DE ATIVOS
   scope :search, -> (query) { 
     order(:created_at, :desc)
