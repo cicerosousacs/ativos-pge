@@ -22,6 +22,17 @@ class AtivoPge::SubareasController < AtivosController
   def edit
   end
 
+  def change_subarea
+
+    area_id = params[:id].to_i
+    sub_areas = Subarea.where(:area => 9)
+    area = []
+      sub_areas.each do |sub_area|
+        area << { :id => sub_area.id, :subarea => sub_area.description }
+      end
+    render :json => {:area => area.compact}.as_json
+  end
+
   def update
     if @subarea.update(params_subarea)
       redirect_to ativo_pge_subareas_path, notice: "Subarea atualizada, Parabéns!"

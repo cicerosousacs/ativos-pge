@@ -10,7 +10,6 @@ class AtivoPge::BondsController < AtivosController
   def index
     respond_to do |format|
       format.html { @bonds = Bond.last_bond }
-      format.json { render json: (@bonds = Bond.all.order(:id)) }
     end
   end
 
@@ -45,7 +44,6 @@ class AtivoPge::BondsController < AtivosController
     @bonds = Bond.last_bond.find(params[:id])
     respond_to do |format|
       format.js { render partial: 'ativo_pge/bonds/exibir' }
-      format.json { render json: @bond }
     end
   end
 
@@ -53,7 +51,6 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def update
-    byebug
     if @bond.update(params_bond)
       redirect_to ativo_pge_bonds_path, notice: "Vinculo atualizado, Sucesso!"
     else

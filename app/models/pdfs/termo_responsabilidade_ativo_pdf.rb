@@ -8,7 +8,7 @@ module Pdfs
           w = pdf.bounds.width
           h = pdf.bounds.height
 
-          pdf.image "#{Rails.root}/app/assets/images/logo_pge_center.png", :position => :center, :width => 200
+          pdf.image "#{Rails.root}/app/assets/images/logo_pge_center.png", :position => :center, :width => 130
           pdf.move_down 30
           pdf.text "TERMO DE EMPRÉSTIMO", :align => :center, :size => 12	, :style => :bold
           pdf.move_down 10

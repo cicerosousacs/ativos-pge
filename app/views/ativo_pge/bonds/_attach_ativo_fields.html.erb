@@ -12,7 +12,7 @@
       <%= f.select :status, AttachAtivo.statuses.keys, {include_blank: 'Status'}, class:"form-control" %>
     </div>
 
-    <div class="control col-md-3">
+    <div id="show_note" class="control col-md-3">
       <%= f.text_field :note, class:"form-control"%>
     </div>
 

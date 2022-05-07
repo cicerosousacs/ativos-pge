@@ -12,7 +12,13 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :areas
-    resources :subareas
+    resources :subareas do
+      collection do
+        match :change_subarea, via: %i[get post]
+        get 'change_subarea'
+        post 'change_subarea'
+      end
+    end
     resources :acquisitions
     resources :bonds do
       collection do
