@@ -7,16 +7,22 @@ class Bond < ApplicationRecord
 
   # VALIDAÇÔES
   validates :attach_ativo, presence: { message: "É necessario incluir ao menos um Ativo!"}
-  validates :user_id, uniqueness: true, unless: -> { user.has_many_bond == true }
+  # validates :user_id, uniqueness: true, unless: -> { user.has_many_bond == true }
   
+  # PAGINAÇÂO
+  paginates_per 10
+
   def self.last_bond
     # N+1 e ordaneção por ultimo criado
     Bond.includes(:user, :subarea, :attach_ativo).order("created_at DESC")
   end
   
   def bond_description
-    #"#{area.descricao} - #{subarea.descricao} - #{usuario.nome}" 
-    [self.subarea.area.description, self.subarea.description, self.user.name, self.note].join(" - ")
+    if self.note.present? 
+      [self.subarea.area.description, self.subarea.description, self.user.name, self.note].join(" - ")
+    else
+      [self.subarea.area.description, self.subarea.description, self.user.name].join(" - ")
+    end
   end
 
   def check_home_office

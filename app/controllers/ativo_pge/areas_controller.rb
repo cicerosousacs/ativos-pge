@@ -3,6 +3,10 @@ class AtivoPge::AreasController < AtivosController
 
   def index
     @areas = Area.all.page(params[:page])
+    respond_to do |format|
+      format.html
+      format.json { render json: @areas }
+    end
   end
 
   def new

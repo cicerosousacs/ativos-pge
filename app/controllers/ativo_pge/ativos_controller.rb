@@ -5,6 +5,11 @@ class AtivoPge::AtivosController < AtivosController
   protect_from_forgery except: :vincular_deposito
 
   def index
+    @ativos = Ativo.all
+    # FILTRA O ATIVO PELO ID
+    if params[:id].present?
+      @ativos = @ativos.where(id: params[:id])
+    end
     respond_to do |format|
       format.html {
         if params[:search]
@@ -14,6 +19,7 @@ class AtivoPge::AtivosController < AtivosController
         end
       }
       format.pdf { @ativos = Ativo.pdf_ativo }
+      format.json { render json: @ativos}
     end
     @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
   end
@@ -23,9 +29,14 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def create
-    @ativo = Ativo.new(parmas_ativo)
-    if @ativo.save()
-      redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado. Parabéns!"
+    @ativo = Ativo.new(params_ativo)
+
+    salvo = false
+    Ativo.transaction do
+      salvo = @ativo.save!
+    end
+    if salvo
+      redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado e disponibilizado com sucesso!"
     else
       render :new
     end
@@ -35,7 +46,7 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def update
-    if @ativo.update(parmas_ativo)
+    if @ativo.update(params_ativo)
       redirect_to ativo_pge_ativos_path, notice: "Ativo atualizado. Sucesso!"
     else
       render :edit
@@ -54,12 +65,17 @@ class AtivoPge::AtivosController < AtivosController
     attach_ativos = params[:ativos_ids].split(',') 
     attach_ativos.each do |ativo|
       AttachAtivo.find_or_create_by!(
-        bond_id:"3",
+        bond_id:"1",
         ativo_id: ativo.to_i,
         description: ativo.to_i,
         status:"DISPONÍVEL"
       ) 
     end
+    flash[:notice] = "Ativo(s) disponibilizado com Sucesso!"
+    # respond_to do |format|
+       # format.js { flash[:notice] = "Ativo(s) disponibilizado com Sucesso!" }
+    # end
+    
   end
 
   def gerar_pdf_ativo
@@ -67,7 +83,7 @@ class AtivoPge::AtivosController < AtivosController
 
   private
 
-  def parmas_ativo
+  def params_ativo
     params.require(:ativo).permit(:type, :brand, :model, :tombo, :serial, :specification, :acquisition_id)
   end
 

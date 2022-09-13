@@ -8,7 +8,7 @@ module Pdfs
           w = pdf.bounds.width
           h = pdf.bounds.height
 
-          pdf.image "#{Rails.root}/app/assets/images/logo_pge_center.png", :position => :center, :width => 200
+          pdf.image "#{Rails.root}/app/assets/images/logo_pge_center.png", :position => :center, :width => 120
           pdf.move_down 30
           pdf.text "TERMO DE EMPRÉSTIMO", :align => :center, :size => 12	, :style => :bold
           pdf.move_down 10
@@ -20,11 +20,11 @@ module Pdfs
           pdf.move_down 20
 
           pdf.move_down 20
-          pdf.text "Nome: #{bond.user.name}", :size => 12, :style => :italic, align: :left
+          pdf.text "Nome: #{bond.user.name}", :size => 12, :style => :bold, align: :left
           pdf.move_down 5
-          pdf.text "CPF:", :size => 12, :style => :italic, align: :left
+          pdf.text "CPF:", :size => 12, :style => :bold, align: :left
           pdf.move_down 5
-          pdf.text "Setor: #{bond.subarea.area.description}", :size => 12, :style => :italic, align: :left
+          pdf.text "Setor: #{bond.subarea.area.description}", :size => 12, :style => :bold, align: :left
           pdf.move_down 20
 
           pdf.move_down 20

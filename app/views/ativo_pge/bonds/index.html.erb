@@ -70,32 +70,35 @@
   $(document).ready(function () {
     $('#btn-termo').click(function () {
       var bonds_ids = $('.marcar:checked').map(function () {
-          return $(this).val();
-      }).get();
-      if (bonds_ids == '') {
+        return $(this).val();
+        }).get();
+        if (bonds_ids == '') {
           alert('Selecione pelo menos um vinculo');
-      } else {
-          if (this.id == 'btn-termo') {
+          } else {
+            if (this.id == 'btn-termo') {
               window.open('<%= url_for({ :controller => 'bonds', :action => 'pdf_termo_responsabilidade_ativo' })%>?bonds_ids=' + bonds_ids)
+            }
           }
-      }
     });
-
+    
     $("#all_bonds").change(function () {
         $('.marcar').prop('checked', $(this).prop("checked"));
-    });
-
-    $("#all_bonds").click(function(){
+        });
+        
+        $("#all_bonds").click(function(){
         $('.marcar').not(this).prop('checked', this.checked);
-    });
-
-    var all_bonds = $("#all_bonds");
+        });
+        
+        var all_bonds = $("#all_bonds");
     all_bonds.click(function () {
       if ( $(this).is(':checked') ){
         $('.marcar').prop("checked", true);
       }else{
         $('.marcar').prop("checked", false);
       }
-    });
-  });
+      });
+      });
+
 </script>
+
+<%= paginate @bonds %>

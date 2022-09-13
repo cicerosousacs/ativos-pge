@@ -8,16 +8,18 @@ class AtivoPge::BondsController < AtivosController
   protect_from_forgery except: :pdf_termo_responsabilidade_ativo
 
   def index
+    @bonds = Bond.all.order(:id)
+
     respond_to do |format|
-      format.html { @bonds = Bond.last_bond }
-      format.json { render json: (@bonds = Bond.all.order(:id)) }
+      format.html { @bonds = Bond.last_bond.page(params[:page]) }
+      format.json { render json: @bonds }
     end
   end
 
   def pdf_termo_responsabilidade_ativo
     pdf_data = Pdfs::TermoResponsabilidadeAtivoPdf.gerar((params[:bonds_ids]).split(','))
     if params["bonds_ids"].split(',').size == 1
-      usuario_vinculo = Bond.where('id = ?', params["bonds_ids"].split(',')).first.user_id
+      usuario_vinculo = User.where('id = ?', params["bonds_ids"].split(',')).name
       send_data(pdf_data, filename: "termo_#{usuario_vinculo}.pdf", :type => 'application/pdf', :disposition => 'inline')
     else
       send_data(pdf_data, filename: "termo.pdf", :type => 'application/pdf', :disposition => 'inline')
@@ -31,8 +33,14 @@ class AtivoPge::BondsController < AtivosController
 
   def create
     @bond = Bond.new(params_bond)
+    salvo = false
+    Bond.transaction do
+      raise "Usuário não informado!" unless params_bond["user_id"].present?
+      raise "Este usuário já possui um vinculo" if Bond.where(user_id: params_bond[:user_id]).present? unless Bond.where(user_id: params_bond[:user_id] == 422 )
+      salvo = @bond.save!
+    end
     respond_to do |format|
-      if @bond.save!
+      if salvo
         format.html { redirect_to ativo_pge_bonds_path, notice: "Vinculo criado, Parabéns!" }
         format.json { render json: @bond }
       else
@@ -53,7 +61,6 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def update
-    byebug
     if @bond.update(params_bond)
       redirect_to ativo_pge_bonds_path, notice: "Vinculo atualizado, Sucesso!"
     else
@@ -73,6 +80,7 @@ class AtivoPge::BondsController < AtivosController
 
   def params_bond
     params.require(:bond).permit(
+                                :id,
                                 :user_id,
                                 :area, 
                                 :subarea_id, 

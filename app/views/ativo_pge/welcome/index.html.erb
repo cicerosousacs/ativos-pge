@@ -90,7 +90,7 @@
           <code>
             <% @type_count.each do |type| %>
               <li style="list-style:none;">
-                <%= type %>
+                <%= type.join(" - ") %>
               </li>
             <% end %>
           </code>

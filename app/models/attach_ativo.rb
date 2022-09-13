@@ -15,5 +15,5 @@ class AttachAtivo < ApplicationRecord
   # VALIDAÇÔES
   validates :ativo_id, uniqueness: true
   validates :note, presence: true, if: -> { status == "DEFEITO" }
-  
+  validates :status, presence: true
 end

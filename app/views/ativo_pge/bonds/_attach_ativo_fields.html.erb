@@ -1,11 +1,11 @@
 <div class="control-group nested-fields">
   <div class="row g-3">
     <div class="control col-md-2">
-      <%= f.select("ativo_id", @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo")%>
+      <%= f.select("ativo_id", @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo")%>
     </div>
 
     <div class="control col-md-4">
-      <%= f.collection_select(:description, Ativo.all, :id, :ativo_description, {include_blank: 'Descrição'}, class:"form-control") %>
+      <%= f.collection_select(:description, Ativo.all, :id, :ativo_description, {include_blank: 'Descrição'}, class:"form-control", id:"set_description") %>
     </div>
 
     <div class="control col-md-2">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="control">
-      <%= link_to_remove_association(f, data: {confirm: "Certeza?"}, class: "btn-sm btn-danger") do %>
+      <%= link_to_remove_association(f, class: "btn-sm btn-danger") do %>
         <i class="fa fa-times" style="color:white"></i>
       <% end %>
     </div>
@@ -34,9 +34,27 @@ $(document).ready(function(){
 
     $('.select_tombo').select2
   ({
-    //theme: 'bootstrap'
+    theme: 'bootstrap'
   });
 
+});
+
+// ###############################
+
+$(document).ready(function(){
+  $(".nested-fields #set_tombo").change(function(){
+    $.ajax( "/ativo_pge/ativos.json?id=" + this.value )
+    .done(function(data){
+      var htmlOptions = ""
+      for(var i = 0; i<data.length; i++){
+        htmlOptions += "<option value='"+ data[i].id +"'>" + data[i].type + " " + data[i].brand + " " + data[i].model + "</option>"
+      }
+      $(".nested-fields #set_description").html(htmlOptions);
+    })
+    .fail(function(){
+      alert(error);
+    });
+  });
 });
 
 </script>

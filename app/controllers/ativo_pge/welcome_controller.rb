@@ -7,7 +7,7 @@ class AtivoPge::WelcomeController < AtivosController
 
     #@ativos = Ativo.all
     @total_ativos = Ativo.count(:id)
-    @type_count = Ativo.select(:type).group(:type).count
+    @type_count = Ativo.select(:type).group(:type).order("type ASC").count
 
     @ativos_available = AttachAtivo.DISPONÍVEL.count
     @ativos_linked = AttachAtivo.VÍNCULADO.count

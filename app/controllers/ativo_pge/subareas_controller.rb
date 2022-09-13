@@ -4,6 +4,13 @@ class AtivoPge::SubareasController < AtivosController
 
   def index
     @subareas = Subarea.includes(:area).order("area_id").page(params[:page])
+    if params[:area_id].present?
+      @subareas = @subareas.where(area_id: params[:area_id])
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @subareas}
+    end
   end
 
   def new
