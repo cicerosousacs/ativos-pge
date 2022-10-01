@@ -20,9 +20,9 @@ class AtivoPge::BondsController < AtivosController
     pdf_data = Pdfs::TermoResponsabilidadeAtivoPdf.gerar((params[:bonds_ids]).split(','))
     if params["bonds_ids"].split(',').size == 1
       usuario_vinculo = User.where('id = ?', params["bonds_ids"].split(',')).name
-      send_data(pdf_data, filename: "termo_#{usuario_vinculo}.pdf", :type => 'application/pdf', :disposition => 'inline')
+      send_data(pdf_data, filename: "termo_responsabilidade_#{usuario_vinculo}.pdf", :type => 'application/pdf', :disposition => 'inline')
     else
-      send_data(pdf_data, filename: "termo.pdf", :type => 'application/pdf', :disposition => 'inline')
+      send_data(pdf_data, filename: "termo_responsabilidade.pdf", :type => 'application/pdf', :disposition => 'inline')
     end
   end
 
@@ -33,6 +33,7 @@ class AtivoPge::BondsController < AtivosController
 
   def create
     @bond = Bond.new(params_bond)
+byebug
     salvo = false
     Bond.transaction do
       raise "Usuário não informado!" unless params_bond["user_id"].present?
@@ -107,7 +108,7 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def set_ativo_select
-    @ativo_select = Ativo.pluck(:tombo, :id)
+    @ativo_select = Ativo.select(AttachAtivo.statuses == "DISPONÍVEL").pluck(:tombo, :id)
   end
 
 end

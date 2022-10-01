@@ -36,7 +36,7 @@ class AtivoPge::AtivosController < AtivosController
       salvo = @ativo.save!
     end
     if salvo
-      redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado e disponibilizado com sucesso!"
+      redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado e enviado ao depósito com sucesso!"
     else
       render :new
     end
@@ -62,20 +62,21 @@ class AtivoPge::AtivosController < AtivosController
   end
 
   def vincular_deposito
-    attach_ativos = params[:ativos_ids].split(',') 
+    attach_ativos = params[:ativos_ids].split(',')
     attach_ativos.each do |ativo|
       AttachAtivo.find_or_create_by!(
         bond_id:"1",
         ativo_id: ativo.to_i,
-        description: ativo.to_i,
+        description: description_active(ativo.to_i),
         status:"DISPONÍVEL"
       ) 
     end
-    flash[:notice] = "Ativo(s) disponibilizado com Sucesso!"
-    # respond_to do |format|
-       # format.js { flash[:notice] = "Ativo(s) disponibilizado com Sucesso!" }
-    # end
-    
+    flash[:notice] = (attach_ativos.length > 1 ? ("Ativos enviados ao depósito com sucesso!") : ("Ativo enviado ao depósito com sucesso!"))
+  end
+
+  def description_active(id)
+    active = Ativo.find(id)
+    description = [active.type, active.brand, active.model].join(" ")
   end
 
   def gerar_pdf_ativo
