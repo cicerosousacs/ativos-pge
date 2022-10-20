@@ -2,7 +2,7 @@ class AtivoPge::UsersController < AtivosController
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page])
+    @users = User.page(params[:page]).order("name")
   end
 
   def new
@@ -40,7 +40,7 @@ class AtivoPge::UsersController < AtivosController
   private
 
   def params_user
-    params.require(:user).permit(:name, :has_many_bond)
+    params.require(:user).permit(:name, :has_many_bond, :email)
   end
 
   def set_user

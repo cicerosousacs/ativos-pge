@@ -1,7 +1,7 @@
 <div class="control-group nested-fields">
   <div class="row g-3">
     <div class="control col-md-2">
-      <%= f.select("ativo_id", @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo")%>
+      <%= f.select :ativo_id, @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo"%>
     </div>
 
     <div class="control col-md-4">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="control col-md-2">
-      <%= f.select :status, AttachAtivo.statuses.keys, {include_blank: 'Status'}, class:"form-control" %>
+      <%= f.select :status, @status, {include_blank: 'Status'}, class:"form-control" %>
     </div>
 
     <div class="control col-md-3">

@@ -10,14 +10,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-<title >Ativos PGE - Login</title>
+<title >Portal Service Desk - Login</title>
     
 
 <%= stylesheet_link_tag 'ativos_session' %>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
   <div class="container">
       <!-- Outer Row -->
@@ -30,21 +30,21 @@
               <div class="col-lg-11">
                 <div class="p-5">
                   <div class="text-center">
-                      <h1 class="h4  mb-4"><i class="fas fa-cubes"></i> ATIVOS PGE</h1>   
+                      <h1 class="h4  mb-4">Portal do Service Desk</h1>   
                   </div>
                   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                     <div class="field">
-                      <%= f.label :email,"Login" %><br />
+                      <%= f.label :email,"Email" %>
                       <%= f.email_field :email, autofocus: true, class: "form-control" %>
                     </div>
                       <br>
                     <div class="field">
-                      <%= f.label :password %><br />
+                      <%= f.label :password %>
                       <%= f.password_field :password, class: "form-control" %>
                     </div>
                       <hr>
                     <div class="actions">
-                      <%= f.submit "Entrar", class: "btn btn-primary btn-user btn-block" %>
+                      <%= f.submit "Entrar", class: "btn btn-success btn-user btn-block" %>
                     </div>                
                   <% end %>                                    
                 </div>

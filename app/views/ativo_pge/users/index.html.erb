@@ -13,8 +13,8 @@
   <thead>
     <tr>
       <th>Usuário
+      <th>Email
       <th>Multiplos Vinculos
-      <th>
       <th>
       </th>
     </tr>
@@ -23,6 +23,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
+        <td><%= user.email %></td>
         <td><%= user.check_has_many_bond %></td>
         <td style="width: 10px">
           <%= link_to edit_ativo_pge_user_path(user) do %>

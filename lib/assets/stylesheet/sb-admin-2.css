@@ -113,6 +113,10 @@ dl {
   margin-bottom: 1rem;
 }
 
+.responsive-columns {
+  column-count: 2 !important;
+}
+
 ol ol,
 ul ul,
 ol ul,
@@ -6434,7 +6438,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #1cc88a !important;
+  background-color: #13855c !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
@@ -9611,7 +9615,7 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .text-success {
-  color: #1cc88a !important;
+  color: #13855c !important;
 }
 
 a.text-success:hover, a.text-success:focus {
@@ -10060,7 +10064,7 @@ a:focus {
 }
 
 .border-left-success {
-  border-left: 0.25rem solid #1cc88a !important;
+  border-left: 0.25rem solid #13855c !important;
 }
 
 .border-bottom-success {

@@ -1,11 +1,11 @@
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow">
+      <div class="card border-left-success shadow">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ATIVOS</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">ATIVOS</div>
               <div class="h4 mb-0 font-weight-bold"><%= @total_ativos %></div>
             </div>
           </div>
@@ -14,11 +14,11 @@
     </div>
     <!-- Earnings (Annual) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow">
+      <div class="card border-left-success shadow">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">VÍNCULOS</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">VÍNCULOS</div>
               <div class="h4 mb-0 font-weight-bold"><%= @total_bonds %></div> 
             </div>
           </div>
@@ -27,11 +27,11 @@
     </div>
     <!-- Tasks Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow">
+      <div class="card border-left-success shadow">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ATIVOS DISPONÍVEIS</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">ATIVOS DISPONÍVEIS</div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
                   <div class="h4 mb-0 mr-3 font-weight-bold"><%= @ativos_available %></div>
@@ -44,11 +44,11 @@
     </div>
     <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow">
+        <div class="card border-left-success shadow">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ATIVOS SEM USUÁRIO</div>
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">ATIVOS SEM USUÁRIO</div>
                         <div class="h4 mb-0 font-weight-bold"><%= @ativos_linked %></div> 
                     </div>
                 </div>
@@ -63,7 +63,7 @@
       <!-- Card Header - Accordion -->
       <a href="#vinculos" class="d-block card-header py-3" data-toggle="collapse"
         role="button" aria-expanded="true" aria-controls="vinculos">
-        <h6 class="m-0 font-weight-bold text-primary">ÚLTIMAS MOVIMENTAÇÕES</h6>
+        <h6 class="m-0 font-weight-bold text-success">ÚLTIMAS MOVIMENTAÇÕES</h6>
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="vinculos">
@@ -82,18 +82,19 @@
     <div class="card shadow mb-4">
       <a href="#ativos" class="d-block card-header py-3" data-toggle="collapse"
         role="button" aria-expanded="true" aria-controls="ativos">
-        <h6 class="m-0 font-weight-bold text-primary">ATIVOS POR TIPO</h6>
+        <h6 class="m-0 font-weight-bold text-success">ATIVOS POR TIPO</h6>
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="ativos">
         <div class="card-body">
-          <code>
+          <div class="responsive-columns">
             <% @type_count.each do |type| %>
-              <li style="list-style:none;">
+              <div class="mb-2">
+                <li style="list-style:none;">
                 <%= type.join(" - ") %>
-              </li>
+              </div>
             <% end %>
-          </code>
+          </div>
         </div>
       </div>
     </div>

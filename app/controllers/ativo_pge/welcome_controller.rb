@@ -1,7 +1,7 @@
 class AtivoPge::WelcomeController < AtivosController
 
   def index
-    @bonds = Bond.includes(:user, :subarea).order("created_at DESC").limit(17)
+    @bonds = Bond.includes(:user, :subarea).order("created_at DESC").limit(16)
     @total_bonds = Bond.count(:id)
 
     #@ativos = Ativo.all

@@ -4,6 +4,8 @@ class AtivoPge::BondsController < AtivosController
   before_action :set_area_select, only: [:new, :create, :edit, :update]
   before_action :set_subarea_select, only: [:new, :create, :edit, :update]
   before_action :set_ativo_select, only: [:new, :create, :edit, :update]
+  before_action :set_status, only: [:new, :create, :edit, :update]
+  before_action :set_description_active, only: [:new, :create, :edit, :update]
 
   protect_from_forgery except: :pdf_termo_responsabilidade_ativo
 
@@ -33,7 +35,7 @@ class AtivoPge::BondsController < AtivosController
 
   def create
     @bond = Bond.new(params_bond)
-byebug
+
     salvo = false
     Bond.transaction do
       raise "Usuário não informado!" unless params_bond["user_id"].present?
@@ -111,4 +113,13 @@ byebug
     @ativo_select = Ativo.select(AttachAtivo.statuses == "DISPONÍVEL").pluck(:tombo, :id)
   end
 
+  def set_status
+    @status = AttachAtivo.statuses.keys
+  end
+
+  def set_description_active
+    # active = Ativo.all
+    # description = [active.type, active.brand, active.model].join(" ")
+    @description_active = Ativo.select(AttachAtivo.statuses == "DISPONÍVEL").pluck(:type, :brand, :model, :id).join(" ")
+  end
 end
