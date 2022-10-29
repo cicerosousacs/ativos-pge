@@ -28,7 +28,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
-              <div class="sidebar-brand-text mx-2" style="font-family:Verdana;">PORTAL do SERVICE DESK</div>
+              <%= image_tag "service_desk_br2.png", size: "200x40" %>
             </a>
 
             <!-- Divider -->
@@ -130,38 +130,42 @@
                     <form class="form-inline">
                       <div class="input-group">
                         <div class="input-group-append">
-                          <div class="mx-2 text-gray-600">Gerenciamento de Ativos de TI</div>
+                          <div class="mx-2 text-gray-600"></div>
                         </div>
                       </div>
                     </form>
                 
                     <ul class="navbar-nav ml-auto">
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-lg-inline text-gray-600"><%= current_admin.email %></span>
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                              <a class="dropdown">
-                                <%= link_to ativo_pge_admins_path do %>
-                                  <i class="fas fa-user fa-lg fa-fw mr-2 text-gray-800"></i>
-                                  <span style="font-family:Arial;">Gerenciar</span>
-                                <% end %>
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown">
-                                <%= link_to destroy_admin_session_path, method: :delete do %>
-                                  <i class="fas fa-sign-out-alt fa-lg fa-fw mr-2 text-gray-800"></i> 
-                                  <span style="font-family:Arial;">Sair</span> 
-                                <% end %>
-                              </a>
+                      <div class="topbar-divider d-none d-sm-block"></div>
+                      <!-- Nav Item - User Information -->
+                      <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-lg-inline text-gray-900"><%= current_admin.name %></span>
+                        </a>
+                          <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                          <%= link_to ativo_pge_admins_path do %>
+                            <div class="dropdown-item">
+                              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-800"></i>
+                              Gerenciar
                             </div>
-                        </li>
+                          <% end %>
+                          <%= link_to ativo_pge_other_index_path do %>
+                            <div class="dropdown-item">
+                              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-800"></i>
+                              Outros
+                            </div>
+                          <% end %>
+                          <div class="dropdown-divider"></div>
+                          <%= link_to destroy_admin_session_path, method: :delete do %>
+                            <div class="dropdown-item">
+                              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800"></i> 
+                              Sair 
+                            </div>
+                          <% end %>
+                        </div>
+                      </li>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -181,7 +185,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>PORTAL DO SERVICE DESK - V 1.0.0</span>
+                        <span>2022 PORTAL DO SERVICE DESK - V 1.0.0</span>
                     </div>
                 </div>
             </footer>

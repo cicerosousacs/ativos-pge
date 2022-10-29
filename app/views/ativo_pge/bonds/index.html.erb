@@ -1,3 +1,4 @@
+<h1 class="h3 mb-2 text-gray-800">Vinculos</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <div>
@@ -44,6 +45,10 @@
             <td><%= bond.user.name %></td>
             <td><%= bond.note %></td>
             <td><%= bond.check_home_office %></td>
+            <td style="width: 12px">
+              <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
+                <i class="fa fa-clipboard-list"></i>
+              <% end %>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
                 <i class="fa fa-eye"></i>

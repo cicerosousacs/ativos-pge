@@ -1,5 +1,5 @@
 class AtivoPge::AdminsController < AtivosController
-  before_action :check_senhas, only: [:update]
+  before_action :check_password, only: [:update]
   before_action :set_admin, only: [:edit, :update, :destroy]
   
   def index
@@ -24,7 +24,7 @@ class AtivoPge::AdminsController < AtivosController
 
   def update
     if @admin.update(params_admin)
-      sign_in(@admin, bypass: true)
+      bypass_sign_in(@admin)
       redirect_to ativo_pge_admins_path, notice: "Administrador atualizado. Sucesso!"
     else
       render :edit
@@ -42,14 +42,14 @@ class AtivoPge::AdminsController < AtivosController
   private
 
   def params_admin
-    params.require(:admin).permit(:email, :password, :password_confirmation)#:nome, , :status
+    params.require(:admin).permit(:email, :password, :name, :active, :password_confirmation)
   end
 
   def set_admin
     @admin = Admin.find(params[:id])
   end
 
-  def check_senhas
+  def check_password
     if params[:admin][:password].blank? && params[:admin][:password_confirmation].blank?
       params[:admin].extract!(:password, :password_confirmation)
     end

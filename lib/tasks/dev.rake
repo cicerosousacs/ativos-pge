@@ -12,7 +12,7 @@ namespace :dev do
         show_spinner("Admin padrão...") { %x(rails dev:add_default_admin) }
         show_spinner("Ajustes 1 de 2...") { %x(rails dev:add_areas) }
         show_spinner("Ajustes 2 de 2...") { %x(rails dev:add_users) }
-        #show_spinner("Ajustes 3 de 5...") { %x(rails dev:add_condicao) }
+        show_spinner("Ajustes 3 de 5...") { %x(rails dev:add_status) }
         #show_spinner("Ajustes 4 de 5...") { %x(rails dev:add_origem) }
         #show_spinner("Ajustes 5 de 5...") { %x(rails dev:add_modalidade) }
       else
@@ -49,6 +49,20 @@ namespace :dev do
       User.create!(name: line.strip)
       end
     end
+
+    desc "Adicionando Status"
+    task add_status: :environment do
+      show_spinner("Adicionando Status...") do
+        Status.create!([
+          {description: "DISPONÍVEL"},
+          {description: "DEFEITO"},
+          {description: "INSERVÍVEL"},
+          {description: "AGUARDANDO GARANTIA"},
+          {description: "VÍNCULADO"},
+          {description: "VÍNCULADO EM USO"},
+        ])
+      end
+    end
 ##################################################################
     desc "Contador de Ativos por Tipo"
     task count_ativos: :environment do
@@ -59,6 +73,7 @@ namespace :dev do
       end
     end
 ##################################################################
+
     private
      
     def show_spinner(msg_start, msg_end = "Sucesso!")

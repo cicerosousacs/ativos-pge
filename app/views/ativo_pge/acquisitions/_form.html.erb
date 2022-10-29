@@ -11,35 +11,35 @@
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary"></h6>
+    <h6 class="m-0 font-weight-bold text-success">Nova aquisição</h6>
   </div>
   <div class="card-body">
     <%= form_with(model: [ :ativo_pge, @acquisition ], local: true ) do |form| %>
       <div class="row g-3">
-        <div class="form-group col-md-8">
-          <%= form.label :item, "Item" %> <br>
+        <div class="form-group col-md-6">
+          <%= form.label :item %> <br>
           <%= form.text_field :item, class:"form-control" %>
         </div>
-        <div class="form-group col-md-2">
-          <%= form.label :quantity, "Quantidade" %> <br>
+        <div class="form-group col-md-3">
+          <%= form.label :quantity %> <br>
           <%= form.text_field :quantity, class:"form-control" %>
         </div>
-        <div class="form-group col-md-2">
-          <%= form.label :value, "Valor Aquisição" %> <br>
+        <div class="form-group col-md-3">
+          <%= form.label :value %> <br>
           <%= form.text_field :value, class:"form-control"%>
         </div>
         <div class="form-group col-md-6">
-          <%= form.label :manager, "Gestor do Contrato" %> <br>
+          <%= form.label :manager %> <br>
           <%= form.text_field :manager, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
           <code>*</code>
-          <%= form.label :modality, "Modalidade da Aquisição" %>
+          <%= form.label :modality %>
           <%= form.select :modality, Acquisition.modalities.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
           <code>*</code>
-          <%= form.label :source, "Origem da Aquisição" %>
+          <%= form.label :source %>
           <%= form.select :source, Acquisition.sources.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
         </div>
         <div class="form-group col-md-6">
@@ -51,29 +51,38 @@
           <%= form.date_field :acquisition_date, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
-          <%= form.label :contract_number, "Nº Contrato" %> <br>
-          <%= form.text_field :contract_number, class:"form-control masc-contrato" %>
+          <%= form.label  "Duração da Garantia" %> <br>
+          <%= form.text_field :acquisition_date, class:"form-control" %>
         </div>
         <div class="form-group col-md-6">
           <%= form.label :company %> <br>
           <%= form.text_field :company, class:"form-control" %>
         </div>
-        <div class="form-group col-md-6">
-          <%= form.label :observacao, "Observações" %> <br>
-          <%= form.text_field :empresa_contratada, class:"form-control" %>
+        <div class="form-group col-md-3">
+          <%= form.label  "Termino de Garantia" %> <br>
+          <%= form.date_field :acquisition_date, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= form.label :contract_number, "Nº Contrato" %> <br>
+          <%= form.text_field :contract_number, class:"form-control masc-contrato" %>
         </div>
         <div class="form-group col-md-6">
+          <%= form.label :observacao %> <br>
+          <%= form.text_field :empresa_contratada, class:"form-control" %>
+          <br>
+          <code>* Campos obrigatorios</code><br>
+        </div>
+        <div class="form-group col-md-3">
           <code>*</code>
-          <%= form.label :anexar_contrato, "Anexar Contrato", title:"Apenas arquivos PDF" %>
+          <%= form.label :anexar_contrato, title:"Apenas arquivos PDF" %>
           <%= form.file_field :anexo_contrato, class:"form-control-file", id:"file_contrato"%>
         </div>
-        <div class="form-group col-md-6">
-          <%= form.label :anexar_aditivo, "Anexar Aditivo" %>
+        <div class="form-group col-md-3">
+          <%= form.label :anexar_aditivo %>
           <%= form.file_field :anexo_aditivo, class:"form-control-file", id:"file_aditivo" %>
         </div>
       </div>
       <hr/>
-      <code>* Campos obrigatorios</code><br>
       <div class="text-right">
         <%= form.submit "Salvar", class:"btn btn-primary" %>
         <%= link_to ativo_pge_acquisitions_path do %>

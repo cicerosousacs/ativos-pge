@@ -10,15 +10,19 @@
     </div>
 <% end %>
 
-
-<%= form_with(model: [ :ativo_pge, @area ], local: true ) do |form| %>
-
-  <div class="form-group">
-    <%= form.label :description %> <br>
-    <%= form.text_field :description, class:"form-control border-6 small" %>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-success">Nova Área</h6>
   </div>
-
-<div class="text-right">
-  <%= form.submit "Salvar", class:"btn btn-primary" %>
+  <div class="card-body">
+  <%= form_with(model: [ :ativo_pge, @area ], local: true ) do |form| %>
+    <div class="form-group">
+      <%= form.label :description %> <br>
+      <%= form.text_field :description, class:"form-control border-6 small" %>
+    </div>
+    <div class="text-right">
+      <%= form.submit "Salvar", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+  </div>
 </div>
-<% end %>

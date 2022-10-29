@@ -7,11 +7,22 @@
       ativo:
         one: Ativo
         other: Ativos
+      bond:
+        one: Vinculo
+        other: Vinculos
+      acquisition:
+        one: Aquisição
+        other: Aquisiçãos
+      attach_ativo:
+        one: Ativo vinculado
+        other: Ativos vinculados
     attributes:
       admin:
         id: ID
         login: "Logar-se"
         email: Email
+        name: Nome
+        active: Usuário ativo?
         created_at: Criado em
         updated_at: Atualizado em
         password: Senha
@@ -23,6 +34,61 @@
         model: Modelo
         serial: Serial
         tombo: Tombo
-        specification: Especificaçôes
+        specification: Especificações
+        contract_number: Nº Processo
+        created_at: Criado em
+        updated_at: Atualizado em
+      bond:
+        id: ID
+        area: Área
+        user_id: Usuário
+        note: Observações
+        call_number: Número do chamado
+        created_at: Criado em
+        updated_at: Atualizado em
+      acquisition:
+        id: ID
+        interested_party: Parte Interessada
+        acquisition_date: Data da Aquisição
+        company: Empresa
+        item: Item
+        quantity: Quantidade
+        value: Valor Aquisição
+        manager: Gestor do Contrato
+        modality: Modalidade da Aquisição
+        source: Origem da Aquisição
+        observacao: Observações
+        anexar_contrato: Anexar Contrato
+        anexar_aditivo: Anexar Aditivo
+        created_at: Criado em
+        updated_at: Atualizado em
+      call_number:
+        id: ID
+        number: Numero do chamado
+        created_at: Criado em
+        updated_at: Atualizado em
+      attach_ativo:
+        id: ID
+        bond_id: Vinculo
+        ativo_id: Ativo
+        description: Descrição
+        status: Status
+        note: Anotação
+        created_at: Criado em
+        updated_at: Atualizado em
+      area:
+        id: ID
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      subarea:
+        id: ID
+        area_id: Área
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      user:
+        id: ID
+        name: Nome
         created_at: Criado em
         updated_at: Atualizado em

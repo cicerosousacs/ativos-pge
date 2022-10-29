@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ativo: one
+  descritpion: MyString
+  status: one
+
+two:
+  ativo: two
+  descritpion: MyString
+  status: two

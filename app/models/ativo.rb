@@ -4,6 +4,7 @@ class Ativo < ApplicationRecord
 
   # RELACIONAMENTOS
   belongs_to :acquisition
+  belongs_to :status
   
   has_one :attach_ativo
   has_one :user, through: :attach_ativo
@@ -11,12 +12,28 @@ class Ativo < ApplicationRecord
   has_one :subarea, through: :attach_ativo
 
   has_many :bonds
-
-  # PAGINAÇÂO
-  paginates_per 10
-
+  has_many :deposits
+  
   # VALIDAÇÔES
-  validates :type, :brand, :model, :serial, :tombo, presence: true
+  validates :type, :brand, :model, :serial, :tombo, presence: { message: "não informado!" }
+
+  # PESQUISA DE ATIVOS
+  # scope :search, -> (query) { 
+  #   order(:created_at, :desc)
+  #   text = "%#{query}%".upcase
+  #   search_columns = %w[model tombo serial type brand]
+  #   where(
+  #     search_columns
+  #     .map { |field| "#{field} LIKE :search" }
+  #     .join(' OR '),
+  #     search: text
+  #     )
+  #   }
+  
+  scope :available_assets, -> { where(deposits: {status_id: 1}) }  
+  
+  # PAGINAÇÂO
+  paginates_per 9
 
   #descrição do ativo juntando tipo, marca e modelo
   def ativo_description
@@ -36,17 +53,5 @@ class Ativo < ApplicationRecord
     Ativo.includes(:acquisition, :attach_ativo).order(:tombo) 
   end
 
-  # PESQUISA DE ATIVOS
-  scope :search, -> (query) { 
-    order(:created_at, :desc)
-    text = "%#{query}%".upcase
-    search_columns = %w[model tombo serial type brand]
-    where(
-      search_columns
-        .map { |field| "#{field} LIKE :search" }
-        .join(' OR '),
-      search: text
-    )
-  }
 
 end

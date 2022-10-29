@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  paginates_per 10
+  paginates_per 9
   has_many :ativos, through: :bond
 
   def check_has_many_bond

@@ -1,14 +1,11 @@
 <table class="table table-hover table-bordered">
-  <thead>
-  </thead>
   <tbody>
-      <% @bonds.attach_ativo.each do |show_ativo| %>
-        <tr class="table-light">
-          <td><%= show_ativo.ativo.tombo %>
-          <td><%= show_ativo.ativo.ativo_description %> 
-          <td><%= show_ativo.status %>
-          <td><%= show_ativo.note %>
-        </tr>
-      <% end %>
+    <% @bonds.attach_ativo.each do |show_ativo| %>
+      <tr class="table-light">
+        <td><%= show_ativo.ativo.tombo %>
+        <td><%= show_ativo.ativo.ativo_description %> 
+        <td><%= show_ativo.status %>
+      </tr>
+    <% end %>
   </tbody>
 </table>

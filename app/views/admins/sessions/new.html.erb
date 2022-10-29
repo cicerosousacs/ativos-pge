@@ -1,7 +1,3 @@
-<% flash.each do |key, value| %>
-  <div class="flash <%= key %>"><%= value %></div>
-<% end %>
-
 <head>
 
   <meta charset="utf-8">
@@ -21,29 +17,27 @@
 
   <div class="container">
       <!-- Outer Row -->
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-md-9">
-        <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-6 col-md-9 mt-5">
+        <div class="card o-hidden border-8 shadow-lg mt-5">
           <div class="card-body">
             <!-- Nested Row within Card Body -->
             <div class="row justify-content-center">
               <div class="col-lg-11">
                 <div class="p-5">
-                  <div class="text-center">
-                      <h1 class="h4  mb-4">Portal do Service Desk</h1>   
+                  <div class="figure-img"> 
+                    <%= image_tag "service_desk_gren3.png", size: "350x70"%>
                   </div>
                   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                    <div class="field">
-                      <%= f.label :email,"Email" %>
-                      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                    <div class="field mt-5">
+                      <%= f.email_field :email, placeholder: "Email", autofocus: true, class:"form-control"%>
                     </div>
-                      <br>
-                    <div class="field">
-                      <%= f.label :password %>
-                      <%= f.password_field :password, class: "form-control" %>
+                
+                    <div class="field mt-3">
+                      <%= f.password_field :password, placeholder: "Senha", class: "form-control" %>
                     </div>
-                      <hr>
-                    <div class="actions">
+                 
+                    <div class="actions mt-3">
                       <%= f.submit "Entrar", class: "btn btn-success btn-user btn-block" %>
                     </div>                
                   <% end %>                                    

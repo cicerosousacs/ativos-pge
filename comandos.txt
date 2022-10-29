@@ -1,40 +1,31 @@
 	TABLE MODEL ACQUISITION(aquisição)
 
 	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
-	contract_number:string company:string interested_party:string modality:integer source:integer
+	contract_number:string company:string interested_party:string modality:string source:string warranty_period:number warranty_ends:date
 	
-  enum modality: { 
-									CONCORRÊNCIA: 'CONCORRÊNCIA', 
-									PREGÃO: 'PREGÃO', 
-									LEILÃO: 'LEILÃO', 
-									CONCURSO: 'CONCURSO', 
-									"COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
-									"DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
-								}
-          
-  enum source: { 
-								MAPP: 'MAPP', 
-								FUNPECE: 'FUNPECE', 
-								"PGE FUNDO": 'PGE FUNDO'
-							}
+	  enum modality:{ 
+			 CONCORRÊNCIA: 'CONCORRÊNCIA', 
+			 PREGÃO: 'PREGÃO', 
+			 LEILÃO: 'LEILÃO', 
+			 CONCURSO: 'CONCURSO', 
+			 "COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
+			 "DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
+			}
+		  
+	  enum source: { 
+			MAPP: 'MAPP', 
+			FUNPECE: 'FUNPECE', 
+			"PGE FUNDO": 'PGE FUNDO'
+			}
 
-	TABLE MODEL ACTIVE(ativo)
+	TABLE MODEL ASSET(ativo)
 
-	rails g model Active type:string brand:string model:string serial:string tombo:string
-	specification:text acquisition:references state:string
+	rails g model Asset type:string brand:string model:string serial:string tombo:string
+	specification:text acquisition:references
 	
-  enum status: { 
-		            DISPONIVEL: 'DISPONÍVEL', 
-		            VINCULADO: 'VINCULADO', 
-		            "VINCULADO EM USO": 'VÍNCULADO EM USO', 
-		            DEFEITO: 'DEFEITO', 
-		            INSERVIVEL: 'INSERVÍVEL', 
-		            "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
-		          }
-
 	TABLE MODEL USER(usuario)
 
-	rails g model User name:string email:string has_many_bond:boolean
+	rails g model User name:string email:string
 
 	TABLE AREA
 
@@ -46,11 +37,35 @@
 
 	TABLE BOND(vinculo)
 
-	rails g model Bond subarea:references user:references note:string
+	rails g model Bond subarea:references user:references observation:string
+	
+	TABLE 
+
+	rails g model call_number bond:references number:integer(max 7 digitos) model: length: { is: 7 }
 
 	TABLE 
 
-	rails g model attach_ativos bond:references ativo:references description:string status:string note:string
+	rails g model allocated_asset bond:references asset:references description:string status:references
+	
+	TABLE MODEL status
+
+	rails g model Status description:string
+		VINCULADO
+		VÍNCULADO EM USO 
+		DISPONÍVEL
+		DEFEITO
+		INSERVÍVEL 
+		AGUARDANDO GARANTIA
+
+	
+	TABLE DEPOSIT
+	
+	rails g model Deposit ativo:references status:references observation:string linked:boolean
+	
+	TABLE ADMIN
+	
+	rails g migrate AddNameToAdmin name:string
+	rails g migrate AddActiveToAdmin active:boolean
 	
 	#########################################
 
@@ -70,12 +85,12 @@
 	################################################
 	
 	PAGINAÇÂO VIEW
-	rails g kaminari:views bootstrap4
+	rails g kaminari:views bootstrap4linked
 
 
 RETORNAM O MESMO VALOR DE CONTAGEM
 
-  Ativo.where(type:'NOBREAK').count
+  Ativo.where(type:'NOBREAK').count mais rapido
   Ativo.where(type:'NOBREAK').size
 
 	CONTA A QUANTIDADE E AGRUPA
@@ -136,14 +151,21 @@ AttachAtivo.joins(:ativo).where(bond_id:'4').count
 
 
 
+.bg-success {
+  background-color: #13855c !important;
+}
+
+select com todos os tipos de ativos:
+        <%= select_tag 'ativo_type', options_from_collection_for_select(@type, "id", "type"), class:"form-control"%>
 
 
 
 
 
+action_name = retorna qual a action do momento
 
 
-
+params[:bond][:attach_ativo_attributes] = retorna as coisas
 
 
 

@@ -3,14 +3,14 @@ class AtivoPge::BondsController < AtivosController
   before_action :set_user_select, only: [:new, :create, :edit, :update]
   before_action :set_area_select, only: [:new, :create, :edit, :update]
   before_action :set_subarea_select, only: [:new, :create, :edit, :update]
-  before_action :set_ativo_select, only: [:new, :create, :edit, :update]
+  before_action :set_description_ativo, only: [:new, :create, :edit, :update]
+  before_action :set_tombo_ativo_select, only: [:new, :create, :edit, :update]
   before_action :set_status, only: [:new, :create, :edit, :update]
-  before_action :set_description_active, only: [:new, :create, :edit, :update]
 
   protect_from_forgery except: :pdf_termo_responsabilidade_ativo
 
   def index
-    @bonds = Bond.all.order(:id)
+    @bonds = Bond.order(:id)
 
     respond_to do |format|
       format.html { @bonds = Bond.last_bond.page(params[:page]) }
@@ -21,25 +21,24 @@ class AtivoPge::BondsController < AtivosController
   def pdf_termo_responsabilidade_ativo
     pdf_data = Pdfs::TermoResponsabilidadeAtivoPdf.gerar((params[:bonds_ids]).split(','))
     if params["bonds_ids"].split(',').size == 1
-      usuario_vinculo = User.where('id = ?', params["bonds_ids"].split(',')).name
-      send_data(pdf_data, filename: "termo_responsabilidade_#{usuario_vinculo}.pdf", :type => 'application/pdf', :disposition => 'inline')
+      user_id = Bond.find(params[:bonds_ids]).user_id
+      user_bond = User.find(user_id).name
+      send_data(pdf_data, filename: "Termo_Responsabilidade_#{user_bond}.pdf", :type => 'application/pdf', :disposition => 'inline')
     else
-      send_data(pdf_data, filename: "termo_responsabilidade.pdf", :type => 'application/pdf', :disposition => 'inline')
+      send_data(pdf_data, filename: "Termo_Responsabilidade.pdf", :type => 'application/pdf', :disposition => 'inline')
     end
   end
 
   def new
     @bond = Bond.new
+    @bond.call_number.build
     @ativos = Ativo.all
   end
 
   def create
     @bond = Bond.new(params_bond)
-
     salvo = false
     Bond.transaction do
-      raise "Usuário não informado!" unless params_bond["user_id"].present?
-      raise "Este usuário já possui um vinculo" if Bond.where(user_id: params_bond[:user_id]).present? unless Bond.where(user_id: params_bond[:user_id] == 422 )
       salvo = @bond.save!
     end
     respond_to do |format|
@@ -61,8 +60,10 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def edit
+    # @bond.call_number
+    @bond.call_number.build
   end
-
+  
   def update
     if @bond.update(params_bond)
       redirect_to ativo_pge_bonds_path, notice: "Vinculo atualizado, Sucesso!"
@@ -89,7 +90,8 @@ class AtivoPge::BondsController < AtivosController
                                 :subarea_id, 
                                 :note,
                                 :homeoffice,
-                                attach_ativo_attributes: [:id, :ativo_id, :description, :status, :note, :_destroy]
+                                attach_ativo_attributes: [:id, :ativo_id, :description, :status, :note, :_destroy],
+                                call_number_attributes: [:id, :number, :_destroy]
                                 )
   end
 
@@ -109,17 +111,27 @@ class AtivoPge::BondsController < AtivosController
     @subarea_select = Subarea.pluck(:description, :id)
   end
 
-  def set_ativo_select
-    @ativo_select = Ativo.select(AttachAtivo.statuses == "DISPONÍVEL").pluck(:tombo, :id)
+  def set_description_ativo
+    if action_name == "new"
+      @description_ativo = Deposit.available.pluck(:description, :id)
+    else
+      @description_ativo = Deposit.pluck(:description, :id)
+    end
+  end
+
+  def set_tombo_ativo_select
+    if action_name == "edit"
+      @tombo_ativo = Ativo.joins(:deposits).pluck('ativos.tombo', 'ativos.id')
+    else
+      @tombo_ativo = Ativo.joins(:deposits).available_assets.pluck('ativos.tombo', 'ativos.id')
+    end
   end
 
   def set_status
-    @status = AttachAtivo.statuses.keys
-  end
-
-  def set_description_active
-    # active = Ativo.all
-    # description = [active.type, active.brand, active.model].join(" ")
-    @description_active = Ativo.select(AttachAtivo.statuses == "DISPONÍVEL").pluck(:type, :brand, :model, :id).join(" ")
+    if action_name =="new"
+      @status = Status.linked_or_in_use.pluck(:description, :id)
+    else
+      @status = Status.pluck(:description, :id)
+    end
   end
 end

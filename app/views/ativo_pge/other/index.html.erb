@@ -1,0 +1,133 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#area" role="tab" data-toggle="tab" aria-controls="area" aria-selected="true">Áreas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#subarea" role="tab" data-toggle="tab" aria-controls="subarea" aria-selected="true">Subareas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#usuarios" role="tab" data-toggle="tab" aria-controls="usuarios" aria-selected="true">Usuários</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade show active" id="area" aria-labelledby="area-tab">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <%= link_to new_ativo_pge_area_path do %>
+          <i class="fa fa-plus btn-sm btn-success" style="color:write"></i>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Descrição
+              <th> 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @areas.each do |area| %>
+              <tr>
+                <td><%= area.description %></td>
+                <td style="width: 10px">
+                <%= link_to edit_ativo_pge_area_path(area) do %>
+                    <i class="fa fa-edit"></i>
+                <% end %>
+                <td style="width: 10px">
+                <%= link_to ativo_pge_area_path(area), method: :delete, data: {confirm: "Certeza?"} do %>
+                    <i class="fa fa-trash" style="color:red"></i>
+                <% end %>  
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @areas, :params => {:controller => "areas"} %>
+      </div>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="subarea" aria-labelledby="subarea-tab">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <%= link_to new_ativo_pge_subarea_path do %>
+          <i class="fa fa-plus btn-sm btn-success" style="color:write"></i>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Descrição
+              <th>Área mãe 
+              <th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @subareas.each do |subarea| %>
+              <tr>
+                <td><%= subarea.description %></td>
+                <td><%= subarea.area.description %></td>
+                <td style="width: 10px">
+                  <%= link_to edit_ativo_pge_subarea_path(subarea) do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                <td style="width: 10px">
+                <%= link_to ativo_pge_subarea_path(subarea), method: :delete, data: {confirm: "Certeza?"} do %>
+                    <i class="fa fa-trash" style="color:red"></i>
+                  <% end %>  
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @subareas, :params => {:controller => "subareas"} %>
+      </div>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="usuarios" aria-labelledby="usuarios-tab">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <%= link_to new_ativo_pge_user_path do %>
+          <i class="fa fa-plus btn-sm btn-success" style="color:write"></i>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Usuário
+              <th>Email
+              <th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td style="width: 10px">
+                  <%= link_to edit_ativo_pge_user_path(user) do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                <td style="width: 10px">
+                  <%= link_to ativo_pge_user_path(user), method: :delete, data: {confirm: "Certeza?"} do %>
+                    <i class="fa fa-trash" style="color:red"></i>
+                  <% end %>  
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @users, :params => {:controller => "users"} %>
+      </div>
+    </div>
+  </div>
+</div>

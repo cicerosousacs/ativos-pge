@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_19_235352) do
+ActiveRecord::Schema.define(version: 2022_10_29_024223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2022_10_19_235352) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.boolean "active"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -85,6 +87,32 @@ ActiveRecord::Schema.define(version: 2022_10_19_235352) do
     t.index ["user_id"], name: "index_bonds_on_user_id"
   end
 
+  create_table "call_numbers", force: :cascade do |t|
+    t.bigint "bond_id"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bond_id"], name: "index_call_numbers_on_bond_id"
+  end
+
+  create_table "deposits", force: :cascade do |t|
+    t.bigint "ativo_id"
+    t.string "description"
+    t.bigint "status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "linked"
+    t.string "observation"
+    t.index ["ativo_id"], name: "index_deposits_on_ativo_id"
+    t.index ["status_id"], name: "index_deposits_on_status_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subareas", force: :cascade do |t|
     t.bigint "area_id"
     t.string "description", null: false
@@ -106,5 +134,8 @@ ActiveRecord::Schema.define(version: 2022_10_19_235352) do
   add_foreign_key "attach_ativos", "bonds"
   add_foreign_key "bonds", "subareas"
   add_foreign_key "bonds", "users"
+  add_foreign_key "call_numbers", "bonds"
+  add_foreign_key "deposits", "ativos"
+  add_foreign_key "deposits", "statuses"
   add_foreign_key "subareas", "areas"
 end

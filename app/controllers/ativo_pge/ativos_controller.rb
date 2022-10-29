@@ -6,6 +6,8 @@ class AtivoPge::AtivosController < AtivosController
 
   def index
     @ativos = Ativo.all
+    @total_ativos = Ativo.count(:id)
+    @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
     # FILTRA O ATIVO PELO ID
     if params[:id].present?
       @ativos = @ativos.where(id: params[:id])
@@ -21,7 +23,6 @@ class AtivoPge::AtivosController < AtivosController
       format.pdf { @ativos = Ativo.pdf_ativo }
       format.json { render json: @ativos}
     end
-    @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
   end
 
   def new
@@ -64,11 +65,10 @@ class AtivoPge::AtivosController < AtivosController
   def vincular_deposito
     attach_ativos = params[:ativos_ids].split(',')
     attach_ativos.each do |ativo|
-      AttachAtivo.find_or_create_by!(
-        bond_id:"1",
+      Deposit.find_or_create_by!(
         ativo_id: ativo.to_i,
         description: description_active(ativo.to_i),
-        status:"DISPONÍVEL"
+        status_id: 1 # = DISPONIVEL
       ) 
     end
     flash[:notice] = (attach_ativos.length > 1 ? ("Ativos enviados ao depósito com sucesso!") : ("Ativo enviado ao depósito com sucesso!"))

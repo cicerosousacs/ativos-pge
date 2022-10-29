@@ -2,18 +2,7 @@ class AttachAtivo < ApplicationRecord
   belongs_to :bond
   belongs_to :ativo
 
-  # ENUM STATUS DO ATIVO
-  enum status: { 
-    DISPONÍVEL: 'DISPONÍVEL', 
-    VÍNCULADO: 'VÍNCULADO', 
-    "VÍNCULADO EM USO": 'VÍNCULADO EM USO', 
-    DEFEITO: 'DEFEITO', 
-    INSERVÍVEL: 'INSERVÍVEL', 
-    "AGUARDANDO GARANTIA": 'AGUARDANDO GARANTIA' 
-  }
-
-  # VALIDAÇÔES
-  validates :ativo_id, uniqueness: true, if: -> { status == "DISPONÍVEL" }
-  validates :note, presence: true, if: -> { status == "DEFEITO" }
+  #VALIDAÇÔES
+  validates :ativo_id, uniqueness: { message: "não pode ser o mesmo!" }
   validates :status, presence: true
 end

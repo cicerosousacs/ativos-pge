@@ -1,20 +1,21 @@
-<div class="control-group nested-fields">
+<div class="control-group nested-fields add_ativo">
   <div class="row g-3">
     <div class="control col-md-2">
-      <%= f.select :ativo_id, @ativo_select, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo"%>
+      <%= f.select :ativo_id, @tombo_ativo, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo"%>
     </div>
 
     <div class="control col-md-4">
-      <%= f.collection_select(:description, Ativo.all, :id, :ativo_description, {include_blank: 'Descrição'}, class:"form-control", id:"set_description") %>
+      <%= f.select :description, @description_ativo, {include_blank: 'Descrição'}, class:"form-control", id:"set_description"%>
     </div>
 
     <div class="control col-md-2">
       <%= f.select :status, @status, {include_blank: 'Status'}, class:"form-control" %>
     </div>
-
-    <div class="control col-md-3">
-      <%= f.text_field :note, class:"form-control"%>
-    </div>
+    <% if action_name == 'edit' %>
+      <div class="control col-md-3">
+        <%= f.text_field :note, class:"form-control"%>
+      </div>
+    <% end %>
 
     <div class="control">
       <%= link_to_remove_association(f, class: "btn-sm btn-danger") do %>
@@ -42,14 +43,14 @@ $(document).ready(function(){
 // ###############################
 
 $(document).ready(function(){
-  $(".nested-fields #set_tombo").change(function(){
+  $(".add_ativo #set_tombo").change(function(){
     $.ajax( "/ativo_pge/ativos.json?id=" + this.value )
     .done(function(data){
       var htmlOptions = ""
       for(var i = 0; i<data.length; i++){
         htmlOptions += "<option value='"+ data[i].id +"'>" + data[i].type + " " + data[i].brand + " " + data[i].model + "</option>"
       }
-      $(".nested-fields #set_description").html(htmlOptions);
+      $(".add_ativo #set_description").last().html(htmlOptions);
     })
     .fail(function(){
       alert(error);

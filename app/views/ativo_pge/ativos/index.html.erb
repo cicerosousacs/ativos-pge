@@ -1,3 +1,4 @@
+<h1 class="h3 mb-2 text-gray-800">Ativos</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <div>
@@ -8,9 +9,6 @@
       <%= link_to ativo_pge_ativos_path(format: :pdf) do %>
         <button class="btn btn-warning" type="button">Gerar PDF</button>
       <% end %>
-
-      <%= select_tag 'ativo_type', options_from_collection_for_select(@type, "id", "type"), class:"form-control" %>
-
     </div>
     <div>
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
@@ -63,6 +61,8 @@
         <% end %>
       </tbody>
     </table>
+    <div class="text-black-50 text-sm">Total de ativos: <%= @total_ativos %></div>
+    <%= paginate @ativos %>
   </div>
 </div>
 
@@ -103,4 +103,4 @@
   });
 </script>
 
-<%= paginate @ativos %>
+

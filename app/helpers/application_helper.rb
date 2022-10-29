@@ -4,8 +4,8 @@ module ApplicationHelper
     attach_ativo ? status_ativo.status : "-"
   end
 
-  def description_active(id)
-    active = Ativo.find(id)
-    description = [active.type, active.brand, active.model].join(" ")
-  end
+  # def description_active(id)
+  #   active = Ativo.find(id)
+  #   description = [active.type, active.brand, active.model].join(" ")
+  # end
 end

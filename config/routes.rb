@@ -17,10 +17,15 @@ Rails.application.routes.draw do
     resources :bonds do
       collection do
         match :pdf_termo_responsabilidade_ativo, via: %i[get post]
-        get 'pdf_termo_responsabilidade_ativo'
-        post 'pdf_termo_responsabilidade_ativo'
+        get 'pdf_termo_responsabilidade'
+        post 'pdf_termo_responsabilidade'
       end
     end
+  end
+  
+  namespace :ativo_pge do
+    get 'other/index'
+    # get 'other/index/area(/:page)', controller => 'areas'
   end
 
   namespace :ativo_pge do
