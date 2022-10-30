@@ -10,37 +10,31 @@
   </div>
 <% end %>
 
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-success">Novo Administrador</h6>
+<%= form_with(model: [ :ativo_pge, @admin ], local: true ) do |form| %>
+  <div class="row g-3">
+    <div class="control col-md-6">
+      <%= form.label :name %>
+      <%= form.text_field :name, class:"form-control" %>
+    </div>
+    <div class="control col-md-6">
+      <%= form.label :email %>
+      <%= form.text_field :email, class:"form-control", placeholder:"@ativos.pge" %>
+    </div>
+    <div class="control col-md-6"><br>
+      <%= form.label :password %>
+      <%= form.password_field :password, class:"form-control" %>
+    </div>
+    <div class="control col-md-6"><br>
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, class:"form-control" %>
+    </div>
+    <div class="control col-md-4"><br>
+      <%= form.check_box :active %>
+      <%= form.label :active %> 
+    </div>
   </div>
-  <div class="card-body">
-    <%= form_with(model: [ :ativo_pge, @admin ], local: true ) do |form| %>
-      <div class="row g-3">
-        <div class="control col-md-4">
-          <%= form.label :name %>
-          <%= form.text_field :name, class:"form-control" %>
-        </div>
-        <div class="control col-md-4">
-          <%= form.label :email %>
-          <%= form.text_field :email, class:"form-control", placeholder:"@ativos.pge" %>
-        </div>
-        <div class="control col-md-4">
-          <%= form.label :password %>
-          <%= form.password_field :password, class:"form-control" %>
-        </div>
-        <div class="control col-md-4">
-          <%= form.label :password_confirmation %>
-          <%= form.password_field :password_confirmation, class:"form-control" %>
-        </div>
-        <div class="control col-md-4"><br>
-          <%= form.label :active %> 
-          <%= form.check_box :active %>
-        </div>
-      </div>
-      <div class="text-right">
-        <%= form.submit "Salvar", class:"btn btn-xg btn-primary" %>
-      </div>
-    <% end %>
+  <div class="text-right">
+    <%= form.submit "Salvar", class:"btn btn-xg btn-primary" %>
+    <button class="btn btn-xg btn-danger" data-dismiss="modal">Cancelar</button>
   </div>
-</div>
+<% end %>

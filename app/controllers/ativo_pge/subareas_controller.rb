@@ -15,6 +15,10 @@ class AtivoPge::SubareasController < AtivosController
 
   def new
     @subarea = Subarea.new
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/subareas/subarea' }
+    end
   end
 
   def create
@@ -27,6 +31,10 @@ class AtivoPge::SubareasController < AtivosController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/subareas/subarea' }
+    end
   end
 
   def update

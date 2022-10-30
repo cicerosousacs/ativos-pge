@@ -7,6 +7,10 @@ class AtivoPge::UsersController < AtivosController
 
   def new
     @user = User.new
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/users/user' }
+    end
   end
 
   def create
@@ -19,6 +23,10 @@ class AtivoPge::UsersController < AtivosController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/users/user' }
+    end
   end
 
   def update

@@ -1,7 +1,7 @@
 <h1 class="h3 mb-2 text-gray-800">Administradores</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <%= link_to new_ativo_pge_admin_path do %>
+    <%= link_to new_ativo_pge_admin_path, remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
       <button class="btn btn-success" type="button">Novo Administrador</button>
     <% end %>
   </div>
@@ -24,7 +24,7 @@
               <td><%= admin.email %></td>
               <td><%= admin.check_active %></td>
               <td style="width: 12px">
-                <%= link_to edit_ativo_pge_admin_path(admin) do %>
+                <%= link_to edit_ativo_pge_admin_path(admin), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
                   <i class="fa fa-edit"></i>
                 <% end %>
               <td style="width: 12px">

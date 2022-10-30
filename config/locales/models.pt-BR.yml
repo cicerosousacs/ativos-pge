@@ -22,7 +22,7 @@
         login: "Logar-se"
         email: Email
         name: Nome
-        active: Usuário ativo?
+        active: Ativo
         created_at: Criado em
         updated_at: Atualizado em
         password: Senha

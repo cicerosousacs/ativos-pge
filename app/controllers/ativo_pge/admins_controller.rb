@@ -8,6 +8,10 @@ class AtivoPge::AdminsController < AtivosController
 
   def new
     @admin = Admin.new
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/admins/admin' }
+    end
   end
 
   def create
@@ -20,6 +24,10 @@ class AtivoPge::AdminsController < AtivosController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'ativo_pge/admins/admin' }
+    end
   end
 
   def update
