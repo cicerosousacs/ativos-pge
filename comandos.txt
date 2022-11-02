@@ -1,7 +1,7 @@
 	TABLE MODEL ACQUISITION(aquisição)
 
 	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
-	contract_number:string company:string interested_party:string modality:string source:string warranty_period:number warranty_ends:date
+	contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date
 	
 	  enum modality:{ 
 			 CONCORRÊNCIA: 'CONCORRÊNCIA', 
@@ -159,13 +159,27 @@ select com todos os tipos de ativos:
         <%= select_tag 'ativo_type', options_from_collection_for_select(@type, "id", "type"), class:"form-control"%>
 
 
-
+          <%= form_tag(ativo_pge_admins_path, method: :post) do %>
+            <%= text_field_tag 'search', nil, class:"form-control border-1 small", placeholder:'Pesquisar...'%>
+          <% end %>
+          <div class="input-group-append">
+            <%= button_tag type:'submit', class:"btn btn-primary" do %>
+              <i class="fas fa-search fa-sm"></i>
+            <% end %>
+          </div>
 
 
 action_name = retorna qual a action do momento
 
 
 params[:bond][:attach_ativo_attributes] = retorna as coisas
+
+
+JQUETY SOMA DATA FINAL
+
+campo data compra: $('#acquisition_acquisition_date')[0].value
+campo de meses: $('#acquisition_warranty_period')[0].value
+campo data final: $('#acquisition_warranty_ends')[0].value
 
 
 

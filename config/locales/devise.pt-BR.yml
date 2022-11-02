@@ -38,13 +38,13 @@ pt-BR:
       send_paranoid_instructions: Se o seu e-mail existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
     failure:
       already_authenticated: Você já está autenticado.
-      inactive: A sua conta ainda não foi ativada.
+      inactive: Vocẽ não tem acesso a este sistema!
       invalid: "%{authentication_keys} ou senha inválidos."
       last_attempt: Você tem mais uma única tentativa antes de sua conta ser bloqueada.
       locked: A sua conta está bloqueada.
       not_found_in_database: "%{authentication_keys} ou senha inválidos."
       timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
-      unauthenticated: Para continuar, faça login ou registre-se.
+      unauthenticated: Para continuar, faça login.
       unconfirmed: Antes de continuar, confirme a sua conta.
     mailer:
       confirmation_instructions:
@@ -115,7 +115,7 @@ pt-BR:
       already_signed_out: Logout efetuado com sucesso.
       new:
         sign_in: Login
-      signed_in: Login efetuado com sucesso.
+      signed_in: Logado com sucesso.
       signed_out: Logout efetuado com sucesso.
     shared:
       links:

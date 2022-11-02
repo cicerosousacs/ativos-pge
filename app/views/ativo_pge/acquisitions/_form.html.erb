@@ -24,7 +24,7 @@
           <%= form.label :quantity %> <br>
           <%= form.text_field :quantity, class:"form-control" %>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 valor">
           <%= form.label :value %> <br>
           <%= form.text_field :value, class:"form-control"%>
         </div>
@@ -51,16 +51,16 @@
           <%= form.date_field :acquisition_date, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
-          <%= form.label  "Duração da Garantia" %> <br>
-          <%= form.text_field :acquisition_date, class:"form-control" %>
+          <%= form.label :warranty_period %> <br>
+          <%= form.text_field :warranty_period, class:"form-control" %>
         </div>
         <div class="form-group col-md-6">
           <%= form.label :company %> <br>
           <%= form.text_field :company, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
-          <%= form.label  "Termino de Garantia" %> <br>
-          <%= form.date_field :acquisition_date, class:"form-control" %>
+          <%= form.label :warranty_ends %> <br>
+          <%= form.date_field :warranty_ends, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
           <%= form.label :contract_number, "Nº Contrato" %> <br>
@@ -92,3 +92,11 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_include_tag 'application' %>
+
+<script>
+  $(document).ready(function(){
+    $("#acquisition_value").inputmask('000.000.000.000.000,00');
+  });
+</script>

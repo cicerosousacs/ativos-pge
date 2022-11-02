@@ -5,21 +5,17 @@ class AtivoPge::AtivosController < AtivosController
   protect_from_forgery except: :vincular_deposito
 
   def index
-    @ativos = Ativo.all
+    @q = Ativo.ransack(params[:q])
+    @ativos = @q.result.page(params[:page])
     @total_ativos = Ativo.count(:id)
-    @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
+    # @ativos = Ativo.all
+    # @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
     # FILTRA O ATIVO PELO ID
     if params[:id].present?
       @ativos = @ativos.where(id: params[:id])
     end
     respond_to do |format|
-      format.html {
-        if params[:search]
-          @ativos = Ativo.last_ativo.search(params[:search]).page(params[:page])
-        else
-          @ativos = Ativo.ultimo_ativo(params[:page])
-        end
-      }
+      format.html
       format.pdf { @ativos = Ativo.pdf_ativo }
       format.json { render json: @ativos}
     end
@@ -72,6 +68,7 @@ class AtivoPge::AtivosController < AtivosController
       ) 
     end
     flash[:notice] = (attach_ativos.length > 1 ? ("Ativos enviados ao depósito com sucesso!") : ("Ativo enviado ao depósito com sucesso!"))
+    # redirect_to '/ativo_pge/ativos' and return
   end
 
   def description_active(id)

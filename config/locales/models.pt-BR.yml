@@ -25,7 +25,7 @@
         active: Ativo
         created_at: Criado em
         updated_at: Atualizado em
-        password: Senha
+        password: "Senha (mínimo: 6 caracteres)"
         password_confirmation: Confirmação de Senha
       ativo:
         id: ID
@@ -58,6 +58,8 @@
         modality: Modalidade da Aquisição
         source: Origem da Aquisição
         observacao: Observações
+        warranty_ends: Término da Garantia
+        warranty_period: Duração da Garantia (em meses)
         anexar_contrato: Anexar Contrato
         anexar_aditivo: Anexar Aditivo
         created_at: Criado em

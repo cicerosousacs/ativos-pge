@@ -3,13 +3,13 @@ class AtivoPge::AdminsController < AtivosController
   before_action :set_admin, only: [:edit, :update, :destroy]
   
   def index
-    @admins = Admin.all
+    @admins = Admin.all.order('id','active desc')
   end
 
   def new
     @admin = Admin.new
     respond_to do |format|
-      format.html
+      # format.html
       format.js { render partial: 'ativo_pge/admins/admin' }
     end
   end
@@ -17,7 +17,7 @@ class AtivoPge::AdminsController < AtivosController
   def create
     @admin = Admin.new(params_admin)
       if @admin.save()
-        redirect_to ativo_pge_admins_path, notice: "Novo Administrador criado. Parabéns!"
+        redirect_to ativo_pge_admins_path, notice: "Novo Administrador #{@admin.name} criado. Parabéns!"
       else
         render :new
       end
@@ -25,32 +25,37 @@ class AtivoPge::AdminsController < AtivosController
 
   def edit
     respond_to do |format|
-      format.html
+      # format.html
       format.js { render partial: 'ativo_pge/admins/admin' }
     end
   end
 
   def update
     if @admin.update(params_admin)
-      bypass_sign_in(@admin)
-      redirect_to ativo_pge_admins_path, notice: "Administrador atualizado. Sucesso!"
+      bypass_sign_in(@admin) if @admin.id == current_admin.id
+      redirect_to ativo_pge_admins_path, notice: "#{@admin.name} atualizado. Sucesso!"
     else
       render :edit
     end
   end
 
   def destroy
-    if @admin.destroy
-      redirect_to ativo_pge_admins_path, notice: "Administrador removido. Feito!"
+    if @admin.id == current_admin.id
+      flash[:alert] = "#{@admin.name}, você não pode se desativar."
+      redirect_to '/ativo_pge/admins' and return
     else
-      render :index
+      @admin.active = @admin.active ? false : true
+      text_message = @admin.active.present? ? "ativado(a)." : "inativado(a)."
+      text_not_disabled = "Você não pode se desativar"
+      @admin.save!
+      redirect_to ativo_pge_admins_path, notice: (("#{@admin.name} #{text_message} com sucesso!"))
     end
   end
 
   private
 
   def params_admin
-    params.require(:admin).permit(:email, :password, :name, :active, :password_confirmation)
+    params.require(:admin).permit(:name, :email, :active, :password, :password_confirmation)
   end
 
   def set_admin

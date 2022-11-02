@@ -28,8 +28,13 @@
                   <i class="fa fa-edit"></i>
                 <% end %>
               <td style="width: 12px">
-                <%= link_to ativo_pge_admin_path(admin), method: :delete, data: {confirm: "Certeza?"} do %>
-                  <i class="fa fa-trash" style="color:red"></i>
+                <% confirm_message = admin.active.present? ? "inativar" : "ativar" %>
+                <%= link_to ativo_pge_admin_path(admin), method: :delete, data: { confirm: "Você tem certeza que deseja #{confirm_message}:  #{admin.name}?"} do %>
+                  <% if admin.active.present? %>
+                    <i class="fa fa-user-xmark inactive"></i>
+                  <% else %>
+                    <i class="fa fa-user-check active"></i>
+                  <% end %>
                 <% end %>  
               </td>
             </tr>

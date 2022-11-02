@@ -41,8 +41,8 @@ class AtivoPge::AcquisitionsController < AtivosController
 
   def params_acquisition
     params.require(:acquisition).permit(:item, :quantity, :value, :manager, :acquisition_date,
-                                      :modality, :contract_number, :source, :company, :interested_party, 
-                                      :anexo_contrato, :anexo_aditivo)
+                                      :modality, :contract_number, :source, :company, :interested_party,
+                                      :warranty_ends, :warranty_period, :anexo_contrato, :anexo_aditivo)
   end
 
   def set_acquisition

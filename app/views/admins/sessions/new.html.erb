@@ -1,57 +1,59 @@
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-<title >Portal Service Desk - Login</title>
-    
-
-<%= stylesheet_link_tag 'ativos_session' %>
-
+  <%= stylesheet_link_tag 'ativos' %>
+  
+  <title >'Portal do Service Desk - Login'</title>
 </head>
 
-<body class="bg-gradient-success">
-
+<body class="bg-gradient-light">
   <div class="container">
-      <!-- Outer Row -->
-    <div class="row justify-content-center mt-5">
-      <div class="col-lg-6 col-md-9 mt-5">
-        <div class="card o-hidden border-8 shadow-lg mt-5">
-          <div class="card-body">
-            <!-- Nested Row within Card Body -->
-            <div class="row justify-content-center">
-              <div class="col-lg-11">
-                <div class="p-5">
-                  <div class="figure-img"> 
-                    <%= image_tag "service_desk_gren3.png", size: "350x70"%>
-                  </div>
-                  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                    <div class="field mt-5">
-                      <%= f.email_field :email, placeholder: "Email", autofocus: true, class:"form-control"%>
-                    </div>
-                
-                    <div class="field mt-3">
-                      <%= f.password_field :password, placeholder: "Senha", class: "form-control" %>
-                    </div>
-                 
-                    <div class="actions mt-3">
-                      <%= f.submit "Entrar", class: "btn btn-success btn-user btn-block" %>
-                    </div>                
-                  <% end %>                                    
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="p-5 mt-4">
+      <div class="d-flex justify-content-center"> 
+        <%= image_tag "logo_pge_center.png", size: "140x120"%>
       </div>
+      <div class="d-flex justify-content-center mt-4"> 
+        <%= image_tag "service_desk_gren.png", size: "320x70"%>
+      </div>
+      <div class="text-center mt-4">
+        <p class="font-weight-bold text-gray-900">Bem-vindo!</p>
+      </div>
+      <p class="text-gray-900 text-center col-md-auto">Serviço disponibilizado para gerenciamento dos Ativos <br> que compôem o parque tecnologico da PGE.</p>
+        <div class="d-flex justify-content-center row g-3">
+          <div class="form-group col-md-5">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="shadow-lg mt-3">
+                <%= f.email_field :email, placeholder: "Email", autofocus: true, class: "form-control" %>
+              </div>
+              <div class="shadow-lg mt-3">
+                <%= f.password_field :password, placeholder: "Senha", class: "form-control" %>
+              </div>
+              <div class="shadow-lg mt-3">
+                <%= f.submit "Entrar", class: "btn btn-success btn-block" %>
+              </div>                
+            <% end %>
+          </div>
+        </div>                                    
     </div>
   </div>
+  
+  <% javascript_include_tag 'ativos' %>
 
-<% javascript_include_tag 'ativos_session' %>
-
+  <% if alert %>
+    <%= javascript_tag do %>
+      $.bootstrapGrowl('<%= alert %>',{
+      offset: {from: 'top', amount: 80},
+      type: 'danger', 
+      align: 'center',
+      width: 'auto',
+      delay: 4000, 
+      allow_dismiss: false, 
+      stackup_spacing: 10 
+      });
+    <% end %>
+  <% end %>
 </body>
-
-</html>

@@ -18,6 +18,9 @@ class Bond < ApplicationRecord
   #PAGINAÇÂO
   paginates_per 9
 
+  PRESENTIAL = false
+  HOMEOFFICE = true
+  
   def update_ativo_deposit
     attach_ativo.each do |asset|
       # byebug

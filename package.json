@@ -2,10 +2,11 @@
   "name": "ativos-pge",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "@ttskch/select2-bootstrap4-theme": "^1.5.2",
     "bootstrap": "4.6.0",
     "bootstrap-growl-ifightcrime": "^1.1.0",
-    "fontawesome-free": "^1.0.4",
+    "inputmask": "^5.0.8-beta.47",
     "jquery": "3.6.0",
     "jquery-easing": "^0.0.1",
     "jquery.easing": "1.4.1",

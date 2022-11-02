@@ -3,11 +3,11 @@ namespace :dev do
   DEFAULT_PASSWORD = '@tivos_2022'
   DEFAULT_FILE_PATH = File.join(Rails.root, 'tmp')
   
-    desc "Configura o ambiente de desenvolvimento"
+    desc "Configurando o ambiente de desenvolvimento"
     task setup: :environment do
       if Rails.env.development?
-        show_spinner("Apagando BD...") { %x(rails db:drop:_unsafe) }
-        show_spinner("Criando BD...") { %x(rails db:create) }
+        # show_spinner("Apagando BD...") { %x(rails db:drop:_unsafe) }
+        # show_spinner("Criando BD...") { %x(rails db:create) }
         show_spinner("Migrando BD...") { %x(rails db:migrate) }
         show_spinner("Admin padrão...") { %x(rails dev:add_default_admin) }
         show_spinner("Ajustes 1 de 2...") { %x(rails dev:add_areas) }
@@ -46,7 +46,10 @@ namespace :dev do
       file_path = File.join(DEFAULT_FILE_PATH, file_name)
   
       File.open(file_path, 'r').each do |line|
-      User.create!(name: line.strip)
+      User.create!(
+        name: line[0],
+        email: line[1]
+        )
       end
     end
 
@@ -54,6 +57,20 @@ namespace :dev do
     task add_status: :environment do
       show_spinner("Adicionando Status...") do
         Status.create!([
+          {description: "DISPONÍVEL"},
+          {description: "DEFEITO"},
+          {description: "INSERVÍVEL"},
+          {description: "AGUARDANDO GARANTIA"},
+          {description: "VÍNCULADO"},
+          {description: "VÍNCULADO EM USO"},
+        ])
+      end
+    end
+
+    desc "Adicionando Aquisição Padrão"
+    task add_acquisition: :environment do
+      show_spinner("Adicionando Aquisição Padrão...") do
+        Acquisitions.create!([
           {description: "DISPONÍVEL"},
           {description: "DEFEITO"},
           {description: "INSERVÍVEL"},

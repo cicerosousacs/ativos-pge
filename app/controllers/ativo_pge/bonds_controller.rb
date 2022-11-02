@@ -10,11 +10,12 @@ class AtivoPge::BondsController < AtivosController
   protect_from_forgery except: :pdf_termo_responsabilidade_ativo
 
   def index
-    @bonds = Bond.order(:id)
-
+    # @bonds = Bond.order(:id)
+    @q = Bond.ransack(params[:q])
+    @bonds = @q.result.page(params[:page]).order(:id)
+    @total_bonds = Bond.count(:id)
     respond_to do |format|
       format.html { @bonds = Bond.last_bond.page(params[:page]) }
-      format.json { render json: @bonds }
     end
   end
 
@@ -60,7 +61,6 @@ class AtivoPge::BondsController < AtivosController
   end
 
   def edit
-    # @bond.call_number
     @bond.call_number.build
   end
   

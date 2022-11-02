@@ -162,6 +162,30 @@ sup {
   top: -.5em;
 }
 
+.inactive {
+  color: #ff0000;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.inactive:hover {
+  color: #f75454;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.active {
+  color: #008080ff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.active:hover {
+  color: rgb(2, 151, 151);
+  text-decoration: none;
+  background-color: transparent;
+}
+
 a {
   color: #4e73df;
   text-decoration: none;
@@ -2441,15 +2465,15 @@ fieldset:disabled a.btn {
 
 .btn-success:hover {
   color: #fff;
-  background-color: #17a673;
+  background-color: rgb(2, 151, 151);
   border-color: #169b6b;
 }
 
 .btn-success:focus, .btn-success.focus {
   color: #fff;
-  background-color: #17a673;
-  border-color: #169b6b;
-  box-shadow: 0 0 0 0.2rem rgba(62, 208, 156, 0.5);
+  background-color: #008080ff;
+  border-color: #008080ff;
+  /* box-shadow: 0 0 0 0.2rem rgba(62, 208, 156, 0.5); */
 }
 
 .btn-success.disabled, .btn-success:disabled {
@@ -3209,9 +3233,9 @@ input[type="button"].btn-block {
 }
 
 .dropdown-item.active, .dropdown-item:active {
-  color: #fff;
+  color: rgb(0, 0, 0);
   text-decoration: none;
-  background-color: #4e73df;
+  background-color: #b0b2ba;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
@@ -6438,7 +6462,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #13855c !important;
+  background-color: #008080ff !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
@@ -7917,7 +7941,7 @@ button.bg-dark:focus {
 }
 
 .p-5 {
-  padding: 3rem !important;
+  padding: 8rem !important;
 }
 
 .pt-5,
@@ -9615,11 +9639,11 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .text-success {
-  color: #13855c !important;
+  color: #008080ff !important;
 }
 
 a.text-success:hover, a.text-success:focus {
-  color: #13855c !important;
+  color: #008080ff !important;
 }
 
 .text-info {
@@ -9943,8 +9967,7 @@ a:focus {
 }
 
 .bg-gradient-light {
-  background-color: #f8f9fc;
-  background-image: linear-gradient(180deg, #f8f9fc 10%, #c2cbe5 100%);
+  background-color: #ebebeb none repeat scroll 0 0;
   background-size: cover;
 }
 
@@ -10072,7 +10095,7 @@ a:focus {
 }
 
 .border-left-success {
-  border-left: 0.25rem solid #13855c !important;
+  border-left: 0.25rem solid #008080ff !important;
 }
 
 .border-bottom-success {

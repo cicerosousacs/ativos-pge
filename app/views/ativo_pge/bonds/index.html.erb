@@ -10,14 +10,12 @@
     <div>
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
         <div class="input-group">
-          <%= form_tag(ativo_pge_admins_path, method: :post) do %>
-            <%= text_field_tag 'search_bond', nil, class:"form-control border-1 small", placeholder:'Pesquise pelo usuário'%>
-          <% end %>
-          <div class="input-group-append">
+          <%= search_form_for @q, url: ativo_pge_bonds_path, method: :get do |f| %>
+            <%= f.search_field :area_cont, class:"form-control border-1 small", placeholder:'Pesquisar...' %>
             <%= button_tag type:'submit', class:"btn btn-primary" do %>
               <i class="fas fa-search fa-sm"></i>
             <% end %>
-          </div>
+          <% end %>
         </div>
       </form>
     </div>
@@ -47,10 +45,6 @@
             <td><%= bond.check_home_office %></td>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                <i class="fa fa-clipboard-list"></i>
-              <% end %>
-            <td style="width: 12px">
-              <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
                 <i class="fa fa-eye"></i>
               <% end %>
             <td style="width: 12px">
@@ -66,8 +60,10 @@
         <% end %>
       </tbody>
     </table>
+    <div class="text-black-50 text-sm">Total de vinculos: <%= @total_bonds %></div>
   </div>
 </div>
+<%= paginate @bonds %>
 
 <%= javascript_include_tag 'application' %>
 
@@ -87,23 +83,21 @@
     });
     
     $("#all_bonds").change(function () {
-        $('.marcar').prop('checked', $(this).prop("checked"));
-        });
+      $('.marcar').prop('checked', $(this).prop("checked"));
+    });
         
-        $("#all_bonds").click(function(){
-        $('.marcar').not(this).prop('checked', this.checked);
-        });
+    $("#all_bonds").click(function(){
+      $('.marcar').not(this).prop('checked', this.checked);
+    });
         
-        var all_bonds = $("#all_bonds");
+    var all_bonds = $("#all_bonds");
     all_bonds.click(function () {
       if ( $(this).is(':checked') ){
         $('.marcar').prop("checked", true);
       }else{
         $('.marcar').prop("checked", false);
       }
-      });
-      });
+    });
+  });
 
 </script>
-
-<%= paginate @bonds %>
