@@ -19,7 +19,9 @@
     <%= form.text_field :email, class:"form-control border-6 small" %>
   </div>
   <div class="text-right">
-    <%= form.submit "Salvar", class:"btn btn-xg btn-primary"%>
-    <button class="btn btn-xg btn-danger" data-dismiss="modal">Cancelar</button>
+    <%= form.submit "Salvar", class:"btn btn-xg btn-success"%>
+    <%= link_to ativo_pge_users_path do %>
+      <button class="btn btn-danger" type="button">Cancelar</button>
+    <% end %>
   </div>
 <% end %>

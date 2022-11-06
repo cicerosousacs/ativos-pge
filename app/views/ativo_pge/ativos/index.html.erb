@@ -33,7 +33,6 @@
           <th>Tombo</th>
           <th>Descrição</th>
           <th>Serial</th>
-          <th>Status</th>
           <th>
           <th>
         </tr>
@@ -45,7 +44,6 @@
             <td><%= ativo.tombo %></td>
             <td><%= ativo.ativo_description %></td>
             <td><%= ativo.serial %></td>
-            <td><%= show_ativo_status ativo.attach_ativo%></td>
             <td style="width: 12px">
             <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
               <i class="fa fa-clipboard-list"></i>
@@ -77,7 +75,7 @@
         alert('Selecione pelo menos um Ativo');
       } else {
         if (this.id == 'btn-vincular') {
-          $.post('<%= url_for({ :controller => 'ativos', :action => 'vincular_deposito' })%>?ativos_ids=' + ativos_ids)
+          $.post('<%= url_for({ :controller => 'ativos', :action => 'link_to_deposit' })%>?ativos_ids=' + ativos_ids)
         }
       }
     });

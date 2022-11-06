@@ -72,15 +72,13 @@
 	CONTROLLER
 
 	rails g controller ativo_pge::admins index
-	
 	rails g controller ativo_pge::ativos index
 	rails g controller ativo_pge::acquisitions index
-	
 	rails g controller ativo_pge::users index
 	rails g controller ativo_pge::areas index
 	rails g controller ativo_pge::subareas index
-	
 	rails g controller ativo_pge::bonds index
+	rails g controller ativo_pge::deposits index
 	
 	################################################
 	

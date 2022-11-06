@@ -2,14 +2,14 @@ class AtivoPge::AtivosController < AtivosController
   before_action :set_ativo, only: [:edit, :update, :destroy]
   before_action :set_acquisition_selects, only: [:new, :create, :edit, :update]
   # desativa a proteção CSRF apenas para esse metodo
-  protect_from_forgery except: :vincular_deposito
+  protect_from_forgery except: :link_to_deposit
 
   def index
     @q = Ativo.ransack(params[:q])
-    @ativos = @q.result.page(params[:page])
+    @ativos = @q.result.last_asset.page(params[:page])
     @total_ativos = Ativo.count(:id)
     # @ativos = Ativo.all
-    # @type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
+    # @assets_type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
     # FILTRA O ATIVO PELO ID
     if params[:id].present?
       @ativos = @ativos.where(id: params[:id])
@@ -27,12 +27,7 @@ class AtivoPge::AtivosController < AtivosController
 
   def create
     @ativo = Ativo.new(params_ativo)
-
-    salvo = false
-    Ativo.transaction do
-      salvo = @ativo.save!
-    end
-    if salvo
+    if @ativo.save()
       redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado e enviado ao depósito com sucesso!"
     else
       render :new
@@ -58,17 +53,19 @@ class AtivoPge::AtivosController < AtivosController
     end
   end
 
-  def vincular_deposito
+  def link_to_deposit
     attach_ativos = params[:ativos_ids].split(',')
+    qtd_asset = attach_ativos.length
+    text_asset = attach_ativos.length > 1 ? "Ativos diponibilizados" : "Ativo diponibilizado"
     attach_ativos.each do |ativo|
       Deposit.find_or_create_by!(
         ativo_id: ativo.to_i,
         description: description_active(ativo.to_i),
-        status_id: 1 # = DISPONIVEL
+        status_id: 1 # 1 = DISPONIVEL
       ) 
+      flash[:notice] = "#{qtd_asset} - #{text_asset} com sucesso!"
+      # redirect_to '/ativo_pge/ativos'
     end
-    flash[:notice] = (attach_ativos.length > 1 ? ("Ativos enviados ao depósito com sucesso!") : ("Ativo enviado ao depósito com sucesso!"))
-    # redirect_to '/ativo_pge/ativos' and return
   end
 
   def description_active(id)

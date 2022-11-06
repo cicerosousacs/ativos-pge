@@ -33,19 +33,14 @@ class AtivoPge::BondsController < AtivosController
   def new
     @bond = Bond.new
     @bond.call_number.build
-    @ativos = Ativo.all
   end
 
   def create
     @bond = Bond.new(params_bond)
-    salvo = false
-    Bond.transaction do
-      salvo = @bond.save!
-    end
     respond_to do |format|
-      if salvo
+      if @bond.save()
         format.html { redirect_to ativo_pge_bonds_path, notice: "Vinculo criado, Parabéns!" }
-        format.json { render json: @bond }
+        # format.json { render json: @bond }
       else
         format.html { render :new }
       end
@@ -56,7 +51,7 @@ class AtivoPge::BondsController < AtivosController
     @bonds = Bond.last_bond.find(params[:id])
     respond_to do |format|
       format.js { render partial: 'ativo_pge/bonds/exibir' }
-      format.json { render json: @bond }
+      # format.json { render json: @bond }
     end
   end
 
@@ -84,15 +79,10 @@ class AtivoPge::BondsController < AtivosController
 
   def params_bond
     params.require(:bond).permit(
-                                :id,
-                                :user_id,
-                                :area, 
-                                :subarea_id, 
-                                :note,
-                                :homeoffice,
-                                attach_ativo_attributes: [:id, :ativo_id, :description, :status, :note, :_destroy],
-                                call_number_attributes: [:id, :number, :_destroy]
-                                )
+      :id, :user_id, :area, :subarea_id, :note, :homeoffice,
+      attach_ativo_attributes: [:id, :ativo_id, :description, :status_id, :note, :_destroy],
+      call_number_attributes: [:id, :number, :_destroy]
+    )
   end
 
   def set_bond
@@ -113,17 +103,17 @@ class AtivoPge::BondsController < AtivosController
 
   def set_description_ativo
     if action_name == "new"
-      @description_ativo = Deposit.available.pluck(:description, :id)
+      @description_ativo = Deposit.joins(:ativo).available.pluck(:description, :ativo_id)
     else
-      @description_ativo = Deposit.pluck(:description, :id)
+      @description_ativo = Deposit.joins(:ativo).pluck(:description, :ativo_id)
     end
   end
 
   def set_tombo_ativo_select
-    if action_name == "edit"
-      @tombo_ativo = Ativo.joins(:deposits).pluck('ativos.tombo', 'ativos.id')
+    if action_name == "new"
+      @tombo_ativo = Deposit.joins(:ativo).available.pluck('ativos.tombo', 'ativos.id')
     else
-      @tombo_ativo = Ativo.joins(:deposits).available_assets.pluck('ativos.tombo', 'ativos.id')
+      @tombo_ativo = Deposit.joins(:ativo).pluck('ativos.tombo', 'ativos.id')
     end
   end
 

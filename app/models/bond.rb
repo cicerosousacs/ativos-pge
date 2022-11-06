@@ -8,7 +8,7 @@ class Bond < ApplicationRecord
   has_many :call_number, dependent: :destroy
   accepts_nested_attributes_for :call_number, reject_if: :all_blank, allow_destroy: true
 
-  before_save :update_ativo_deposit
+  before_save :update_deposit
 
   #VALIDAÇÔES
   validates :attach_ativo, presence: { message: "não informado!" }
@@ -21,21 +21,19 @@ class Bond < ApplicationRecord
   PRESENTIAL = false
   HOMEOFFICE = true
   
-  def update_ativo_deposit
+  def update_deposit
     attach_ativo.each do |asset|
-      # byebug
-      as_id = asset.ativo_id
-      as_status = asset.status.to_i
-      as_note = asset.note
-      as_is_linked = asset.status.to_i == 5 or asset.status.to_i == 6 ? true : false
-      deposit = Deposit.find_by_ativo_id(as_id)
-      deposit.update_attributes(linked: as_is_linked, status_id: as_status, observation: as_note) 
+      id = asset.ativo_id
+      status = asset.status_id
+      note = asset.note
+      deposit = Deposit.find_by_ativo_id(id)
+      deposit.update_attributes(status_id: status, observation: note) 
     end
   end
 
   #N+1 e ordenação por ultimo criado
   def self.last_bond
-    Bond.includes(:user, :subarea, :attach_ativo).order("created_at DESC")
+    Bond.includes(:user, :subarea, :attach_ativo, :call_number).order("id desc")
   end
   
   def bond_description

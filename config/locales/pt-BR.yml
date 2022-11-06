@@ -5,3 +5,108 @@
       previous: '<i class="fas fa-angle-left"></i>'
       first: '<i class="fas fa-angle-double-left"></i>'
       last: '<i class="fas fa-angle-double-right"></i>'
+  activerecord:
+    models:
+      admin:
+        one: Administradores
+        other: Administradores
+      ativo:
+        one: Ativo
+        other: Ativos
+      bond:
+        one: Vinculo
+        other: Vinculos
+      acquisition:
+        one: Aquisição
+        other: Aquisiçãos
+      attach_ativo:
+        one: Ativo vinculado
+        other: Ativos vinculados
+      deposit:
+        one: Depósito
+        other: Depósitos
+    attributes:
+      admin:
+        id: ID
+        login: "Logar-se"
+        email: Email
+        name: Nome
+        active: Ativo
+        created_at: Criado em
+        updated_at: Atualizado em
+        password: "Senha (mínimo: 6 caracteres)"
+        password_confirmation: Confirmação de Senha
+      ativo:
+        id: ID
+        type: Tipo
+        brand: Marca
+        model: Modelo
+        serial: Serial
+        tombo: Tombo
+        specification: Especificações
+        contract_number: Nº Processo
+        created_at: Criado em
+        updated_at: Atualizado em
+      bond:
+        id: ID
+        area: Área
+        user_id: Usuário
+        note: Observações
+        call_number: Número do chamado
+        created_at: Criado em
+        updated_at: Atualizado em
+      acquisition:
+        id: ID
+        interested_party: Parte Interessada
+        acquisition_date: Data da Aquisição
+        company: Empresa
+        item: Item
+        quantity: Quantidade
+        value: Valor Aquisição
+        manager: Gestor do Contrato
+        modality: Modalidade da Aquisição
+        source: Origem da Aquisição
+        observacao: Observações
+        warranty_ends: Término da Garantia
+        warranty_period: Duração da Garantia (em meses)
+        anexar_contrato: Anexar Contrato
+        anexar_aditivo: Anexar Aditivo
+        created_at: Criado em
+        updated_at: Atualizado em
+      call_number:
+        id: ID
+        number: Numero do chamado
+        created_at: Criado em
+        updated_at: Atualizado em
+      attach_ativo:
+        id: ID
+        bond_id: Vinculo
+        ativo_id: Ativo
+        description: Descrição
+        status: Status
+        note: Anotação
+        created_at: Criado em
+        updated_at: Atualizado em
+      area:
+        id: ID
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      subarea:
+        id: ID
+        area_id: Área
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      user:
+        id: ID
+        name: Nome
+        created_at: Criado em
+        updated_at: Atualizado em
+      deposit:
+        id: ID
+        descriptio: Descrição
+        observation: Observações
+        status: Status
+        created_at: Criado em
+        updated_at: Atualizado em

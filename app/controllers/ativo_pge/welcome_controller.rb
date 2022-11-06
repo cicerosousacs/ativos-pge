@@ -12,15 +12,12 @@ class AtivoPge::WelcomeController < AtivosController
     @type_count = Ativo.select(:type).group(:type).order("type ASC").count
 
     #Ativos disponiveis no deposito
-    @ativos_available = Deposit.select{|d| d.status_id == 1}.count
+    @ativos_available = Deposit.select{ |d| d.status_id == 1 }.count
 
-    #Ativos vinculados sem/com usuário
-    @ativos_linked = AttachAtivo.select{|at| at.status == '5'}.count
+    #Ativos vinculados sem usuário
+    @ativos_linked = AttachAtivo.select{ |at| at.status_id == 5 }.count
   end
 
   private
-
-  def area_description
-  end
 
 end

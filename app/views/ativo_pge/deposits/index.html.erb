@@ -1,0 +1,37 @@
+<h1 class="h3 mb-2 text-gray-800">Depósito</h1>
+<div class="card shadow mb-4">
+  <div class="card-header py-3 text-success">
+    DISPONÍVEIS: <%= @qtd_available %> | COM DEFEITO: <%= @qtd_defect %> | INSERVÍVEIS: <%= @qtd_unusable %> | AGUARDANDO GARANTIA: <%= @qtd_awaiting_warranty %>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Tombo</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Observações</th>
+            <th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @deposits.each do |deposit| %>
+            <tr>
+              <td><%= deposit.ativo.tombo %></td>
+              <td><%= deposit.description %></td>
+              <td><%= deposit.status.description %></td>
+              <td><%= deposit.observation %></td>
+              <td style="width: 12px">
+              <%= link_to edit_ativo_pge_deposit_path(deposit), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @deposits %>
+    </div>
+  </div>
+</div>

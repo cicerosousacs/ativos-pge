@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_30_191435) do
+ActiveRecord::Schema.define(version: 2022_11_04_034640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,12 +69,13 @@ ActiveRecord::Schema.define(version: 2022_10_30_191435) do
     t.bigint "bond_id", null: false
     t.bigint "ativo_id", null: false
     t.string "description", null: false
-    t.string "status", null: false
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_id"
     t.index ["ativo_id"], name: "index_attach_ativos_on_ativo_id"
     t.index ["bond_id"], name: "index_attach_ativos_on_bond_id"
+    t.index ["status_id"], name: "index_attach_ativos_on_status_id"
   end
 
   create_table "bonds", force: :cascade do |t|
@@ -103,7 +104,6 @@ ActiveRecord::Schema.define(version: 2022_10_30_191435) do
     t.bigint "status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "linked"
     t.string "observation"
     t.index ["ativo_id"], name: "index_deposits_on_ativo_id"
     t.index ["status_id"], name: "index_deposits_on_status_id"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 2022_10_30_191435) do
   add_foreign_key "ativos", "acquisitions"
   add_foreign_key "attach_ativos", "ativos"
   add_foreign_key "attach_ativos", "bonds"
+  add_foreign_key "attach_ativos", "statuses"
   add_foreign_key "bonds", "subareas"
   add_foreign_key "bonds", "users"
   add_foreign_key "call_numbers", "bonds"

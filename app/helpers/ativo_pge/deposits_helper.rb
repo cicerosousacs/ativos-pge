@@ -1,0 +1,2 @@
+module AtivoPge::DepositsHelper
+end

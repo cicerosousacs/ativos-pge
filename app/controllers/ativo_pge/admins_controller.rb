@@ -45,7 +45,7 @@ class AtivoPge::AdminsController < AtivosController
       redirect_to '/ativo_pge/admins' and return
     else
       @admin.active = @admin.active ? false : true
-      text_message = @admin.active.present? ? "ativado(a)." : "inativado(a)."
+      text_message = @admin.active.present? ? "ativado(a)" : "inativado(a)"
       text_not_disabled = "Você não pode se desativar"
       @admin.save!
       redirect_to ativo_pge_admins_path, notice: (("#{@admin.name} #{text_message} com sucesso!"))

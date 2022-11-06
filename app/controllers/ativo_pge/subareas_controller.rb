@@ -3,7 +3,7 @@ class AtivoPge::SubareasController < AtivosController
   before_action :set_area_options, only: [:new, :create, :edit, :update]
 
   def index
-    @subareas = Subarea.includes(:area).order("area_id").page(params[:page])
+    @subareas = Subarea.includes(:area).order('area_id asc').page(params[:page])
     if params[:area_id].present?
       @subareas = @subareas.where(area_id: params[:area_id])
     end

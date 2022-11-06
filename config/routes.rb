@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     resources :admins
     resources :ativos do
       collection do
-        match :vincular_deposito, via: %i[get post]
-        get :vincular_deposito
+        match :link_to_deposit, via: %i[get post]
+        get :link_to_deposit
         match :gerar_pdf_ativo, via: %i[get post]
         get 'gerar_pdf_ativo'
         post 'gerar_pdf_ativo'
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :areas
     resources :subareas
     resources :acquisitions
+    resources :deposits, only: [:index, :edit, :update]
     resources :bonds do
       collection do
         match :pdf_termo_responsabilidade_ativo, via: %i[get post]
@@ -23,11 +24,6 @@ Rails.application.routes.draw do
     end
   end
   
-  namespace :ativo_pge do
-    get 'other/index'
-    # get 'other/index/area(/:page)', controller => 'areas'
-  end
-
   namespace :ativo_pge do
     get 'welcome/index'
   end

@@ -72,11 +72,6 @@ namespace :dev do
       show_spinner("Adicionando Aquisição Padrão...") do
         Acquisitions.create!([
           {description: "DISPONÍVEL"},
-          {description: "DEFEITO"},
-          {description: "INSERVÍVEL"},
-          {description: "AGUARDANDO GARANTIA"},
-          {description: "VÍNCULADO"},
-          {description: "VÍNCULADO EM USO"},
         ])
       end
     end

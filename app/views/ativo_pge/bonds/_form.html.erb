@@ -28,7 +28,7 @@
 
         <div class="form-group col-md-4">
           <code>*</code>
-          <%= form.label :usuario %> <br>
+          <%= form.label :user_id %> <br>
           <%= form.select("user_id", @user_select, {include_blank: 'Selecione ...'}, class:"form-control") %>
         </div>
         
@@ -73,7 +73,7 @@
         </div>
       <hr>
       <div class="text-right">
-        <%= form.submit "Salvar", class:"btn btn-primary" %>
+        <%= form.submit "Salvar", class:"btn btn-success" %>
         <%= link_to ativo_pge_bonds_path do %>
           <button class="btn btn-danger" type="button">Cancelar</button>
         <% end %>
@@ -108,15 +108,15 @@ $(document).ready(function(){
       $(".cascata #resp_subarea").html(htmlOptions);
     })
     .fail(function(){
-      alert(error);
+      alert("error");
     });
   });
 });
 
-$(document).ready(function(){
-  $('.order_service').hide()
-  $('.order_service').last().show()
-})
+//$(document).ready(function(){
+//  $('.order_service').hide()
+//  $('.order_service').last().show()
+//})
 
 </script>
 
