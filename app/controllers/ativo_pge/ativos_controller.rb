@@ -8,9 +8,7 @@ class AtivoPge::AtivosController < AtivosController
     @q = Ativo.ransack(params[:q])
     @ativos = @q.result.last_asset.page(params[:page])
     @total_ativos = Ativo.count(:id)
-    # @ativos = Ativo.all
-    # @assets_type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
-    # FILTRA O ATIVO PELO ID
+    
     if params[:id].present?
       @ativos = @ativos.where(id: params[:id])
     end

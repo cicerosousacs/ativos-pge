@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h5 class="modal-title font-weight text-center text-success" id="bondmodalLabel">
-    Ultima movimentação: <%= @bonds.attach_ativo.last.updated_at.strftime("%d/%m/%Y %H:%M") %> - Chamado: <%= @bonds.call_number.last.number %>
+    Ultima movimentação: <%= last_movement(@bonds) %> - Chamado: <%= @bonds.call_number.last.number %>
   </h5>
 </div>
 <div class="modal-body">

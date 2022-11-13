@@ -3,11 +3,12 @@ class AtivoPge::DepositsController < AtivosController
   before_action :set_status, only: [:edit, :update]
 
   def index
-    @deposits = Deposit.teste.available.order('id desc').page(params[:page])
-    @qtd_available = Deposit.available_at
-    @qtd_defect = Deposit.defect
-    @qtd_unusable = Deposit.unusable
-    @qtd_awaiting_warranty = Deposit.awaiting_warranty
+    @deposits = Deposit.status_warehouse(params[:status]).order('id desc').page(params[:page])
+    @qtd_available = Deposit.available_size
+    @qtd_defect = Deposit.defect_size
+    @qtd_unusable = Deposit.unusable_size
+    @qtd_awaiting_warranty = Deposit.awaiting_warranty_size
+    @status = Status.status_in_warehouse.select(:id, :description)
   end
 
   def edit
@@ -18,7 +19,7 @@ class AtivoPge::DepositsController < AtivosController
 
   def update
     if @deposit.update(params_deposit)
-      redirect_to ativo_pge_deposits_path, notice: "Status atualizado. Sucesso!"
+      redirect_to ativo_pge_deposits_path, notice: "O status do #{@deposit.description}, foi atualizado."
     else
       render :edit
     end
@@ -27,7 +28,7 @@ class AtivoPge::DepositsController < AtivosController
   private
 
   def params_deposit
-    params.require(:deposit).permit(:ativo_id, :description, :status_id, :observation)
+    params.require(:deposit).permit(:ativo_id, :description, :status_id, :observation, :status)
   end
 
   def set_deposit

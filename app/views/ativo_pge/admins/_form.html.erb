@@ -27,6 +27,10 @@
       <%= form.label :password_confirmation %>
       <%= form.password_field :password_confirmation, class:"form-control" %>
     </div>
+    <div class="control col-md-6"><br>
+      <%= form.label :profile %>
+      <%= form.select :profile, Admin.profiles.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
+    </div>
   </div>
     <br>
   <div class="text-right">

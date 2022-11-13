@@ -1,4 +1,9 @@
 'pt-BR':
+  time:
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y ás %H:%M"
+      short: "%d de %B"
   views:
     pagination:
       next: '<i class="fas fa-angle-right"></i>'
@@ -32,6 +37,7 @@
         email: Email
         name: Nome
         active: Ativo
+        profile: Perfil
         created_at: Criado em
         updated_at: Atualizado em
         password: "Senha (mínimo: 6 caracteres)"

@@ -5,7 +5,7 @@
       <%= link_to new_ativo_pge_bond_path do %>
         <button class="btn btn-success" style="color:write">Novo Vinculo</button>
       <% end %>
-        <button type="button" id="btn-termo" class="btn btn-info" style="color:write">Gerar Termo</button>
+      <button type="button" id="btn-termo" class="btn btn-info" style="color:write">Gerar Termo</button>
     </div>
     <div>
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
@@ -52,7 +52,7 @@
                 <i class="fa fa-edit"></i>
               <% end %>
             <td style="width: 12px">
-              <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "Certeza?"} do %>
+              <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
                 <i class="fa fa-trash"></i>
               <% end %>  
             </td>
@@ -71,15 +71,15 @@
   $(document).ready(function () {
     $('#btn-termo').click(function () {
       var bonds_ids = $('.marcar:checked').map(function () {
-        return $(this).val();
-        }).get();
-        if (bonds_ids == '') {
-          alert('Selecione pelo menos um vinculo');
-          } else {
-            if (this.id == 'btn-termo') {
-              window.open('<%= url_for({ :controller => 'bonds', :action => 'pdf_termo_responsabilidade_ativo' })%>?bonds_ids=' + bonds_ids)
-            }
-          }
+      return $(this).val();
+      }).get();
+      if (bonds_ids == '') {
+        alert('Selecione pelo menos um vinculo');
+      } else {
+        if (this.id == 'btn-termo') {
+          window.open('<%= url_for({ :controller => 'bonds', :action => 'pdf_termo_responsabilidade_ativo' })%>?bonds_ids=' + bonds_ids)
+        }
+      }
     });
     
     $("#all_bonds").change(function () {

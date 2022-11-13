@@ -13,7 +13,7 @@
     <div>
       <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
         <div class="input-group">
-          <%= search_form_for @q, url: ativo_pge_ativos_path, method: :get do |f| %>
+          <%= search_form_for @q, url: ativo_pge_ativos_path, method: :post do |f| %>
             <%= f.search_field :model_or_tombo_or_serial_or_type_or_brand_cont_all, class:"form-control border-1 small", placeholder:'Pesquisar...' %>
             <%= button_tag type:'submit', class:"btn btn-primary" do %>
               <i class="fas fa-search fa-sm"></i>
@@ -53,6 +53,10 @@
                 <i class="fas fa-edit"></i>
               <% end %>
             </td>
+            <td style="width: 12px">
+              <%= link_to ativo_pge_ativo_path(ativo), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover: #{ativo.ativo_description}?"} do %>
+                <i class="fa fa-trash"></i>
+              <% end %>  
           </tr>
         <% end %>
       </tbody>

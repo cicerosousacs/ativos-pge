@@ -17,5 +17,25 @@ module AtivosPge
     # Set as default hellpers in system
     config.action_controller.include_all_helpers = true
 
+    # config.action_mailer.delivery_method = :smtp
+    # config.action_mailer.smtp_settings = {
+    #   :address              => "mxsafe.pge.ce.gov.br",
+    #   :port                 => 25,
+    #   :domain               => "pge.ce.gov.br",
+    #   #:user_name            => "assistente.virtual@pge.ce.gov.br"
+    #   #:password             => "av2010",
+    #   #:authentication       => :login,
+    #   :enable_starttls_auto => true,
+    #   :openssl_verify_mode => 'none'
+    # }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :user_name => 'db206629333374',
+      :password => '815bdd994e06fe',
+      :address => 'smtp.mailtrap.io',
+      :domain => 'smtp.mailtrap.io',
+      :port => '2525',
+      :authentication => :cram_md5
+    }
   end
 end

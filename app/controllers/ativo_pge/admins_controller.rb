@@ -55,7 +55,7 @@ class AtivoPge::AdminsController < AtivosController
   private
 
   def params_admin
-    params.require(:admin).permit(:name, :email, :active, :password, :password_confirmation)
+    params.require(:admin).permit(:name, :email, :active, :password, :password_confirmation, :profile)
   end
 
   def set_admin

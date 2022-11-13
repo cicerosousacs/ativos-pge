@@ -3,6 +3,8 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable, :recoverable
   devise :database_authenticatable, :validatable, :rememberable, :registerable
 
+  enum profile: [:Padrão, :Admin]
+
   def check_active
     { true => "Ativo", false => "Inativo", nil => "Inativo" }.fetch(active)
   end

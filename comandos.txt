@@ -23,49 +23,51 @@
 	rails g model Asset type:string brand:string model:string serial:string tombo:string
 	specification:text acquisition:references
 	
+	TABLE MODEL DEPOSIT
+	
+	rails g model Deposit ativo:references status:references observation:string
+	
 	TABLE MODEL USER(usuario)
 
 	rails g model User name:string email:string
 
-	TABLE AREA
+	TABLE MODEL AREA
 
 	rails g model Area description:string
 
-	TABLE SUBAREA
+	TABLE MODEL SUBAREA
 
 	rails g model Subarea area:references description:string
 
-	TABLE BOND(vinculo)
+	TABLE MODEL BOND(vinculo)
 
 	rails g model Bond subarea:references user:references observation:string
 	
-	TABLE 
+	TABLE MODEL ORDER SERVICE
 
-	rails g model call_number bond:references number:integer(max 7 digitos) model: length: { is: 7 }
+	rails g model order_service bond:references number:integer(max 7 digitos) model: length: { is: 7 }
 
-	TABLE 
+	TABLE MODEL LINKED ASSET
 
-	rails g model allocated_asset bond:references asset:references description:string status:references
+	rails g model linked_asset bond:references asset:references status:references observation:string
 	
-	TABLE MODEL status
+	TABLE MODEL STATUS
 
 	rails g model Status description:string
-		VINCULADO
-		VÍNCULADO EM USO 
+
 		DISPONÍVEL
 		DEFEITO
 		INSERVÍVEL 
 		AGUARDANDO GARANTIA
-
+		VINCULADO
+		VÍNCULADO EM USO 
 	
-	TABLE DEPOSIT
 	
-	rails g model Deposit ativo:references status:references observation:string linked:boolean
+	TABLE MODEL ADMIN
 	
-	TABLE ADMIN
-	
-	rails g migrate AddNameToAdmin name:string
-	rails g migrate AddActiveToAdmin active:boolean
+	rails g migration AddNameToAdmin name:string
+	rails g migration AddActiveToAdmin active:boolean, na migration adicionar default:true
+	rails g migration AddProfileToAdmin profile:integer
 	
 	#########################################
 
@@ -84,6 +86,11 @@
 	
 	PAGINAÇÂO VIEW
 	rails g kaminari:views bootstrap4linked
+
+
+	ENVIO DE EMAIL
+	rails g mailer SendEmail
+
 
 
 RETORNAM O MESMO VALOR DE CONTAGEM
@@ -147,7 +154,7 @@ AttachAtivo.joins(:ativo).where(bond_id:'4').count
 "https://mailtrap.io/inboxes/1711410/messages/2739803459"
 
 
-
+# @assets_type = Ativo.select(:type).group(:type) # CRIA UM SELECT DOS TIPOS DE ATIVOS
 
 .bg-success {
   background-color: #13855c !important;
@@ -173,7 +180,7 @@ action_name = retorna qual a action do momento
 params[:bond][:attach_ativo_attributes] = retorna as coisas
 
 
-JQUETY SOMA DATA FINAL
+JQUERY SOMA DATA FINAL
 
 campo data compra: $('#acquisition_acquisition_date')[0].value
 campo de meses: $('#acquisition_warranty_period')[0].value
@@ -181,4 +188,48 @@ campo data final: $('#acquisition_warranty_ends')[0].value
 
 
 
+@bond.call_number.last.number
+@bond.attach_ativo
+@bond.attach_ativo.last.ativo.tombo
+@bond.attach_ativo.last.description
+@bond.subarea.area.description
+@bond.subarea.description
+
+CRIA UM MODAL PARA INFORMAR O CPF
+
+<div class="modal fade" id="cpf_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cpf_modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cpf_modalLabel">Informe o CPF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="cpf">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-termos" class="btn btn-success">Prossegir</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+ 
+ DATA: .strftime('%A, %d de %B de %Y ás %H:%M')   
+    
+  def show_ativo_status(attach_ativo)
+    status_ativo = AttachAtivo.find_by_id(attach_ativo)
+    attach_ativo ? status_ativo.status : "-"
+  end
+
+  def description_active(id)
+    active = Ativo.find(id)
+    description = [active.type, active.brand, active.model].join(" ")
+  end
+  </div>
+</div>
 

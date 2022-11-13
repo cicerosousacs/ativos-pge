@@ -1,7 +1,17 @@
 <h1 class="h3 mb-2 text-gray-800">Depósito</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3 text-success">
-    DISPONÍVEIS: <%= @qtd_available %> | COM DEFEITO: <%= @qtd_defect %> | INSERVÍVEIS: <%= @qtd_unusable %> | AGUARDANDO GARANTIA: <%= @qtd_awaiting_warranty %>
+    <div>
+    </div>
+    <div>
+      <form class="d-sm-inline-block">
+        <div class="input-group">
+          <input type="text" class="form-control" id="search">
+          <%= select_tag 'status', options_from_collection_for_select(@status, 'id', 'description'), 
+          :prompt => "Selecione um status", class:"form-control", onchange: 'this.form.submit()' %>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -16,14 +26,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @deposits.each do |deposit| %>
+          <% @deposits.each do |dep| %>
             <tr>
-              <td><%= deposit.ativo.tombo %></td>
-              <td><%= deposit.description %></td>
-              <td><%= deposit.status.description %></td>
-              <td><%= deposit.observation %></td>
+              <td><%= dep.ativo.tombo %></td>
+              <td><%= dep.description %></td>
+              <td><%= dep.status.description %></td>
+              <td><%= dep.observation %></td>
               <td style="width: 12px">
-              <%= link_to edit_ativo_pge_deposit_path(deposit), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
+              <%= link_to edit_ativo_pge_deposit_path(dep), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
                 <i class="fa fa-edit"></i>
               <% end %>
               </td>
@@ -31,6 +41,10 @@
           <% end %>
         </tbody>
       </table>
+      <div class="text-black-50 text-sm">
+        Disponíveis: <%= @qtd_available %> | Defeito: <%= @qtd_defect %> | 
+        Inservíveis: <%= @qtd_unusable %> | Aguardando garantia: <%= @qtd_awaiting_warranty %>
+      </div>
       <%= paginate @deposits %>
     </div>
   </div>

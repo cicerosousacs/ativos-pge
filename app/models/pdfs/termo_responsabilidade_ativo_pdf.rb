@@ -10,29 +10,29 @@ module Pdfs
 
           pdf.image "#{Rails.root}/app/assets/images/logo_pge_center.png", :position => :center, :width => 120
           pdf.move_down 30
-          pdf.text "TERMO DE EMPRÉSTIMO", :align => :center, :size => 12	, :style => :bold
+          pdf.text 'TERMO DE EMPRÉSTIMO', :align => :center, :size => 12	, :style => :bold
           pdf.move_down 10
-         
-          pdf.move_down 10
-          pdf.text "Pelo presente termo, declaro receber, na condição de empréstimo, os equipamentos listados, pertencente à Procuradoria-Geral do Estado do Ceará - PGE, que serão utilizados no período conforme o estabelecido por Decreto do Governador do Estado do Ceará em virtude do COVID-19.
 
-          Declaro outrossim, que os equipamentos foram recebidos em funcionamento e em bom estado de conservação e que ficarei responsável por sua guarda e conservação.", :size => 12, align: :justify
+          pdf.move_down 10
+          pdf.text 'Pelo presente termo, declaro receber na condição de empréstimo, os equipamentos listados pertencente à Procuradoria-Geral do Estado do Ceará - PGE.
+
+          Declaro outrossim, que os equipamentos foram recebidos em funcionamento e em bom estado de conservação e que ficarei responsável por sua guarda e conservação.', :size => 12, align: :justify
           pdf.move_down 20
 
           pdf.move_down 20
           pdf.text "Nome: #{bond.user.name}", :size => 12, :style => :bold, align: :left
           pdf.move_down 5
-          pdf.text "CPF:", :size => 12, :style => :bold, align: :left
+          pdf.text 'CPF:', :size => 12, :style => :bold, align: :left
           pdf.move_down 5
           pdf.text "Setor: #{bond.subarea.area.description}", :size => 12, :style => :bold, align: :left
           pdf.move_down 20
 
           pdf.move_down 20
-          pdf.text "ATIVOS VINCULADOS ", :size => 10, :style => :bold, align: :center
+          pdf.text 'ATIVOS VINCULADOS', :size => 10, :style => :bold, align: :center
           pdf.move_down 20
 
           data = Array.new
-          data << ["Tombo","Descrição","Serial"]
+          data << ['Tombo','Descrição','Serial']
 
           bond.attach_ativo.each do |ativo|
             data_dados = Array.new
@@ -47,21 +47,18 @@ module Pdfs
           end
 
           pdf.move_down 50
-          pdf.text "Fortaleza, #{I18n.l(Time.now, format: "%d de %B de %Y")}", :size => 12, :style => :italic, align: :left
-
+          pdf.text "Fortaleza, #{I18n.l(Time.now, format: '%d de %B de %Y')}", :size => 12, :style => :italic, align: :left
 
           pdf.move_down 15
 
           pdf.move_down 50
-          pdf.text "___________________________________________________", :size => 10, :style => :bold, align: :center
+          pdf.text '___________________________________________________', :size => 10, :style => :bold, align: :center
           pdf.move_down 5
-          pdf.text "Assinatura", :size => 12, :style => :italic, align: :center
+          pdf.text 'Assinatura', :size => 12, :style => :italic, align: :center
           pdf.move_down 10
-          
-
-        end  
-      end  
-      return pdf.render
+        end
+      end
+      pdf.render
     end
   end
 end

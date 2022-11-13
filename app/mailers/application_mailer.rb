@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'servicedesk@pge.ce.gov.br'
   layout 'mailer'
 end

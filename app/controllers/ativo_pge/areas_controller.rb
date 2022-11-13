@@ -12,7 +12,6 @@ class AtivoPge::AreasController < AtivosController
   def new
     @area = Area.new
     respond_to do |format|
-      format.html
       format.js { render partial: 'ativo_pge/areas/area' }
     end
   end
@@ -28,7 +27,6 @@ class AtivoPge::AreasController < AtivosController
 
   def edit
     respond_to do |format|
-      format.html
       format.js { render partial: 'ativo_pge/areas/area' }
     end
   end

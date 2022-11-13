@@ -19,7 +19,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise' #cria e gerencia o login e usuarios
 gem 'rails-i18n', '~> 5.1' #tradução
 gem 'tty-spinner' #animalçoes de progresso
-gem 'awesome_print' #ajuda a visualizar melhor no rails console, "ap" antes
 gem 'kaminari' #paginação
 gem 'kaminari-i18n' #tradução da paginação
 gem 'cocoon' #formularios aninhados
@@ -51,10 +50,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'awesome_print' #ajuda a visualizar melhor no rails console, "ap" antes
+  gem 'rubocop', require: false
+  gem 'mailcatcher'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
+  gem 'solargraph'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
