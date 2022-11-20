@@ -52,21 +52,25 @@ class Bond < ApplicationRecord
 
   def bond_creation_history
     if BondHistory.find_by_bond_id(bond_id).nil?
-      history = BondHistory.new({
-        bond_id: bond_id,
-        received: received_asset
-      })
+      history = BondHistory.new(
+        {
+          bond_id: bond_id,
+          received: received_asset
+        }
+      )
       history.save!
       send_email_creation_bond
     end
   end
-  
+
   def bond_update_history
-    history = BondHistory.new({
-      bond_id: bond_id,
-      received: attach_ativo.select { |rec| rec.created_at.blank? },
-      removed: attach_ativo.select { |rem| rem.status_id == 2 }
-    })
+    history = BondHistory.new(
+      {
+        bond_id: bond_id,
+        received: attach_ativo.select { |rec| rec.created_at.blank? },
+        removed: attach_ativo.select { |rem| rem.status_id == 2 }
+      }
+    )
     history.save!
     send_email_update_bond
   end
