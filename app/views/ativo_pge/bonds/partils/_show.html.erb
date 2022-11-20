@@ -1,0 +1,11 @@
+<table class="table table-hover table-bordered">
+  <tbody>
+    <% @bond.attach_ativo.each do |asset| %>
+      <tr>
+        <td><%= asset.ativo.tombo %>
+        <td><%= asset.ativo.ativo_description %> 
+        <td><%= asset.status.description %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

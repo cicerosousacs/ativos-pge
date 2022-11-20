@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_07_015610) do
+ActiveRecord::Schema.define(version: 2022_11_17_170728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2022_11_07_015610) do
     t.index ["status_id"], name: "index_attach_ativos_on_status_id"
   end
 
+  create_table "bond_histories", force: :cascade do |t|
+    t.bigint "bond_id"
+    t.jsonb "received"
+    t.jsonb "removed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bond_id"], name: "index_bond_histories_on_bond_id"
+  end
+
   create_table "bonds", force: :cascade do |t|
     t.bigint "subarea_id", null: false
     t.bigint "user_id", null: false
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 2022_11_07_015610) do
   add_foreign_key "attach_ativos", "ativos"
   add_foreign_key "attach_ativos", "bonds"
   add_foreign_key "attach_ativos", "statuses"
+  add_foreign_key "bond_histories", "bonds"
   add_foreign_key "bonds", "subareas"
   add_foreign_key "bonds", "users"
   add_foreign_key "call_numbers", "bonds"

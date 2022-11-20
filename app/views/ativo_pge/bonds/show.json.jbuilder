@@ -1,1 +1,1 @@
-json.partial! "bonds/bond, bond: @bond
+json.partial! 'bonds/bond, bond: @bond'

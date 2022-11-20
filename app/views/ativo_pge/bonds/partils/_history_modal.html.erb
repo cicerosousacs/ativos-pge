@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h5 class="modal-title font-weight text-center text-success" id="historymodalLabel">
+    <% if @history.blank? %>
+      Sem histórico para este vínculo
+    <% else %>
+      Histórico: <%= @history[0].bond.subarea.area.description %> - <%= @history[0].bond.subarea.description %>, Usuário atual: <%= @history[0].bond.user.name %>
+    <% end %>
+  </h5>
+</div>
+<div class="modal-body">
+  <%= render partial: 'ativo_pge/bonds/partils/history' %>
+</div>

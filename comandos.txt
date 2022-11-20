@@ -69,6 +69,9 @@
 	rails g migration AddActiveToAdmin active:boolean, na migration adicionar default:true
 	rails g migration AddProfileToAdmin profile:integer
 	
+	TABLE MODEL BOND_HISTORY
+	
+	rails g model bond_history bond:references received:string removed:string
 	#########################################
 
 	CONTROLLER

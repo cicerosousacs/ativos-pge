@@ -4,6 +4,7 @@
       default: "%d/%m/%Y"
       long: "%A, %d de %B de %Y ás %H:%M"
       short: "%d de %B"
+      half_short: "%a, %d %b %Y ás %H:%M"
   views:
     pagination:
       next: '<i class="fas fa-angle-right"></i>'

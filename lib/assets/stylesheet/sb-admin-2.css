@@ -187,13 +187,33 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #008080ff;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #008080ff;
+  text-decoration: none;
+}
+
+.red:hover {
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+}
+
+.blue:hover {
+  color: rgb(0, 34, 255);
+  text-decoration: none;
+}
+
+.orange:hover {
+  color: rgb(255, 106, 0);
+  text-decoration: none;
+}
+
+.gray:hover {
+  color: #555555;
   text-decoration: none;
 }
 
@@ -4793,7 +4813,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
+  color: #008080ff;
   background-color: #fff;
   border: 1px solid #dddfeb;
 }
@@ -4826,8 +4846,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #008080ff;
+  border-color: #008080ff;
 }
 
 .page-item.disabled .page-link {

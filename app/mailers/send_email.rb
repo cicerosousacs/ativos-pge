@@ -1,25 +1,23 @@
 class SendEmail < ApplicationMailer
 
-  def create_bond(bond)
-    @user = bond.user.name
-    @created_at = I18n.l(bond.created_at, format: :long, locale: :'pt-BR')
-    @linked_assets = bond.attach_ativo
+  def create_bond(user, email, creation_date, received_asset)
+    @user = user
+    created_at = DateTime.parse(creation_date)
+    @created_at = I18n.l(created_at, format: :long, locale: :'pt-BR')
+    @linked_assets = received_asset
 
-    email = bond.user.email
+    @title = 'Estes são os ativos atribuidos a você:'
     mail to: email, subject: 'Ativos vinculado a você'
   end
 
-  def update_bond(bond)
-    last_asset_update = bond.attach_ativo.last.updated_at
-    last_bond_update = bond.updated_at
-    last_update = last_bond_update > last_asset_update
-    linked_assets = bond.attach_ativo.where(created_at: Date.today.all_day)
-    @linked = linked_assets.to_a
-    @user = bond.user.name
-    email = bond.user.email
-    @updated_at = last_update ? last_bond_update : last_asset_update
+  def update_bond(user, email, creation_date, received, removed)
+    @user = user
+    last_creation_date = DateTime.parse(creation_date)
+    created_at = I18n.l(last_creation_date, format: :long, locale: :'pt-BR')
+    @received = received
+    @removed = removed
 
-    @title = "segue movimentação de ativo de #{I18n.l(@updated_at, format: :long, locale: :'pt-BR')}"
+    @title = "segue movimentação de ativo de #{created_at}"
     mail to: email, subject: 'Movimentação de ativos vinculado a você'
   end
 end

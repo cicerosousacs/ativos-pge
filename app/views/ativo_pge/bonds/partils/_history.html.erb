@@ -1,0 +1,35 @@
+<% @history.each do |his| %>  
+  <table class="table table-bordered">
+    <thead>
+      <th colspan="4" class="table-active font-weight text-center text-success">
+        Data da movimentação: <%= I18n.l(his.created_at, format: :long, locale: :'pt-BR') %>
+      </th>
+      <tr>
+        <th width="50%" colspan="2" class="text-success">Ativos recebidos</th>
+        <th width="50%" colspan="2" class="text-success">Ativos removidos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if his.received.blank? %>
+        <tr>
+        <td colspan="2">Nenhum ativo recebido
+      <% else%>
+        <% his.received.each do |rec| %>
+          <tr>
+            <td><%= tombo_asset(rec["ativo_id"]) %>
+            <td><%= rec["description"] %>     
+        <% end %>
+      <% end %>
+      <% if his.removed.blank? %>
+        <td colspan="2">Nenhum ativo removido
+      <tr>
+      <% else%>
+        <% his.removed.each do |rem| %>
+            <td><%= tombo_asset(rem["ativo_id"]) %>
+            <td><%= rem["description"] %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

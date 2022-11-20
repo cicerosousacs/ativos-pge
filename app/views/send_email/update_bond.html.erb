@@ -201,24 +201,39 @@
                                     <td>
                                       <table class="table table-hover">
                                         <p>Olá <%= @user %>, <%= @title %> </p>
-                                        <p>Recolhido:</p>
-                                        <tbody>
-                                          <tr>
-                                            <td>TOMBO:  
-                                            <td>DESCRIÇÂO: 
-                                          </tr>
-                                        </tbody>
                                       </table>
                                       <table class="table table-hover">
-                                        <p>Recebido:</p>
-                                        <tbody>
-                                          <% @linked.each do |l| %>
-                                            <tr>
-                                              <td>TOMBO: <%= l.ativo.tombo %>
-                                              <td>DESCRIÇÂO: <%= l.description %>
-                                            </tr>
-                                          <% end %>
-                                        </tbody>
+                                        <th colspan='2'>Recebido:
+                                          <tbody>
+                                            <% if @received.nil? %>
+                                             
+                                                <td colspan='2'>Sem movimentação
+                                         
+                                            <% else %>
+                                              <% @received.each do |l| %>
+                                                <tr>
+                                                  <td>TOMBO: <%= tombo_asset(l["ativo_id"]) %>
+                                                  <td>DESCRIÇÂO: <%= l["description"] %>
+                                                </tr>
+                                              <% end %>
+                                            <% end %>
+                                          </tbody>
+                                        </th>
+                                        <th colspan='2'>Recolhido:
+                                          <tbody>
+                                            <% if @removed.nil? %>
+                                                <td colspan='2'>Sem movimentação
+                                             
+                                            <% else %>
+                                              <% @removed.each do |r| %>
+                                                <tr>
+                                                  <td>TOMBO: <%= tombo_asset(r["ativo_id"]) %>
+                                                  <td>DESCRIÇÂO: <%= r["description"] %>
+                                                </tr>
+                                              <% end %>
+                                            <% end %>
+                                          </tbody>
+                                        </th>
                                       </table>
                                       <p class="msgResposta">E-mail automático não é necessário responder.</p>
                                     </td>

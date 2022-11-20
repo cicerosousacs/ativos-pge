@@ -209,7 +209,7 @@
                                       <table class="table table-hover">
                                       <p class="date"><%= @created_at %></p>
                                       <p>Olá <%= @user %>,</p>
-                                      <p>Estes são os ativos atribuidos a você:</p>
+                                      <p><%= @title %></p>
                                         <tbody>
                                           <% @linked_assets.each do |a| %>
                                             <tr class="table-light">

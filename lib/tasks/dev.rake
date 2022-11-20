@@ -2,7 +2,7 @@ namespace :dev do
 
   DEFAULT_PASSWORD = '@tivos_2022'
   DEFAULT_FILE_PATH = File.join(Rails.root, 'tmp')
-  
+
     desc "Configurando o ambiente de desenvolvimento"
     task setup: :environment do
       if Rails.env.development?
@@ -19,37 +19,37 @@ namespace :dev do
         puts "Você não esta em ambiente de desenvolvimento!"
       end
     end
-    
+
     desc "Adiciona o administrador padrão"
     task add_default_admin: :environment do
       Admin.create!(
-        #nome: 'Admin',
+        name: 'Administrador',
         email: 'admin@ativos.pge',
         password: DEFAULT_PASSWORD,
         password_confirmation: DEFAULT_PASSWORD
       )
     end
-     
+
     desc "Adicionando Areas"
     task add_areas: :environment do
       file_name = 'areas.txt'
       file_path = File.join(DEFAULT_FILE_PATH, file_name)
-  
+
       File.open(file_path, 'r').each do |line|
       Area.create!(description: line.strip)
       end
     end
 
     desc "Adicionando Usuarios"
-    task add_users: :environment do
-      file_name = 'usuarios.txt'
-      file_path = File.join(DEFAULT_FILE_PATH, file_name)
-  
-      File.open(file_path, 'r').each do |line|
-      User.create!(
-        name: line[0],
-        email: line[1]
-        )
+      task add_users: :environment do
+        file_name = 'usuarios.txt'
+        file_path = File.join(DEFAULT_FILE_PATH, file_name)
+
+        File.open(file_path, 'r').each do |line|
+        User.create!(
+          name: line[0],
+          email: line[1]
+          )
       end
     end
 
@@ -75,7 +75,7 @@ namespace :dev do
         ])
       end
     end
-##################################################################
+
     desc "Contador de Ativos por Tipo"
     task count_ativos: :environment do
       show_spinner("Calculando quantidade de Ativos...") do
@@ -84,15 +84,14 @@ namespace :dev do
         end
       end
     end
-##################################################################
 
     private
-     
+
     def show_spinner(msg_start, msg_end = "Sucesso!")
       spinner = TTY::Spinner.new("[:spinner] #{msg_start}")
       spinner.auto_spin
       yield
-      spinner.success("(#{msg_end})") 
+      spinner.success("(#{msg_end})")
     end
-  
-  end  
+
+  end

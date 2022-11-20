@@ -1,4 +1,4 @@
-<h1 class="h3 mb-2 text-gray-800">Vinculos</h1>
+<h1 class="h3 mb-2 text-gray-800">Vínculos</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <div>
@@ -12,7 +12,7 @@
         <div class="input-group">
           <%= search_form_for @q, url: ativo_pge_bonds_path, method: :get do |f| %>
             <%= f.search_field :area_cont, class:"form-control border-1 small", placeholder:'Pesquisar...' %>
-            <%= button_tag type:'submit', class:"btn btn-primary" do %>
+            <%= button_tag type:'submit', class:"btn btn-success" do %>
               <i class="fas fa-search fa-sm"></i>
             <% end %>
           <% end %>
@@ -42,18 +42,27 @@
             <td><%= bond.subarea.description %></td>
             <td><%= bond.user.name %></td>
             <td><%= bond.note %></td>
-            <td><%= bond.check_home_office %></td>
+            <td><%= bond.check_home_office %>
+              <% if bond.homeoffice.present? %>
+                <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
+                  <i title="Visualizar termo" class="fa-regular fa-file-pdf"></i>
+                <% end %>
+              <% end %>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                <i class="fa fa-eye"></i>
+                <i title="Visualizar ativos" class="gray fa fa-eye"></i>
+              <% end %>
+            <td style="width: 12px">
+              <%= link_to ativo_pge_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
+                <i title="Ver histórico" class="orange fa fa-clock-rotate-left"></i>
               <% end %>
             <td style="width: 12px">
               <%= link_to edit_ativo_pge_bond_path(bond) do %>
-                <i class="fa fa-edit"></i>
+                <i title="Editar" class="blue fa fa-edit"></i>
               <% end %>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
-                <i class="fa fa-trash"></i>
+                <i title="Excluir" class="red fa fa-trash"></i>
               <% end %>  
             </td>
           </tr>
@@ -77,7 +86,8 @@
         alert('Selecione pelo menos um vinculo');
       } else {
         if (this.id == 'btn-termo') {
-          window.open('<%= url_for({ :controller => 'bonds', :action => 'pdf_termo_responsabilidade_ativo' })%>?bonds_ids=' + bonds_ids)
+          window.open('<%= url_for({ :controller => 'bonds', :action => 'term_responsibility_asset' })%>?bonds_ids=' + bonds_ids);
+          $('.marcar, #all_bonds').prop("checked", false);
         }
       }
     });

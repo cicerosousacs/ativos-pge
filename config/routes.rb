@@ -14,20 +14,21 @@ Rails.application.routes.draw do
     resources :areas
     resources :subareas
     resources :acquisitions
-    resources :deposits, only: [:index, :edit, :update]
+    resources :deposits, only: %i[index edit update]
     resources :bonds do
       collection do
-        match :pdf_termo_responsabilidade_ativo, via: %i[get post]
-        get 'pdf_termo_responsabilidade'
-        post 'pdf_termo_responsabilidade'
+        match :term_responsibility_asset, via: %i[get post]
+        get 'term_responsibility_asset'
+        post 'term_responsibility_asset'
       end
     end
+    get '/bonds/history/:id', to: 'bonds#history'
   end
-  
+
   namespace :ativo_pge do
     get 'welcome/index'
   end
-  
+
   devise_for :admins
 
   root to: 'ativo_pge/welcome#index'
