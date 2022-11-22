@@ -53,3 +53,8 @@
   "integrity" "sha512-/tAPPIIAzjsywl78lFfu7YopFnL9HjnM2pxaYxju38ZBBW5tqK9eollhFJJqBCSa+gLJT9uP2iFt6vJYw5REmw=="
   "resolved" "https://registry.npmjs.org/select2-theme-bootstrap4/-/select2-theme-bootstrap4-1.0.2.tgz"
   "version" "1.0.2"
+
+"sweetalert2@^11.6.10":
+  "integrity" "sha512-/tzEmEYqqHVkO6iMfvCFcmaO78un93CdZIhB+DGj9BLMkcuXS8jo2bmYoxjEAryhxsKPqXiWmZNo3gw/qw/ZwQ=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.6.10.tgz"
+  "version" "11.6.10"

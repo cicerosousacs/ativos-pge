@@ -16,7 +16,14 @@ module ApplicationHelper
   end
 
   def tombo_asset(id)
-    asset = Ativo.find_by_id(id)
-    asset.tombo
+    Ativo.find_by_id(id).tombo
+  end
+
+  def translate_date(date)
+    I18n.l(date, format: :long, locale: :'pt-BR')
+  end
+
+  def text_date_history(history)
+    history.removed.nil? ? 'Data da vinculação:' : 'Data da movimentação:'
   end
 end

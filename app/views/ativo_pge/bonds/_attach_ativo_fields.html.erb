@@ -4,7 +4,7 @@
       <%= f.select :ativo_id, @tombo_ativo, {include_blank: 'Tombo'}, class:"form-control select_tombo", id:"set_tombo"%>
     </div>
 
-    <div class="control col-md-4" id="disabledSelect">
+    <div class="control col-md-4">
       <%= f.select :description, @description_ativo.collect{ |da| [da, da]},{prompt: 'Descricão'} ,{class:"form-control", id:"set_description"} %>
     </div>
 
@@ -19,7 +19,7 @@
 
     <div class="control">
       <%= link_to_remove_association(f, class: "btn-sm btn-danger") do %>
-        <i title="Desvincular ativo" class="fa fa-times" style="color:white"></i>
+        <i title="Desvincular ativo" class="fa fa-times"></i>
       <% end %>
     </div>
   </div>
@@ -29,12 +29,10 @@
 <script>
 
 $(document).ready(function(){
-  $('.select_tombo').select2({
+  $(".select_tombo").select2({
     theme: 'bootstrap'
   });
 });
-
-// ###############################
 
 $(document).ready(function(){
   $(".add_ativo #set_tombo").change(function(){
@@ -51,15 +49,5 @@ $(document).ready(function(){
     });
   });
 });
-
-//$(document).ready(function(){
-//  $('.disabledSelect').change(function () {
-//    if ($(this).val() == '') {
-//        $('.enableOnInput').prop('disabled', true);
-//    } else {
-//        $('.enableOnInput').prop('disabled', false);
-//    }
-//  });
-//});
 
 </script>

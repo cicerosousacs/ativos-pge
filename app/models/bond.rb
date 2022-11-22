@@ -20,8 +20,6 @@ class Bond < ApplicationRecord
 
   paginates_per 9
 
-  # scope :linked_assets, -> { joins(:attach_ativo).where(created_at: Date.today.all_day) }
-
   def self.last_bond
     Bond.includes(:user, :subarea, :attach_ativo, :call_number).order('id desc')
   end
@@ -55,6 +53,7 @@ class Bond < ApplicationRecord
       history = BondHistory.new(
         {
           bond_id: bond_id,
+          last_user: user_name,
           received: received_asset
         }
       )
@@ -67,12 +66,15 @@ class Bond < ApplicationRecord
     history = BondHistory.new(
       {
         bond_id: bond_id,
+        last_user: user_name,
         received: attach_ativo.select { |rec| rec.created_at.blank? },
         removed: attach_ativo.select { |rem| rem.status_id == 2 }
       }
     )
     history.save!
-    send_email_update_bond
+    if attach_ativo.ids.present?
+      send_email_update_bond
+    end
   end
 
   def send_email_creation_bond

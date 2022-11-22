@@ -33,8 +33,7 @@
           <th>Tombo</th>
           <th>Descrição</th>
           <th>Serial</th>
-          <th>
-          <th>
+          <th colspan="2" class="text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -44,18 +43,14 @@
             <td><%= ativo.tombo %></td>
             <td><%= ativo.ativo_description %></td>
             <td><%= ativo.serial %></td>
-            <td style="width: 12px">
-            <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
-              <i class="fa fa-clipboard-list"></i>
-            <% end %>
             <td style="width: 10px">
               <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
-                <i class="fas fa-edit"></i>
+                <i class="blue fas fa-edit"></i>
               <% end %>
             </td>
             <td style="width: 12px">
               <%= link_to ativo_pge_ativo_path(ativo), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover: #{ativo.ativo_description}?"} do %>
-                <i class="fa fa-trash"></i>
+                <i class="red fa fa-trash"></i>
               <% end %>  
           </tr>
         <% end %>

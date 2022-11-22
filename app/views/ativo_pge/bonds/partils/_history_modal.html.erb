@@ -3,7 +3,7 @@
     <% if @history.blank? %>
       Sem histórico para este vínculo
     <% else %>
-      Histórico: <%= @history[0].bond.subarea.area.description %> - <%= @history[0].bond.subarea.description %>, Usuário atual: <%= @history[0].bond.user.name %>
+      Usuário atual: <%= @history[0].bond.user.name %>
     <% end %>
   </h5>
 </div>

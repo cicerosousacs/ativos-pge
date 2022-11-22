@@ -17,16 +17,17 @@
     <%= form_with(model: [ :ativo_pge, @acquisition ], local: true ) do |form| %>
       <div class="row g-3">
         <div class="form-group col-md-6">
+          <code>*</code>
           <%= form.label :item %> <br>
           <%= form.text_field :item, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
           <%= form.label :quantity %> <br>
-          <%= form.text_field :quantity, class:"form-control" %>
+          <%= form.text_field :quantity, class:"form-control"%>
         </div>
-        <div class="form-group col-md-3 valor">
-          <%= form.label :value %> <br>
-          <%= form.text_field :value, class:"form-control"%>
+        <div class="form-group col-md-3">
+          <%= form.label :value_acquisition %> <br>
+          <%= form.text_field :value_acquisition, class:"form-control"%>
         </div>
         <div class="form-group col-md-6">
           <%= form.label :manager %> <br>
@@ -62,24 +63,27 @@
           <%= form.label :warranty_ends %> <br>
           <%= form.date_field :warranty_ends, class:"form-control" %>
         </div>
-        <div class="form-group col-md-3">
-          <%= form.label :contract_number, "Nº Contrato" %> <br>
-          <%= form.text_field :contract_number, class:"form-control masc-contrato" %>
+        <div class="form-group col-md-3 disabled readonly">
+          <code>*</code>
+          <%= form.label :contract_number %> <br>
+          <%= form.text_field :contract_number, class:"form-control" %>
         </div>
         <div class="form-group col-md-6">
-          <%= form.label :observacao %> <br>
-          <%= form.text_field :empresa_contratada, class:"form-control" %>
+          <%= form.label :observations %> <br>
+          <%= form.text_field :observations, class:"form-control" %>
           <br>
           <code>* Campos obrigatorios</code><br>
         </div>
         <div class="form-group col-md-3">
           <code>*</code>
-          <%= form.label :anexar_contrato, title:"Apenas arquivos PDF" %>
-          <%= form.file_field :anexo_contrato, class:"form-control-file", id:"file_contrato"%>
+          <%= form.label :anexar_contrato %>
+          <%= form.file_field :anexo_contrato, class:"form-control", type:"file", id:"file_contrato"%>
+          <code>Apenas arquivos PDF</code>
         </div>
         <div class="form-group col-md-3">
           <%= form.label :anexar_aditivo %>
-          <%= form.file_field :anexo_aditivo, class:"form-control-file", id:"file_aditivo" %>
+          <%= form.file_field :anexo_aditivo, class:"form-control", type:"file", id:"file_aditivo" %>
+          <code>Apenas arquivos PDF</code>
         </div>
       </div>
       <hr/>
@@ -96,7 +100,19 @@
 <%= javascript_include_tag 'application' %>
 
 <script>
-  $(document).ready(function(){
-    $("#acquisition_value").inputmask('000.000.000.000.000,00');
+  $(document).ready(function($){
+    $('#acquisition_value_acquisition').maskMoney({symbol: 'R$ ', thousands: '.', decimal: ','})
+    $('#acquisition_contract_number').mask('00/0000')
+  });
+
+  $(document).change(function() {
+    var acquisition_date = document.getElementById('acquisition_acquisition_date').value;
+    var currentDate = new Date(acquisition_date)
+    var warranty_period = parseInt(document.getElementById('acquisition_warranty_period').value)
+   
+    currentNewDate = currentDate.setMonth(currentDate.getMonth() + warranty_period)
+    enddate = new Date(currentNewDate).toLocaleDateString('fr-CA')
+  
+    document.getElementById('acquisition_warranty_ends').value = enddate
   });
 </script>

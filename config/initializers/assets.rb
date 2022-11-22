@@ -19,5 +19,5 @@ Rails.application.config.assets.precompile += %w( ativos.js ativos.css
 
 # /LIB/ASSETS
 Rails.application.config.assets.precompile += %w( sb-admin-2.js sb-admin-2.css
-                                                  sb-admin-2.min.js sb-admin-2.min.css
-                                                  bootstrap-select2.css )
+                                                  sb-admin-2.min.js jquery.mask.js
+                                                  jquery.maskMoney.js sb-admin-2.min.css bootstrap-select2.css )

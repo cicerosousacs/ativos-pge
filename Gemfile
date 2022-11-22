@@ -27,6 +27,7 @@ gem 'prawn-rails' #gerar pdf
 gem 'wicked_pdf' #gerar pdf
 gem 'wkhtmltopdf-binary' #gerar pdf
 gem 'ransack' #pesquisa
+gem 'money-rails', '~>1.12'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

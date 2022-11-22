@@ -1,8 +1,9 @@
-<% @history.each do |his| %>  
+<% @history.each do |his| %>
+ 
   <table class="table table-bordered">
     <thead>
       <th colspan="4" class="table-active font-weight text-center text-success">
-        Data da movimentação: <%= I18n.l(his.created_at, format: :long, locale: :'pt-BR') %>
+        <%= text_date_history(his) %> <%= I18n.l(his.created_at, format: :long, locale: :'pt-BR') %>
       </th>
       <tr>
         <th width="50%" colspan="2" class="text-success">Ativos recebidos</th>

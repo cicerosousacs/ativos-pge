@@ -1,0 +1,53 @@
+<form class="row g-3">
+  <div class="form-group col-md-6">
+      <div class="form-control border-6 smal">
+        <%= translate_date(@acquisition.acquisition_date) %>
+      </div>
+  </div>
+  <br>
+  <div class="form-group col-md-2">
+      <div class="form-control border-6 smal">
+        <%= @acquisition.warranty_period %> meses
+      </div>
+  </div>
+  <div class="form-group col-md-6">
+      <div class="form-control border-6 smal">
+        <%= translate_date(@acquisition.warranty_ends) %>
+      </div>
+  </div>
+    <div class="form-group col-md-6">
+      <div class="form-control border-6 smal">
+        <%= number_to_currency(@acquisition.value_acquisition) %>
+      </div>
+  </div>
+  <div class="form-group col-md-6">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.manager %>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.modality %>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.source %>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.interested_party %>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.company %>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div class="form-control border-6 smal">
+      <%= @acquisition.observations %>
+    </div>
+  </div>
+</form>

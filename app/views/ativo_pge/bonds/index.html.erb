@@ -32,6 +32,7 @@
           <th>Usuário</th>
           <th>Observação</th>
           <th>Modalidade</th>
+          <th colspan="4" class="text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +63,7 @@
               <% end %>
             <td style="width: 12px">
               <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
-                <i title="Excluir" class="red fa fa-trash"></i>
+                <i title="Excluir" class="red fa fa-trash" id="errorAlert"></i>
               <% end %>  
             </td>
           </tr>

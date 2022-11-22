@@ -206,13 +206,11 @@
                                         <th colspan='2'>Recebido:
                                           <tbody>
                                             <% if @received.blank? %>
-                                             
-                                                <td colspan='2'>Sem movimentação
-                                         
+                                              <td colspan='2'>Sem movimentação
                                             <% else %>
                                               <% @received.each do |l| %>
                                                 <tr>
-                                                  <td>TOMBO: <%= tombo_asset(l["ativo_id"]) %>
+                                                  <td>TOMBO: <%= Ativo.find_by_id(l["ativo_id"]).tombo %>
                                                   <td>DESCRIÇÂO: <%= l["description"] %>
                                                 </tr>
                                               <% end %>
@@ -222,12 +220,11 @@
                                         <th colspan='2'>Recolhido:
                                           <tbody>
                                             <% if @removed.blank? %>
-                                                <td colspan='2'>Sem movimentação
-                                             
+                                              <td colspan='2'>Sem movimentação
                                             <% else %>
                                               <% @removed.each do |r| %>
                                                 <tr>
-                                                  <td>TOMBO: <%= tombo_asset(r["ativo_id"]) %>
+                                                  <td>TOMBO: <%= Ativo.find_by_id(r["ativo_id"]).tombo %>
                                                   <td>DESCRIÇÂO: <%= r["description"] %>
                                                 </tr>
                                               <% end %>

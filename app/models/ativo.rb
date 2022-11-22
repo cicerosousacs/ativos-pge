@@ -12,15 +12,15 @@ class Ativo < ApplicationRecord
   has_many :status
   has_many :bonds
   has_many :deposits
-  
+
   # VALIDAÇÔES
-  validates :type, :brand, :model, :serial, :tombo, presence: { message: "não informado!" }
+  validates :type, :brand, :model, :serial, :tombo, presence: { message: 'não informado!' }
   # SCOPES
-  scope :available_assets, -> { where(deposits: {status_id: 1}) }  
-  scope :last_asset, -> { includes(:acquisition).order("id DESC")}
+  scope :available_assets, -> { where(deposits: { status_id: 1 }) }
+  scope :last_asset, -> { includes(:acquisition).order('id DESC') }
   # PAGINAÇÂO
   paginates_per 9
-  # 
+
   def create_deposit
     Deposit.find_or_create_by(
       ativo_id: id,
@@ -30,10 +30,10 @@ class Ativo < ApplicationRecord
   end
 
   def ativo_description
-    [self.type, self.brand, self.model].join(" ")
+    [type, brand, model].join(' ')
   end
 
   def self.pdf_ativo
-    Ativo.includes(:acquisition, :attach_ativo).order(:tombo) 
+    Ativo.includes(:acquisition, :attach_ativo).order(:tombo)
   end
 end

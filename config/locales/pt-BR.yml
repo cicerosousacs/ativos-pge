@@ -73,7 +73,9 @@
         manager: Gestor do Contrato
         modality: Modalidade da Aquisição
         source: Origem da Aquisição
-        observacao: Observações
+        value_acquisition: Valor da Aquisição
+        contract_number: Número do Contrato
+        observations: Observações
         warranty_ends: Término da Garantia
         warranty_period: Duração da Garantia (em meses)
         anexar_contrato: Anexar Contrato

@@ -1,7 +1,7 @@
 	TABLE MODEL ACQUISITION(aquisição)
 
-	rails g model Acquisition item:string quantity:string value:float manager:string acquisition_date:date 
-	contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date
+	rails g model Acquisition item:string quantity:string value:integer manager:string acquisition_date:date 
+	contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date observations:string
 	
 	  enum modality:{ 
 			 CONCORRÊNCIA: 'CONCORRÊNCIA', 
@@ -27,7 +27,7 @@
 	
 	rails g model Deposit ativo:references status:references observation:string
 	
-	TABLE MODEL USER(usuario)
+	TABLE MODEL USER
 
 	rails g model User name:string email:string
 
@@ -49,7 +49,7 @@
 
 	TABLE MODEL LINKED ASSET
 
-	rails g model linked_asset bond:references asset:references status:references observation:string
+	rails g model linked_asset bond:references asset:references description:string status:references observation:string
 	
 	TABLE MODEL STATUS
 
@@ -71,7 +71,9 @@
 	
 	TABLE MODEL BOND_HISTORY
 	
-	rails g model bond_history bond:references received:string removed:string
+	rails g model bond_history bond:references last_user:string received:string removed:string
+
+
 	#########################################
 
 	CONTROLLER
@@ -179,6 +181,7 @@ select com todos os tipos de ativos:
 
 action_name = retorna qual a action do momento
 
+scope :linked_assets, -> { joins(:attach_ativo).where(created_at: Date.today.all_day) }
 
 params[:bond][:attach_ativo_attributes] = retorna as coisas
 
@@ -235,4 +238,17 @@ CRIA UM MODAL PARA INFORMAR O CPF
   end
   </div>
 </div>
+
+
+$(document).ready(function(){
+ $('.disabledSelect').change(function () {
+   if ($(this).val() == '') {
+       $('.enableOnInput').prop('disabled', true);
+   } else {
+       $('.enableOnInput').prop('disabled', false);
+   }
+ });
+});
+
+Histórico: <%= @history[0].bond.subarea.area.description %> - <%= @history[0].bond.subarea.description %>, 
 

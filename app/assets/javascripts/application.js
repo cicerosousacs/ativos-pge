@@ -10,7 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery/dist/jquery
 //= require rails-ujs
 //= require activestorage
-//= require jquery/dist/jquery
-//= require inputmask/dist/inputmask
+//= require jquery.maskMoney
+//= require jquery.mask
+

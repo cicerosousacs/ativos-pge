@@ -60,7 +60,7 @@
           <%= link_to_add_association(form, :attach_ativo, class: "btn-sm btn-success",
             'data-association-insertion-node' => "#attach_ativo",
             'data-association-insertion-method' => "append") do %>
-            <i title="Vincular ativo" class="fa fa-plus" style="color:white"></i>
+            <i title="Vincular ativo" class="fa fa-plus"></i>
           <% end %>
         </div>
         <br>
@@ -72,7 +72,7 @@
         </div>
       <hr>
       <div class="text-right">
-        <%= form.submit "Salvar", class:"btn btn-success" %>
+        <%= form.submit "Salvar", class:"btn btn-success", id:"btn_save", disabled: true %>
         <%= link_to ativo_pge_bonds_path do %>
           <button class="btn btn-danger" type="button">Cancelar</button>
         <% end %>
@@ -85,12 +85,6 @@
 <%= javascript_include_tag 'application' %>
 
 <script>
-
-$(document).ready(function(){
-  $('.select2').select2 ({
-    theme: 'bootstrap'
-  });
-});
 
 $(document).ready(function(){
   $(".cascata #set_area").change(function(){
@@ -112,4 +106,17 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+  $(".btn-sm").click(function() {
+    if ($("#btn_save").is(":disabled")) {
+        $("#btn_save").removeAttr("disabled");
+      } 
+  });
+
+  $(".form-control").click(function() {
+    if ($("#btn_save").is(":disabled")) {
+        $("#btn_save").removeAttr("disabled");
+      }
+  });
+});
 </script>
