@@ -1,5 +1,5 @@
 class AtivoPge::AreasController < AtivosController
-  before_action :set_area, only: [:edit, :update, :destroy]
+  before_action :set_area, only: %i[edit update destroy]
 
   def index
     @areas = Area.all.page(params[:page])
@@ -18,8 +18,8 @@ class AtivoPge::AreasController < AtivosController
 
   def create
     @area = Area.new(params_area)
-    if @area.save()
-      redirect_to ativo_pge_areas_path, notice: "Nova Área criada, Parabéns!"
+    if @area.save!
+      redirect_to ativo_pge_areas_path, notice: 'Nova Área criada, Parabéns!'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class AtivoPge::AreasController < AtivosController
 
   def update
     if @area.update(params_area)
-      redirect_to ativo_pge_areas_path, notice: "Área atualizada, Sucesso!"
+      redirect_to ativo_pge_areas_path, notice: 'Área atualizada, Sucesso!'
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class AtivoPge::AreasController < AtivosController
 
   def destroy
     if @area.destroy
-      redirect_to ativo_pge_areas_path, notice: "Área excluida, Feito!"
+      redirect_to ativo_pge_areas_path, notice: 'Área excluida, Feito!'
     else
       render :index
     end

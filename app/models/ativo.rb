@@ -2,7 +2,7 @@ class Ativo < ApplicationRecord
   # DESABILITA A COLUNA TYPE
   self.inheritance_column = :_type_disabled
 
-  after_save :create_deposit
+  after_save :send_to_deposit
 
   # RELACIONAMENTOS
   belongs_to :acquisition
@@ -21,8 +21,8 @@ class Ativo < ApplicationRecord
   # PAGINAÇÂO
   paginates_per 9
 
-  def create_deposit
-    Deposit.find_or_create_by(
+  def send_to_deposit
+    Deposit.find_or_create_by!(
       ativo_id: id,
       description: ativo_description,
       status_id: 1 # 1 = DISPONIVEL

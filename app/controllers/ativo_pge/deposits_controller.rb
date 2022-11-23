@@ -1,6 +1,6 @@
 class AtivoPge::DepositsController < AtivosController
-  before_action :set_deposit, only: [:edit, :update]
-  before_action :set_status, only: [:edit, :update]
+  before_action :set_deposit, only: %i[edit update]
+  before_action :set_status, only: %i[edit update]
 
   def index
     @deposits = Deposit.status_warehouse(params[:status]).order('id desc').page(params[:page])

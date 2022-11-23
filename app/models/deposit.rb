@@ -1,5 +1,5 @@
 class Deposit < ApplicationRecord
-  
+
   belongs_to :ativo
   belongs_to :status
 

@@ -4,7 +4,6 @@ class AttachAtivo < ApplicationRecord
   belongs_to :status
 
   #VALIDAÇÔES
-  validates :ativo_id, uniqueness: { message: "não pode ser o mesmo!" }
+  validates :ativo_id, uniqueness: { message: 'não pode ser o mesmo!' }
   validates :status_id, presence: true
- 
 end

@@ -1,9 +1,9 @@
 class AtivoPge::AdminsController < AtivosController
   before_action :check_password, only: [:update]
-  before_action :set_admin, only: [:edit, :update, :destroy]
-  
+  before_action :set_admin, only: %i[edit update destroy]
+
   def index
-    @admins = Admin.all.order('id','active desc')
+    @admins = Admin.all.order('id', 'active desc')
   end
 
   def new
@@ -16,11 +16,11 @@ class AtivoPge::AdminsController < AtivosController
 
   def create
     @admin = Admin.new(params_admin)
-      if @admin.save()
-        redirect_to ativo_pge_admins_path, notice: "Novo Administrador #{@admin.name} criado. Parabéns!"
-      else
-        render :new
-      end
+    if @admin.save!
+      redirect_to ativo_pge_admins_path, notice: "Novo Administrador #{@admin.name} criado. Parabéns!"
+    else
+      render :new
+    end
   end
 
   def edit
@@ -42,13 +42,12 @@ class AtivoPge::AdminsController < AtivosController
   def destroy
     if @admin.id == current_admin.id
       flash[:alert] = "#{@admin.name}, você não pode se desativar."
-      redirect_to '/ativo_pge/admins' and return
+      redirect_to ativo_pge_admins_path and return
     else
       @admin.active = @admin.active ? false : true
-      text_message = @admin.active.present? ? "ativado(a)" : "inativado(a)"
-      text_not_disabled = "Você não pode se desativar"
+      text_message = @admin.active.present? ? 'ativado(a)' : 'inativado(a)'
       @admin.save!
-      redirect_to ativo_pge_admins_path, notice: (("#{@admin.name} #{text_message} com sucesso!"))
+      redirect_to ativo_pge_admins_path, notice: "#{@admin.name} #{text_message} com sucesso!"
     end
   end
 
@@ -67,5 +66,4 @@ class AtivoPge::AdminsController < AtivosController
       params[:admin].extract!(:password, :password_confirmation)
     end
   end
-
 end

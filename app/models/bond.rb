@@ -15,7 +15,7 @@ class Bond < ApplicationRecord
   accepts_nested_attributes_for :call_number, reject_if: :all_blank, allow_destroy: true
 
   validates :attach_ativo, presence: { message: 'não informado!' }
-  # validates :call_number, presence: { message: "não informado!" }
+  # validates :call_number, presence: { message: 'não informado!' }
   validates :user_id, uniqueness: true, unless: -> { user.id == 422 }
 
   paginates_per 9

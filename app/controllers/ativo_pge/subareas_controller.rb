@@ -1,6 +1,6 @@
 class AtivoPge::SubareasController < AtivosController
-  before_action :set_subarea, only: [:edit, :update, :destroy]
-  before_action :set_area_options, only: [:new, :create, :edit, :update]
+  before_action :set_subarea, only: %i[edit update destroy]
+  before_action :set_area_options, only: %i[new create edit update]
 
   def index
     @subareas = Subarea.includes(:area).order('area_id asc').page(params[:page])
@@ -23,8 +23,8 @@ class AtivoPge::SubareasController < AtivosController
 
   def create
     @subarea = Subarea.new(params_subarea)
-    if @subarea.save()
-      redirect_to ativo_pge_subareas_path, notice: "Nova Subarea criada, Parabéns!"
+    if @subarea.save!
+      redirect_to ativo_pge_subareas_path, notice: 'Nova Subarea criada, Parabéns!'
     else
       render :new
     end
@@ -39,7 +39,7 @@ class AtivoPge::SubareasController < AtivosController
 
   def update
     if @subarea.update(params_subarea)
-      redirect_to ativo_pge_subareas_path, notice: "Subarea atualizada, Parabéns!"
+      redirect_to ativo_pge_subareas_path, notice: 'Subarea atualizada, Parabéns!'
     else
       render :edit
     end
@@ -47,12 +47,11 @@ class AtivoPge::SubareasController < AtivosController
 
   def destroy
     if @subarea.destroy
-      redirect_to ativo_pge_subareas_path, notice: "Subarea excluida, Parabéns!"
+      redirect_to ativo_pge_subareas_path, notice: 'Subarea excluida, Parabéns!'
     else
       render :index
     end
   end
-
 
   private
 

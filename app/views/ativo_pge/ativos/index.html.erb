@@ -39,7 +39,7 @@
       <tbody>
         <% @ativos.each do |ativo| %>
           <tr>
-            <td><%= check_box_tag("ativos_ids[]", ativo.id, false, class:'marcar') %></td>
+            <td><%= check_box_tag("asset_ids[]", ativo.id, false, class:'marcar') %></td>
             <td><%= ativo.tombo %></td>
             <td><%= ativo.ativo_description %></td>
             <td><%= ativo.serial %></td>
@@ -67,14 +67,14 @@
 <script>
   $(document).ready(function () {
     $('#btn-vincular').click(function () {
-      var ativos_ids = $('.marcar:checked').map(function () {
+      var asset_ids = $('.marcar:checked').map(function () {
         return $(this).val();
       }).get();
-      if (ativos_ids == '') {
+      if (asset_ids == '') {
         alert('Selecione pelo menos um Ativo');
       } else {
         if (this.id == 'btn-vincular') {
-          $.post('<%= url_for({ :controller => 'ativos', :action => 'link_to_deposit' })%>?ativos_ids=' + ativos_ids)
+          $.post('<%= url_for({ :controller => 'ativos', :action => 'link_to_deposit' })%>?asset_ids=' + asset_ids)
         }
       }
     });

@@ -1,6 +1,6 @@
 class AtivoPge::AtivosController < AtivosController
-  before_action :set_ativo, only: [:edit, :update, :destroy]
-  before_action :set_acquisition_selects, only: [:new, :create, :edit, :update]
+  before_action :set_ativo, only: %i[edit update destroy]
+  before_action :set_acquisition_selects, only: %i[new create edit update]
   # desativa a proteção CSRF apenas para esse metodo
   protect_from_forgery except: :link_to_deposit
 
@@ -8,7 +8,7 @@ class AtivoPge::AtivosController < AtivosController
     @q = Ativo.ransack(params[:q])
     @ativos = @q.result.last_asset.page(params[:page])
     @total_ativos = Ativo.count(:id)
-    
+
     if params[:id].present?
       @ativos = @ativos.where(id: params[:id])
     end
@@ -25,8 +25,8 @@ class AtivoPge::AtivosController < AtivosController
 
   def create
     @ativo = Ativo.new(params_ativo)
-    if @ativo.save()
-      redirect_to ativo_pge_ativos_path, notice: "Ativo cadastrado e enviado ao depósito com sucesso!"
+    if @ativo.save!
+      redirect_to ativo_pge_ativos_path, notice: 'Ativo cadastrado e enviado ao depósito com sucesso!'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class AtivoPge::AtivosController < AtivosController
 
   def update
     if @ativo.update(params_ativo)
-      redirect_to ativo_pge_ativos_path, notice: "Ativo atualizado. Sucesso!"
+      redirect_to ativo_pge_ativos_path, notice: 'Ativo atualizado. Sucesso!'
     else
       render :edit
     end
@@ -45,30 +45,25 @@ class AtivoPge::AtivosController < AtivosController
 
   def destroy
     if @ativo.destroy
-      redirect_to ativo_pge_ativos_path, notice: "Ativo excluido. Feito!"
+      redirect_to ativo_pge_ativos_path, notice: 'Ativo excluido. Feito!'
     else
       render :index
     end
   end
 
   def link_to_deposit
-    attach_ativos = params[:ativos_ids].split(',')
-    qtd_asset = attach_ativos.length
-    text_asset = attach_ativos.length > 1 ? "Ativos diponibilizados" : "Ativo diponibilizado"
-    attach_ativos.each do |ativo|
+    assets = params[:asset_ids].split(',')
+    qtd_asset = assets.length
+    text_asset = assets.length > 1 ? 'Ativos diponibilizados' : 'Ativo diponibilizado'
+    assets.each do |a|
       Deposit.find_or_create_by!(
-        ativo_id: ativo.to_i,
-        description: description_active(ativo.to_i),
+        ativo_id: a.to_i,
+        description: description_active(a.to_i),
         status_id: 1 # 1 = DISPONIVEL
-      ) 
+      )
       flash[:notice] = "#{qtd_asset} - #{text_asset} com sucesso!"
       # redirect_to '/ativo_pge/ativos'
     end
-  end
-
-  def description_active(id)
-    active = Ativo.find(id)
-    description = [active.type, active.brand, active.model].join(" ")
   end
 
   def gerar_pdf_ativo
@@ -88,4 +83,8 @@ class AtivoPge::AtivosController < AtivosController
     @acquisition_selects = Acquisition.pluck(:contract_number, :id)
   end
 
+  def description_active(id)
+    active = Ativo.find(id)
+    [active.type, active.brand, active.model].join(' ')
+  end
 end
