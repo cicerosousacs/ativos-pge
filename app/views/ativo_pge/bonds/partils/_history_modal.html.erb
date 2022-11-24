@@ -3,7 +3,7 @@
     <% if @history.blank? %>
       Sem histórico para este vínculo
     <% else %>
-      Usuário atual: <%= @history[0].bond.user.name %>
+      Usuário atual vinculado: <%= @history[0].last_user %>
     <% end %>
   </h5>
 </div>

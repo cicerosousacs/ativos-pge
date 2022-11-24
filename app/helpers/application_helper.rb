@@ -24,6 +24,12 @@ module ApplicationHelper
   end
 
   def text_date_history(history)
-    history.removed.nil? ? 'Data da vinculação:' : 'Data da movimentação:'
+    if history.removed.nil?
+      'Data da vinculação:'
+    elsif history.received.blank? && history.removed.blank?
+      'Data da desvinculação:'
+    else
+      'Data da movimentação:'
+    end
   end
 end

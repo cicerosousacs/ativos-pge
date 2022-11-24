@@ -5,32 +5,39 @@
       <th colspan="4" class="table-active font-weight text-center text-success">
         <%= text_date_history(his) %> <%= translate_date(his.created_at) %>
       </th>
+    <% if his.received.blank? && his.removed.blank?%>
       <tr>
-        <th width="50%" colspan="2" class="text-success">Ativos recebidos</th>
-        <th width="50%" colspan="2" class="text-success">Ativos removidos</th>
+        <th width="50%" colspan="2" class="text-success">Usuário desvinculado: <%= his.last_user %></th>
+        <th width="50%" colspan="2" class="text-success">Usuário vinculado: <%= @history[0].last_user %></th>
       </tr>
-    </thead>
-    <tbody>
-      <% if his.received.blank? %>
+    <% else %>   
         <tr>
-        <td colspan="2">Nenhum ativo recebido
-      <% else%>
-        <% his.received.each do |rec| %>
+          <th width="50%" colspan="2" class="text-success">Ativos recebidos</th>
+          <th width="50%" colspan="2" class="text-success">Ativos removidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if his.received.blank? %>
           <tr>
-            <td><%= tombo_asset(rec["ativo_id"]) %>
-            <td><%= rec["description"] %>     
+          <td colspan="2">Nenhum ativo recebido
+        <% else %>
+          <% his.received.each do |rec| %>
+            <tr>
+              <td><%= tombo_asset(rec["ativo_id"]) %>
+              <td><%= rec["description"] %>     
+          <% end %>
         <% end %>
-      <% end %>
-      <% if his.removed.blank? %>
-        <td colspan="2">Nenhum ativo removido
-      <tr>
-      <% else%>
-        <% his.removed.each do |rem| %>
-            <td><%= tombo_asset(rem["ativo_id"]) %>
-            <td><%= rem["description"] %>
-          </tr>
+        <% if his.removed.blank? %>
+          <td colspan="2">Nenhum ativo removido
+        <tr>
+        <% else %>
+          <% his.removed.each do |rem| %>
+              <td><%= tombo_asset(rem["ativo_id"]) %>
+              <td><%= rem["description"] %>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
+      </tbody>
+    <% end %>
   </table>
 <% end %>

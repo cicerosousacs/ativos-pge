@@ -19,8 +19,6 @@ class Deposit < ApplicationRecord
     Deposit.includes(:ativo, :status)
   end
 
-  private
-
   def self.status_warehouse(status)
     if status.nil?
       Deposit.asset_and_status.by_deposit

@@ -63,16 +63,19 @@ class Bond < ApplicationRecord
   end
 
   def bond_update_history
+    received = attach_ativo.select { |rec| rec.created_at.blank? }
+    removed = attach_ativo.select { |rem| rem.status_id == 2 }
+    byebug
     history = BondHistory.new(
       {
         bond_id: bond_id,
         last_user: user_name,
-        received: attach_ativo.select { |rec| rec.created_at.blank? },
-        removed: attach_ativo.select { |rem| rem.status_id == 2 }
+        received: received,
+        removed: removed
       }
     )
     history.save!
-    if attach_ativo.ids.present?
+    if attach_ativo.ids.present? && received.present? || removed.present?
       send_email_update_bond
     end
   end
@@ -87,7 +90,8 @@ class Bond < ApplicationRecord
     creation_date = bond.created_at.to_json
     received = bond.received
     removed = bond.removed
-    SendEmail.update_bond(user_name, user_email, creation_date, received, removed).deliver_later
+    last_user = bond.last_user
+    SendEmail.update_bond(user_name, user_email, last_user, creation_date, received, removed).deliver_later
   end
 
   def user_name

@@ -2298,7 +2298,7 @@ textarea.form-control {
 
 .form-inline {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   align-items: center;
 }
 
@@ -3405,9 +3405,9 @@ input[type="button"].btn-block {
 .input-group {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: stretch;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .input-group > .form-control,
@@ -3605,8 +3605,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-inline {
-  display: inline-flex;
-  margin-right: 1rem;
+  display: flex;
 }
 
 .custom-control-input {
@@ -4598,8 +4597,8 @@ input[type="button"].btn-block {
 }
 
 .card-header {
-  display: flex !important;
-  justify-content: space-between !important;
+  display: flex;
+  justify-content: space-between;
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: #f8f9fc;

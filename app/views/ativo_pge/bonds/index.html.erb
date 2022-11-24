@@ -1,24 +1,25 @@
 <h1 class="h3 mb-2 text-gray-800">Vínculos</h1>
-<div class="card shadow mb-4">
+<div class="card shadow mb-3">
   <div class="card-header py-3">
     <div>
       <%= link_to new_ativo_pge_bond_path do %>
-        <button class="btn btn-success" style="color:write">Novo Vinculo</button>
+        <button class="btn btn-success">Novo Vinculo</button>
       <% end %>
-      <button type="button" id="btn-termo" class="btn btn-info" style="color:write">Gerar Termo</button>
+      <button type="button" id="btn-termo" class="btn btn-info">Gerar Termo</button>
     </div>
-    <div>
-      <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
-        <div class="input-group">
-          <%= search_form_for @q, url: ativo_pge_bonds_path, method: :get do |f| %>
-            <%= f.search_field :area_cont, class:"form-control border-1 small", placeholder:'Pesquisar...' %>
-            <%= button_tag type:'submit', class:"btn btn-success" do %>
-              <i class="fas fa-search fa-sm"></i>
-            <% end %>
-          <% end %>
-        </div>
-      </form>
+    <%= search_form_for @q, url: ativo_pge_bonds_path, method: :get,  class:"form-inline" do |f| %>
+    <div class="form-inline col-md-6">
+      <%= f.select :user_id_eq, options_from_collection_for_select(@users, "id", "name"), {include_blank: 'Pesquisa por usuário'}, class:"form-control" %>
     </div>
+    <div class="form-inline col-md-5">
+      <%= f.select :attach_ativo_ativo_id_eq, options_from_collection_for_select(@assets, "id", "tombo"), {include_blank: 'Pesquisa por tombo'}, class:"form-control" %>
+    </div>
+    <div class="form-inline">
+      <%= button_tag type:'submit', class:"btn btn-success" do %>
+        <i class="fas fa-search fa-sm"></i>
+      <% end %>
+    </div>
+    <% end %>
   </div>
   <div class="card-body">
     <table class="table table-hover table-bordered">
@@ -36,37 +37,43 @@
         </tr>
       </thead>
       <tbody>
-        <% @bonds.each do |bond| %>
+        <% if @bonds.blank? %>
           <tr>
-            <td><%= check_box_tag("bonds_ids[]", bond.id, false, class:'marcar') %></td>
-            <td><%= bond.subarea.area.description %></td>
-            <td><%= bond.subarea.description %></td>
-            <td><%= bond.user.name %></td>
-            <td><%= bond.note %></td>
-            <td><%= bond.check_home_office %>
-              <% if bond.homeoffice.present? %>
-                <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                  <i title="Visualizar termo" class="fa-regular fa-file-pdf"></i>
-                <% end %>
-              <% end %>
-            <td style="width: 12px">
-              <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                <i title="Visualizar ativos" class="gray fa fa-eye"></i>
-              <% end %>
-            <td style="width: 12px">
-              <%= link_to ativo_pge_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
-                <i title="Ver histórico" class="orange fa fa-clock-rotate-left"></i>
-              <% end %>
-            <td style="width: 12px">
-              <%= link_to edit_ativo_pge_bond_path(bond) do %>
-                <i title="Editar" class="blue fa fa-edit"></i>
-              <% end %>
-            <td style="width: 12px">
-              <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
-                <i title="Excluir" class="red fa fa-trash" id="errorAlert"></i>
-              <% end %>  
-            </td>
+            <td colspan="7" class="text-center text-info">VÍNCULO NÃO EXISTE!</td>
           </tr>
+        <% else %>
+          <% @bonds.each do |bond| %>
+            <tr>
+              <td><%= check_box_tag("bonds_ids[]", bond.id, false, class:'marcar') %></td>
+              <td><%= bond.subarea.area.description %></td>
+              <td><%= bond.subarea.description %></td>
+              <td><%= bond.user.name %></td>
+              <td><%= bond.note %></td>
+              <td><%= bond.check_home_office %>
+                <% if bond.homeoffice.present? %>
+                  <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
+                    <i title="Visualizar termo" class="fa-regular fa-file-pdf"></i>
+                  <% end %>
+                <% end %>
+              <td style="width: 12px">
+                <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
+                  <i title="Visualizar ativos" class="gray fa fa-eye"></i>
+                <% end %>
+              <td style="width: 12px">
+                <%= link_to ativo_pge_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
+                  <i title="Ver histórico" class="orange fa fa-clock-rotate-left"></i>
+                <% end %>
+              <td style="width: 12px">
+                <%= link_to edit_ativo_pge_bond_path(bond) do %>
+                  <i title="Editar" class="blue fa fa-edit"></i>
+                <% end %>
+              <td style="width: 12px">
+                <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
+                  <i title="Excluir" class="red fa fa-trash" id="errorAlert"></i>
+                <% end %>  
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -111,4 +118,9 @@
     });
   });
 
+  $(document).ready(function(){
+    $(".user_name").select2({
+      theme: 'bootstrap'
+    });
+  });
 </script>

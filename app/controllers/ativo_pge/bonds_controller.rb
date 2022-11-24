@@ -1,6 +1,6 @@
 class AtivoPge::BondsController < AtivosController
   before_action :set_bond, only: %i[edit update destroy]
-  before_action :set_user_select, only: %i[new create edit update]
+  before_action :set_user_select, only: %i[index new create edit update]
   before_action :set_area_select, only: %i[new create edit update]
   before_action :set_subarea_select, only: %i[new create edit update]
   before_action :set_description_ativo, only: %i[new create edit update]
@@ -10,12 +10,17 @@ class AtivoPge::BondsController < AtivosController
   protect_from_forgery except: :term_responsibility_asset
 
   def index
+    # byebug
+    # @q = Bond.joins(:user).where(users: { name: params[:q].values })
+    # @q.result.last_bond.page(params[:page]).length == 0
     @q = Bond.ransack(params[:q])
-    @bonds = @q.result.order(:id).page(params[:page])
-    @total_bonds = Bond.count(:id)
+    @bonds = @q.result.last_bond.page(params[:page])
     respond_to do |format|
-      format.html { @bonds = Bond.last_bond.page(params[:page]) }
+      format.html
     end
+    @total_bonds = Bond.count(:id)
+    @users = User.order('name asc')
+    @assets = Ativo.order('id asc')
   end
 
   def new
