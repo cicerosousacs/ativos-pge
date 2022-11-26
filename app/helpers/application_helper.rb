@@ -26,10 +26,10 @@ module ApplicationHelper
   def text_date_history(history)
     if history.removed.nil?
       'Data da vinculação:'
-    elsif history.received.blank? && history.removed.blank?
-      'Data da vinculação:'
+    elsif history.received.blank? && history.removed.blank? && history.allocation_id.present?
+      'Data da nova lotação:'
     else
-      'Data da movimentação:'
+      'Data da movimentação de ativos:'
     end
   end
 

@@ -70,19 +70,19 @@
         </div>
         <div class="form-group col-md-6">
           <%= form.label :observations %> <br>
-          <%= form.text_field :observations, class:"form-control" %>
+          <%= form.text_area :observations, rows: 4, class:"form-control" %>
           <br>
           <code>* Campos obrigatorios</code><br>
         </div>
         <div class="form-group col-md-3">
           <code>*</code>
           <%= form.label :anexar_contrato %>
-          <%= form.file_field :anexo_contrato, class:"form-control", type:"file", id:"file_contrato"%>
+          <%= form.file_field :anexo_contrato, class:"custom-file", type:"file", id:"file_contrato"%>
           <code>Apenas arquivos PDF</code>
         </div>
         <div class="form-group col-md-3">
           <%= form.label :anexar_aditivo %>
-          <%= form.file_field :anexo_aditivo, class:"form-control", type:"file", id:"file_aditivo" %>
+          <%= form.file_field :anexo_aditivo, class:"custom-file", type:"file", id:"file_aditivo" %>
           <code>Apenas arquivos PDF</code>
         </div>
       </div>

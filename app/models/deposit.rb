@@ -12,7 +12,7 @@ class Deposit < ApplicationRecord
   scope :unusable_size, -> { where(status_id: 3).count }
   scope :awaiting_warranty_size, -> { where(status_id: 4).count }
 
-  paginates_per 9
+  paginates_per 10
 
   def self.asset_and_status
     Deposit.includes(:ativo, :status)

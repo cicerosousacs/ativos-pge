@@ -78,9 +78,9 @@
 	rails g migration AddActiveToAdmin active:boolean, na migration adicionar default:true
 	rails g migration AddProfileToAdmin profile:integer
 	
-	TABLE MODEL BOND_HISTORY
+	TABLE MODEL BOND_HISTORY( last_user, allocation_id, notice )
 	
-	rails g model bond_history bond:references last_user:string allocation_id:integer received:jsonb removed:jsonb
+	rails g model bond_history bond:references allocation:jsonb received:jsonb removed:jsonb
 
 
 	#########################################

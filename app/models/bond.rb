@@ -18,7 +18,7 @@ class Bond < ApplicationRecord
   # validates :call_number, presence: { message: 'não informado!' }
   validates :user_id, uniqueness: true, unless: -> { user.id == 422 }
 
-  paginates_per 9
+  paginates_per 10
 
   def self.last_bond
     Bond.includes(:user, :subarea, :attach_ativo, :call_number).order('id desc')
@@ -70,6 +70,7 @@ class Bond < ApplicationRecord
         bond_id: bond_id,
         last_user: user_name,
         allocation_id: subarea_id,
+        notice: note,
         received: received,
         removed: removed
       }
@@ -90,8 +91,7 @@ class Bond < ApplicationRecord
     creation_date = bond.created_at.to_json
     received = bond.received
     removed = bond.removed
-    last_user = bond.last_user
-    SendEmail.update_bond(user_name, user_email, last_user, creation_date, received, removed).deliver_later
+    SendEmail.update_bond(user_name, user_email, creation_date, received, removed).deliver_later
   end
 
   def user_name

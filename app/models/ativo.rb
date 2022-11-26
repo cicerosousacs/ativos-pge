@@ -20,7 +20,7 @@ class Ativo < ApplicationRecord
   scope :available_assets, -> { where(deposits: { status_id: 1 }) }
   scope :last_asset, -> { includes(:acquisition).order('id DESC') }
   # PAGINAÇÂO
-  paginates_per 9
+  paginates_per 10
 
   def send_to_deposit
     if asset_is_present

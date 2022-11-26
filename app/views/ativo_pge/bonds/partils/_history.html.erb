@@ -6,7 +6,9 @@
       </th>
     <% if his.received.blank? && his.removed.blank? %>
       <tr>
-        <% if his.received.blank? && his.allocation_id.present? %>
+        <% if his.received.blank? && his.notice.present? %>
+          <th class="text-success">Observação: <%= his.notice %></th>
+        <% elsif his.received.blank? && his.allocation_id.present? %>
           <th class="text-success">Nova lotação: <%= allocation(his.allocation_id) %></th>
         <% else %>
           <th class="text-success">Novo usuário vinculado: <%= his.last_user %></th>

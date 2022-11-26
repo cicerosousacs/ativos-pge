@@ -8,7 +8,7 @@ class SendEmail < ApplicationMailer
     mail to: email, subject: 'Ativos vinculado a você'
   end
 
-  def update_bond(user, email, last_user, creation_history_date, received, removed)
+  def update_bond(user, email, creation_history_date, received, removed)
     @user = user
     created_at = decode_translate_date(creation_history_date)
     @received = received

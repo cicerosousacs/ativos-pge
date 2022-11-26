@@ -21,7 +21,7 @@ class AtivoPge::AcquisitionsController < AtivosController
   def show
     @acquisition = Acquisition.find(params[:id])
     respond_to do |format|
-      format.js { render partial: 'ativo_pge/acquisitions/partils/showjs' }
+      format.html
     end
   end
 

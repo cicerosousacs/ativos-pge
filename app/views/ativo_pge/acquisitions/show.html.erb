@@ -1,0 +1,93 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-success"><%= label(:acquisition, :item) %>: <%= @acquisition.item %></h6>
+  </div>
+  <form class="card-body">
+    <div class="row g-3">
+      <div class="form-group col-md-3">
+        <label><%= label(:acquisition, :quantity) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.quantity %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :value_acquisition) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.value_acquisition %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :acquisition_date) %></label><br>
+        <div class="form-control border-6">
+          <%= translate_date(@acquisition.acquisition_date) %>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label><%= label(:acquisition, :warranty_period) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.warranty_period %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :warranty_ends) %></label><br>
+        <div class="form-control border-6">
+          <%= translate_date(@acquisition.warranty_ends) %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :modality) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.modality %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :source) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.source %>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label><%= label(:acquisition, :interested_party) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.interested_party %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label><%= label(:acquisition, :contract_number) %></label><br>
+        <div class="form-control border-6">
+          <%= @acquisition.contract_number %>
+        </div>
+      </div>
+      <div class="row col-md-6">
+        <div class="form-group col-md-12">
+          <label><%= label(:acquisition, :company) %></label>
+          <div class="form-control border-6">
+            <%= @acquisition.company %>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label><%= label(:acquisition, :manager) %></label>
+          <div class="form-control border-6">
+            <%= @acquisition.manager %>
+          </div>
+        </div>
+      </div>
+        <div class="form-group col-md-6">
+          <label><%= label(:acquisition, :observations) %></label>
+          <textarea disabled rows="5" class="form-control border-6 text-area">
+            <%= @acquisition.observations %>
+          </textarea>
+        </div>
+    </div>
+    <br>
+    <hr/>
+    <div class="text-right">
+      <%= link_to edit_ativo_pge_acquisition_path(@acquisition) do %>
+        <button class="btn btn-primary" type="button">Editar</button>
+      <% end %>
+      <%= link_to ativo_pge_acquisitions_path do %>
+        <button class="btn btn-danger" type="button">Voltar</button>
+      <% end %>
+    </div>
+  </form>
+</div>
