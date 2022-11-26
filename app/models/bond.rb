@@ -65,11 +65,11 @@ class Bond < ApplicationRecord
   def bond_update_history
     received = attach_ativo.select { |rec| rec.created_at.blank? }
     removed = attach_ativo.select { |rem| rem.status_id == 2 }
-    byebug
     history = BondHistory.new(
       {
         bond_id: bond_id,
         last_user: user_name,
+        allocation_id: subarea_id,
         received: received,
         removed: removed
       }

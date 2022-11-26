@@ -27,9 +27,24 @@ module ApplicationHelper
     if history.removed.nil?
       'Data da vinculação:'
     elsif history.received.blank? && history.removed.blank?
-      'Data da desvinculação:'
+      'Data da vinculação:'
     else
       'Data da movimentação:'
     end
+  end
+
+  def modality
+    Acquisition.modalities.keys
+  end
+
+  def sources
+    Acquisition.sources.keys
+  end
+
+  def allocation(id)
+    subarea = Subarea.find_by_id(id)
+    area_name = subarea.description
+    subarea_name = subarea.area.description
+    [subarea_name, area_name].join(' - ')
   end
 end

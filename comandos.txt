@@ -3,26 +3,35 @@
 	rails g model Acquisition item:string quantity:string value:integer manager:string acquisition_date:date 
 	contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date observations:string
 	
-	  enum modality:{ 
-			 CONCORRÊNCIA: 'CONCORRÊNCIA', 
-			 PREGÃO: 'PREGÃO', 
-			 LEILÃO: 'LEILÃO', 
-			 CONCURSO: 'CONCURSO', 
-			 "COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
-			 "DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
-			}
-		  
-	  enum source: { 
-			MAPP: 'MAPP', 
-			FUNPECE: 'FUNPECE', 
-			"PGE FUNDO": 'PGE FUNDO'
-			}
+	enum modality:{ 
+			CONCORRÊNCIA: 'CONCORRÊNCIA', 
+			PREGÃO: 'PREGÃO', 
+			LEILÃO: 'LEILÃO', 
+			CONCURSO: 'CONCURSO', 
+			"COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
+			"DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
+		}
+		
+	enum source: { 
+		MAPP: 'MAPP', 
+		FUNPECE: 'FUNPECE', 
+		"PGE FUNDO": 'PGE FUNDO'
+		}
 
 	TABLE MODEL ASSET(ativo)
 
 	rails g model Asset type:string brand:string model:string serial:string tombo:string
 	specification:text acquisition:references
 	
+	enum type:{ 
+		DESKTOP: 'DESKTOP', 
+		MONITOR: 'MONITOR', 
+		LEILÃO: 'LEILÃO', 
+		CONCURSO: 'CONCURSO', 
+		"COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
+		"DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
+	}
+
 	TABLE MODEL DEPOSIT
 	
 	rails g model Deposit ativo:references status:references observation:string
@@ -71,7 +80,7 @@
 	
 	TABLE MODEL BOND_HISTORY
 	
-	rails g model bond_history bond:references last_user:string received:string removed:string
+	rails g model bond_history bond:references last_user:string allocation_id:integer received:jsonb removed:jsonb
 
 
 	#########################################
@@ -252,3 +261,10 @@ $(document).ready(function(){
 
 Histórico: <%= @history[0].bond.subarea.area.description %> - <%= @history[0].bond.subarea.description %>, 
 
+      <form class="d-sm-inline-block">
+        <div class="input-group">
+          <input type="text" class="form-control" id="search">
+          <%= select_tag 'status', options_from_collection_for_select(@status, 'id', 'description'), 
+          :prompt => "Selecione um status", class:"form-control", onchange: 'this.form.submit()' %>
+        </div>
+      </form>

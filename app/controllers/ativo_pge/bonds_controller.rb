@@ -11,16 +11,17 @@ class AtivoPge::BondsController < AtivosController
 
   def index
     # byebug
-    # @q = Bond.joins(:user).where(users: { name: params[:q].values })
+    # @q = Bond.joins(:user).where(users: { name: variable })
     # @q.result.last_bond.page(params[:page]).length == 0
+    @total_bonds = Bond.count(:id)
+    @users = User.order('name asc')
+    @assets = Ativo.order('id asc')
+
     @q = Bond.ransack(params[:q])
     @bonds = @q.result.last_bond.page(params[:page])
     respond_to do |format|
       format.html
     end
-    @total_bonds = Bond.count(:id)
-    @users = User.order('name asc')
-    @assets = Ativo.order('id asc')
   end
 
   def new
@@ -115,7 +116,7 @@ class AtivoPge::BondsController < AtivosController
   def set_description_ativo
     @description_ativo =
       if action_name == 'new'
-        Deposit.joins(:ativo).by_deposit.pluck(:ativo_id, :description)
+        Deposit.joins(:ativo).status_warehouse.pluck(:ativo_id, :description)
       else
         Deposit.joins(:ativo).available_and_linked.pluck(:description, :ativo_id)
       end
@@ -124,7 +125,7 @@ class AtivoPge::BondsController < AtivosController
   def set_tombo_ativo_select
     @tombo_ativo =
       if action_name == 'new'
-        Deposit.joins(:ativo).by_deposit.pluck('ativos.tombo', 'ativos.id')
+        Deposit.joins(:ativo).status_warehouse.pluck('ativos.tombo', 'ativos.id')
       else
         Deposit.joins(:ativo).available_and_linked.pluck('ativos.tombo', 'ativos.id')
       end

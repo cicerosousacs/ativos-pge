@@ -1,14 +1,16 @@
 <% @history.each do |his| %>
- 
   <table class="table table-bordered">
     <thead>
       <th colspan="4" class="table-active font-weight text-center text-success">
         <%= text_date_history(his) %> <%= translate_date(his.created_at) %>
       </th>
-    <% if his.received.blank? && his.removed.blank?%>
+    <% if his.received.blank? && his.removed.blank? %>
       <tr>
-        <th width="50%" colspan="2" class="text-success">Usuário desvinculado: <%= his.last_user %></th>
-        <th width="50%" colspan="2" class="text-success">Usuário vinculado: <%= @history[0].last_user %></th>
+        <% if his.received.blank? && his.allocation_id.present? %>
+          <th class="text-success">Nova lotação: <%= allocation(his.allocation_id) %></th>
+        <% else %>
+          <th class="text-success">Novo usuário vinculado: <%= his.last_user %></th>
+        <% end %>
       </tr>
     <% else %>   
         <tr>
@@ -23,7 +25,7 @@
         <% else %>
           <% his.received.each do |rec| %>
             <tr>
-              <td><%= tombo_asset(rec["ativo_id"]) %>
+              <td class="text-center"><%= tombo_asset(rec["ativo_id"]) %>
               <td><%= rec["description"] %>     
           <% end %>
         <% end %>
@@ -32,7 +34,7 @@
         <tr>
         <% else %>
           <% his.removed.each do |rem| %>
-              <td><%= tombo_asset(rem["ativo_id"]) %>
+              <td class="text-center"><%= tombo_asset(rem["ativo_id"]) %>
               <td><%= rem["description"] %>
             </tr>
           <% end %>

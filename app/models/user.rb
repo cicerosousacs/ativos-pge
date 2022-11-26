@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :ativos, through: :bond
-  belongs_to :bond
+  belongs_to :bond, optional: true
   paginates_per 9
 
   validates :name, :email, presence: { message: 'não informado!' }

@@ -10,17 +10,13 @@
         <button class="btn btn-warning" type="button">Gerar PDF</button>
       <% end %>
     </div>
-    <div>
-      <form class="d-none d-sm-inline-block form-inliness mr-auto ml-md-3 my-2 my-md-0 mw-100">
-        <div class="input-group">
-          <%= search_form_for @q, url: ativo_pge_ativos_path, method: :post do |f| %>
-            <%= f.search_field :asset_i_cont_all, class:"form-control", placeholder:'Pesquisar...' %>
-            <%= button_tag type:'submit', class:"btn btn-success" do %>
-              <i class="fas fa-search fa-sm"></i>
-            <% end %>
-          <% end %>
-        </div>
-      </form>
+    <div class="form-inline">
+      <%= search_form_for @q, url: ativo_pge_ativos_path, method: :get do |f| %>
+        <%= f.search_field :asset_i_cont_all, class:"form-control", placeholder:'Pesquisar...' %>
+        <%= button_tag type:'submit', class:"btn btn-success" do %>
+          <i class="fas fa-search fa-sm"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="card-body">

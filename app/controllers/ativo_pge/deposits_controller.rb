@@ -3,7 +3,8 @@ class AtivoPge::DepositsController < AtivosController
   before_action :set_status, only: %i[edit update]
 
   def index
-    @deposits = Deposit.status_warehouse(params[:status]).order('id desc').page(params[:page])
+    @q = Deposit.ransack(params[:q])
+    @deposits = @q.result.status_warehouse.asset_and_status.page(params[:page])
     @qtd_available = Deposit.available_size
     @qtd_defect = Deposit.defect_size
     @qtd_unusable = Deposit.unusable_size

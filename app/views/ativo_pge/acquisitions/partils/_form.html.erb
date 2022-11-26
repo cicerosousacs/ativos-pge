@@ -36,12 +36,12 @@
         <div class="form-group col-md-3">
           <code>*</code>
           <%= form.label :modality %>
-          <%= form.select :modality, Acquisition.modalities.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
+          <%= form.select :modality, modality, {include_blank: 'Selecione...'}, class:"form-control" %>
         </div>
         <div class="form-group col-md-3">
           <code>*</code>
           <%= form.label :source %>
-          <%= form.select :source, Acquisition.sources.keys, {include_blank: 'Selecione...'}, class:"form-control" %>
+          <%= form.select :source, sources, {include_blank: 'Selecione...'}, class:"form-control" %>
         </div>
         <div class="form-group col-md-6">
           <%= form.label :interested_party %> <br>

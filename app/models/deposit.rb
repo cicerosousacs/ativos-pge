@@ -1,11 +1,10 @@
 class Deposit < ApplicationRecord
-
   belongs_to :ativo
   belongs_to :status
 
-  #SCOPES
-  scope :by_status, -> (status_id) { where(status_id: status_id) }
-  scope :by_deposit, -> { where(status_id: [1, 2, 3, 4]) }
+  # SCOPES
+  # scope :by_status, -> (status_id) { where(status_id: status_id) }
+  scope :status_warehouse, -> { where(status_id: [1, 2, 3, 4]) }
   scope :available, -> { where(status_id: 1) }
   scope :available_and_linked, -> { where(status_id: [1, 5, 6]) }
   scope :available_size, -> { where(status_id: 1).count }
@@ -19,11 +18,11 @@ class Deposit < ApplicationRecord
     Deposit.includes(:ativo, :status)
   end
 
-  def self.status_warehouse(status)
-    if status.nil?
-      Deposit.asset_and_status.by_deposit
-    else
-      Deposit.asset_and_status.by_status(status)
-    end
-  end
+  # def self.status_warehouse(status)
+  #   if status.nil?
+  #     Deposit.asset_and_status.by_deposit
+  #   else
+  #     Deposit.asset_and_status.by_status(status)
+  #   end
+  # end
 end

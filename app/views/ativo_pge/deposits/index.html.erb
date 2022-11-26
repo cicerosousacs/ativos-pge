@@ -3,14 +3,13 @@
   <div class="card-header py-3 text-success">
     <div>
     </div>
-    <div>
-      <form class="d-sm-inline-block">
-        <div class="input-group">
-          <input type="text" class="form-control" id="search">
-          <%= select_tag 'status', options_from_collection_for_select(@status, 'id', 'description'), 
-          :prompt => "Selecione um status", class:"form-control", onchange: 'this.form.submit()' %>
-        </div>
-      </form>
+    <div class="form-inline">
+      <%= search_form_for @q, url: ativo_pge_deposits_path, method: :get do |f| %>
+        <%= f.select :status_id_eq, options_from_collection_for_select(@status, "id", "description"), {include_blank: 'Pesquise por status'}, class:"form-control", onchange: 'this.form.submit()' %>
+        <%= button_tag type:'submit', class:"btn btn-success" do %>
+          <i class="fas fa-search fa-sm"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="card-body">

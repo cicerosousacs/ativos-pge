@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_21_233804) do
+ActiveRecord::Schema.define(version: 2022_11_26_003526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_11_21_233804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "last_user"
+    t.integer "allocation_id"
     t.index ["bond_id"], name: "index_bond_histories_on_bond_id"
   end
 

@@ -2,9 +2,9 @@
   <tbody>
     <% @bond.attach_ativo.each do |asset| %>
       <tr>
-        <td><%= asset.ativo.tombo %>
+        <td class="text-center"><%= asset.ativo.tombo %>
         <td><%= asset.ativo.ativo_description %> 
-        <td><%= asset.status.description %>
+        <td class="text-center"><%= asset.status.description %>
       </tr>
     <% end %>
   </tbody>
