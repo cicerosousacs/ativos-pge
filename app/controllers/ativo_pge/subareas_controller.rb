@@ -23,7 +23,7 @@ class AtivoPge::SubareasController < AtivosController
 
   def create
     @subarea = Subarea.new(params_subarea)
-    if @subarea.save!
+    if @subarea.save
       redirect_to ativo_pge_subareas_path, notice: 'Nova Subarea criada, Parabéns!'
     else
       render :new

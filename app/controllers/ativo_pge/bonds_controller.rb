@@ -32,7 +32,7 @@ class AtivoPge::BondsController < AtivosController
   def create
     @bond = Bond.new(params_bond)
     respond_to do |format|
-      if @bond.save!
+      if @bond.save
         format.html { redirect_to ativo_pge_bonds_path, notice: "Ativos vinculado: #{@bond.user.name} criado, Parabéns!" }
       else
         format.html { render :new }

@@ -1,12 +1,10 @@
 <% if @area.errors.any? %>
+  <% @area.errors.full_messages.each do |message| %>
   <div class="alert alert-danger alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <ul>
-      <% @area.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <%= message %>
   </div>
+  <% end %>
 <% end %>
 
 <%= form_with(model: [ :ativo_pge, @area ], local: true ) do |form| %>
@@ -14,6 +12,8 @@
     <%= form.label :description %> <br>
     <%= form.text_field :description, class:"form-control border-6 small" %>
   </div>
+  <br>
+  <hr>
   <div class="text-right">
     <%= form.submit "Salvar", class:"btn btn-success"%>
     <%= link_to ativo_pge_areas_path do %>

@@ -16,7 +16,7 @@ class AtivoPge::AdminsController < AtivosController
 
   def create
     @admin = Admin.new(params_admin)
-    if @admin.save!
+    if @admin.save
       redirect_to ativo_pge_admins_path, notice: "Novo Administrador #{@admin.name} criado. Parabéns!"
     else
       render :new

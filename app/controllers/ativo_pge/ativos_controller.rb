@@ -25,7 +25,7 @@ class AtivoPge::AtivosController < AtivosController
 
   def create
     @ativo = Ativo.new(params_ativo)
-    if @ativo.save!
+    if @ativo.save
       redirect_to ativo_pge_ativos_path, notice: 'Ativo cadastrado e enviado ao depósito com sucesso!'
     else
       render :new

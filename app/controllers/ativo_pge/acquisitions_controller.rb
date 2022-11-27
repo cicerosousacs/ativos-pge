@@ -11,7 +11,7 @@ class AtivoPge::AcquisitionsController < AtivosController
 
   def create
     @acquisition = Acquisition.new(params_acquisition)
-    if @acquisition.save!
+    if @acquisition.save
       redirect_to ativo_pge_acquisitions_path, notice: 'Aquisição cadastrado. Parabéns!'
     else
       render :new

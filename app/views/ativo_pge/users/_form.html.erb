@@ -1,12 +1,10 @@
 <% if @user.errors.any? %>
-    <div class="alert alert-danger alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
+  <% @user.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <%= message %>
     </div>
+  <% end %>
 <% end %>
 
 <%= form_with(model: [ :ativo_pge, @user ], local: true ) do |form| %>
@@ -18,6 +16,8 @@
     <%= form.label :email %> <br>
     <%= form.text_field :email, class:"form-control border-6 small" %>
   </div>
+  <br>
+  <hr>
   <div class="text-right">
     <%= form.submit "Salvar", class:"btn btn-xg btn-success"%>
     <%= link_to ativo_pge_users_path do %>

@@ -62,14 +62,14 @@
               </a>
               <div id="collapseAtivos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                  <%= link_to ativo_pge_acquisitions_path do %>
+                    <i class="collapse-item">Aquisição</i>
+                  <% end %>
                   <%= link_to ativo_pge_ativos_path do %>
                     <i class="collapse-item ">Ativos</i>
                   <% end %>
                   <%= link_to ativo_pge_deposits_path do %>
                     <i class="collapse-item ">Depósito</i>
-                  <% end %>
-                  <%= link_to ativo_pge_acquisitions_path do %>
-                    <i class="collapse-item">Aquisição</i>
                   <% end %>
                 </div>
               </div>

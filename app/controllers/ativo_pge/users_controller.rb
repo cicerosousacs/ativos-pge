@@ -15,7 +15,7 @@ class AtivoPge::UsersController < AtivosController
 
   def create
     @user = User.new(params_user)
-    if @user.save!
+    if @user.save
       redirect_to ativo_pge_users_path, notice: 'Usuário criado. Parabéns!'
     else
       render :new

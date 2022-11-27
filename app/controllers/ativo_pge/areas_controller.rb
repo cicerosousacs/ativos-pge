@@ -18,7 +18,7 @@ class AtivoPge::AreasController < AtivosController
 
   def create
     @area = Area.new(params_area)
-    if @area.save!
+    if @area.save
       redirect_to ativo_pge_areas_path, notice: 'Nova Área criada, Parabéns!'
     else
       render :new
