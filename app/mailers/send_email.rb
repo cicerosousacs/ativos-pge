@@ -13,7 +13,6 @@ class SendEmail < ApplicationMailer
     created_at = decode_translate_date(creation_history_date)
     @received = received
     @removed = removed
-    @last_user = last_user
 
     @title = "segue movimentação de ativo de #{created_at}"
     mail to: email, subject: 'Movimentação de ativos vinculado a você'
