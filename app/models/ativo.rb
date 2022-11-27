@@ -18,7 +18,7 @@ class Ativo < ApplicationRecord
   validates :type, :brand, :model, :serial, :tombo, presence: { message: 'não informado!' }
   # SCOPES
   scope :available_assets, -> { where(deposits: { status_id: 1 }) }
-  scope :last_asset, -> { includes(:acquisition).order('id DESC') }
+  scope :last_asset, -> { includes(:acquisition).order('type asc') }
   # PAGINAÇÂO
   paginates_per 10
 

@@ -24,13 +24,34 @@
 	specification:text acquisition:references
 	
 	enum type:{ 
-		DESKTOP: 'DESKTOP', 
-		MONITOR: 'MONITOR', 
-		LEILÃO: 'LEILÃO', 
-		CONCURSO: 'CONCURSO', 
-		"COTAÇÃO PREÇO": 'COTAÇÃO PREÇO', 
-		"DIÁLOGO COMPETITIVO": 'DIÁLOGO COMPETITIVO' 
-	}
+              CAMERA: 0,
+              DESKTOP: 1,
+              ESTABILIZADOR: 2,
+              EXTENSÃO: 3,
+              "FALTA O TIPO": 4,
+              "HD EXTERNO": 5,
+              HUB: 6,
+              IMPRESSORA: 7,
+              "IMPRESSORA TÉRMICA": 8,
+              "LEITOR BIOMÉTRICO": 9,
+              "LEITOR COD. BARRAS": 10,
+              "MODULO ISOLADOR": 11,
+              MONITOR: 12,
+              MOUSE: 13,
+              NOBREAK: 14,
+              NOTEBOOK: 15,
+              PEDESTAL: 16,
+              PLOTTER: 17,
+              PROJETOR: 18,
+              SCANNER: 19,
+              SWITCH: 20,
+              TABLET: 21,
+              TECLADO: 22,
+              TOKEN: 23,
+              TV: 24,
+              VOIP: 25,
+              WEBCAM: 26
+            }
 
 	TABLE MODEL DEPOSIT
 	
@@ -68,10 +89,7 @@
 		DEFEITO
 		INSERVÍVEL 
 		AGUARDANDO GARANTIA
-		VINCULADO
-		VÍNCULADO EM USO 
-	
-	
+		VINCULADODISPONÍVEL
 	TABLE MODEL ADMIN
 	
 	rails g migration AddNameToAdmin name:string

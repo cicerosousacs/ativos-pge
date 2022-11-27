@@ -28,6 +28,7 @@ gem 'wicked_pdf' #gerar pdf
 gem 'wkhtmltopdf-binary' #gerar pdf
 gem 'ransack' #pesquisa
 gem 'money-rails', '~>1.12'
+gem 'faker'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -55,6 +56,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'mailcatcher'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'faker'
 end
 
 group :development do

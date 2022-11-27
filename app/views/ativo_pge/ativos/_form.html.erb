@@ -23,7 +23,7 @@
           <%= form.label :brand %> <br>
           <%= form.text_field :brand, class:"form-control" %>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
           <code>*</code>
           <%= form.label :model %> <br>
           <%= form.text_field :model, class:"form-control" %>
@@ -41,7 +41,7 @@
           <%= form.label :contract_number %>
           <%= form.select("acquisition_id", @acquisition_selects, {include_blank: 'Selecione...'}, class:"form-control") %>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-5">
           <%= form.label :specification %> <br>
           <%= form.text_area :specification, rows: 4, class:"form-control" %>
         </div>
