@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def text_date_history(history)
-    if history.removed.nil?
+    if history.removed.blank?
       'Data da vinculação:'
     elsif history.received.blank? && history.removed.blank? && history.allocation_id.present?
       'Data da nova lotação:'
@@ -39,6 +39,10 @@ module ApplicationHelper
 
   def sources
     Acquisition.sources.keys
+  end
+
+  def type
+    Ativo.types.keys
   end
 
   def allocation(id)

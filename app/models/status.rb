@@ -2,7 +2,7 @@ class Status < ApplicationRecord
   has_many :ativos
   has_many :attach_ativo
 
-  belongs_to :deposit
+  belongs_to :deposit, optional: true
 
   #SCOPES
   scope :linked_or_in_use, -> { where(id: [5, 6]) }

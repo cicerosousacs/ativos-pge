@@ -25,18 +25,24 @@
           </tr>
         </thead>
         <tbody>
-          <% @deposits.each do |dep| %>
+          <% if @deposits.blank? %>
             <tr>
-              <td><%= dep.ativo.tombo %></td>
-              <td><%= dep.description %></td>
-              <td><%= dep.status.description %></td>
-              <td><%= dep.observation %></td>
-              <td style="width: 12px">
-              <%= link_to edit_ativo_pge_deposit_path(dep), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                <i class="fa fa-edit"></i>
-              <% end %>
-              </td>
+              <td colspan="5" class="text-center text-info">NENHUM ATIVO ENCONTRADO!</td>
             </tr>
+          <% else %>
+            <% @deposits.each do |dep| %>
+              <tr>
+                <td><%= dep.ativo.tombo %></td>
+                <td><%= dep.description %></td>
+                <td><%= dep.status.description %></td>
+                <td><%= dep.observation %></td>
+                <td style="width: 12px">
+                <%= link_to edit_ativo_pge_deposit_path(dep), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

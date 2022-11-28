@@ -17,7 +17,7 @@
         <div class="form-group col-md-2">
           <code>*</code>
           <%= form.label :type %> <br>
-          <%= form.text_field :type, class:"form-control" %>
+          <%= form.select :type, type, {include_blank: 'Selecione...'}, class:"form-control" %>
           <br>
           <code>*</code>
           <%= form.label :brand %> <br>

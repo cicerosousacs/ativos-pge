@@ -54,7 +54,8 @@ class Bond < ApplicationRecord
         {
           bond_id: bond_id,
           last_user: user_name,
-          received: received_asset
+          received: received_asset,
+          removed: []
         }
       )
       history.save!

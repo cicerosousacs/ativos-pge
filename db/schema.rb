@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2022_11_26_142940) do
   create_table "acquisitions", force: :cascade do |t|
     t.string "item", null: false
     t.string "quantity", null: false
+    t.float "value", null: false
     t.string "manager", null: false
     t.date "acquisition_date", null: false
     t.string "contract_number"
@@ -82,8 +83,8 @@ ActiveRecord::Schema.define(version: 2022_11_26_142940) do
 
   create_table "bond_histories", force: :cascade do |t|
     t.bigint "bond_id"
-    t.jsonb "received"
-    t.jsonb "removed"
+    t.jsonb "received", default: "{}"
+    t.jsonb "removed", default: "{}"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "last_user"
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 2022_11_26_142940) do
     t.datetime "updated_at", null: false
     t.string "area", null: false
     t.boolean "homeoffice"
+    t.integer "call_number"
     t.index ["subarea_id"], name: "index_bonds_on_subarea_id"
     t.index ["user_id"], name: "index_bonds_on_user_id"
   end
@@ -114,7 +116,7 @@ ActiveRecord::Schema.define(version: 2022_11_26_142940) do
 
   create_table "deposits", force: :cascade do |t|
     t.bigint "ativo_id"
-    t.string "description"
+    t.string "descritpion"
     t.bigint "status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

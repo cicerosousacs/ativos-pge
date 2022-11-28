@@ -33,7 +33,7 @@
         <% end %>
         <% if his.removed.blank? %>
           <td colspan="2">Nenhum ativo removido
-        <tr>
+          <tr>
         <% else %>
           <% his.removed.each do |rem| %>
               <td class="text-center"><%= tombo_asset(rem["ativo_id"]) %>
