@@ -51,24 +51,6 @@ class AtivoPge::AtivosController < AtivosController
     end
   end
 
-  def link_to_deposit
-    assets = params[:asset_ids].split(',')
-    qtd_asset = assets.length
-    text_asset = assets.length > 1 ? 'Ativos diponibilizados' : 'Ativo diponibilizado'
-    assets.each do |a|
-      Deposit.find_or_create_by!(
-        ativo_id: a.to_i,
-        description: description_active(a.to_i),
-        status_id: 1 # 1 = DISPONIVEL
-      )
-      flash[:notice] = "#{qtd_asset} - #{text_asset} com sucesso!"
-      # redirect_to '/ativo_pge/ativos'
-    end
-  end
-
-  def gerar_pdf_ativo
-  end
-
   private
 
   def params_ativo
@@ -81,10 +63,5 @@ class AtivoPge::AtivosController < AtivosController
 
   def set_acquisition_selects
     @acquisition_selects = Acquisition.pluck(:contract_number, :id)
-  end
-
-  def description_active(id)
-    active = Ativo.find(id)
-    [active.type, active.brand, active.model].join(' ')
   end
 end

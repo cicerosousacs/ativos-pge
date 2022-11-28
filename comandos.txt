@@ -23,35 +23,35 @@
 	rails g model Asset type:string brand:string model:string serial:string tombo:string
 	specification:text acquisition:references
 	
-	enum type:{ 
-              CAMERA: 0,
-              DESKTOP: 1,
-              ESTABILIZADOR: 2,
-              EXTENSÃO: 3,
-              "FALTA O TIPO": 4,
-              "HD EXTERNO": 5,
-              HUB: 6,
-              IMPRESSORA: 7,
-              "IMPRESSORA TÉRMICA": 8,
-              "LEITOR BIOMÉTRICO": 9,
-              "LEITOR COD. BARRAS": 10,
-              "MODULO ISOLADOR": 11,
-              MONITOR: 12,
-              MOUSE: 13,
-              NOBREAK: 14,
-              NOTEBOOK: 15,
-              PEDESTAL: 16,
-              PLOTTER: 17,
-              PROJETOR: 18,
-              SCANNER: 19,
-              SWITCH: 20,
-              TABLET: 21,
-              TECLADO: 22,
-              TOKEN: 23,
-              TV: 24,
-              VOIP: 25,
-              WEBCAM: 26
-            }
+  enum type: {
+                CAMERA: 'CAMERA',
+                DESKTOP: 'DESKTOP',
+                ESTABILIZADOR: 'ESTABILIZADOR',
+                EXTENSÃO: 'EXTENSÃO',
+                "FALTA O TIPO": 'FALTA O TIPO',
+                "HD EXTERNO": 'HD EXTERNO',
+                HUB: 'HUB',
+                IMPRESSORA: 'IMPRESSORA',
+                "IMPRESSORA TÉRMICA": 'IMPRESSORA TÉRMICA',
+                "LEITOR BIOMÉTRICO": 'LEITOR BIOMÉTRICO',
+                "LEITOR COD. BARRAS": 'LEITOR COD. BARRAS',
+                "MODULO ISOLADOR": 'MODULO ISOLADOR',
+                MONITOR: 'MONITOR',
+                MOUSE: 'MOUSE',
+                NOBREAK: 'NOBREAK',
+                NOTEBOOK: 'NOTEBOOK',
+                PEDESTAL: 'PEDESTAL',
+                PLOTTER: 'PLOTTER',
+                PROJETOR: 'PROJETOR',
+                SCANNER: 'SCANNER',
+                SWITCH: 'SWITCH',
+                TABLET: 'TABLET',
+                TECLADO: 'TECLADO',
+                TOKEN: 'TOKEN',
+                TV: 'TV',
+                VOIP: 'VOIP',
+                WEBCAM: 'WEBCAM'
+              }
 
 	TABLE MODEL DEPOSIT
 	
@@ -286,3 +286,90 @@ Histórico: <%= @history[0].bond.subarea.area.description %> - <%= @history[0].b
           :prompt => "Selecione um status", class:"form-control", onchange: 'this.form.submit()' %>
         </div>
       </form>
+
+
+ATIVOS BOTÂO ATIVOS NO DEPOSITO - INDEX
+
+<button type="button" id="btn-vincular" class="btn btn-info">Disponibilizar Ativo</button>
+
+<%= link_to ativo_pge_ativos_path(format: :pdf) do %>
+  <button class="btn btn-warning" type="button">Gerar PDF</button>
+<% end %>
+
+<th style="width: 10px">
+  <input type="checkbox" id="all_ativos" title="Marcar todos os Ativos"></input>
+</th>
+
+<td><%= check_box_tag("asset_ids[]", ativo.id, false, class:'marcar') %></td>
+
+<%= javascript_include_tag 'application' %>
+
+<script>
+  $(document).ready(function () {
+    $('#btn-vincular').click(function () {
+      var asset_ids = $('.marcar:checked').map(function () {
+        return $(this).val();
+      }).get();
+      if (asset_ids == '') {
+        alert('Selecione pelo menos um Ativo');
+      } else {
+        if (this.id == 'btn-vincular') {
+          $.post('<%= url_for({ :controller => 'ativos', :action => 'link_to_deposit' })%>?asset_ids=' + asset_ids)
+        }
+      }
+    });
+
+    $("#all_ativos").change(function () {
+        $('.marcar').prop('checked', $(this).prop("checked"));
+    });
+
+    $("#all_ativos").click(function(){
+        $('.marcar').not(this).prop('checked', this.checked);
+    });
+
+    var all_ativos = $("#all_ativos");
+    all_ativos.click(function () {
+      if ( $(this).is(':checked') ){
+        $('.marcar').prop("checked", true);
+      }else{
+        $('.marcar').prop("checked", false);
+      }
+    });
+  });
+</script>
+
+ATIVOS BOTÂO ATIVOS NO DEPOSITO - ROUTER
+
+    resources :ativos do
+      collection do
+        match :link_to_deposit, via: %i[get post]
+        get :link_to_deposit
+        match :gerar_pdf_ativo, via: %i[get post]
+        get 'gerar_pdf_ativo'
+        post 'gerar_pdf_ativo'
+      end
+    end
+
+ATIVOS BOTÂO ATIVOS NO DEPOSITO - CONTROLLER
+
+  def link_to_deposit
+    assets = params[:asset_ids].split(',')
+    qtd_asset = assets.length
+    text_asset = assets.length > 1 ? 'Ativos diponibilizados' : 'Ativo diponibilizado'
+    assets.each do |a|
+      Deposit.find_or_create_by!(
+        ativo_id: a.to_i,
+        description: description_active(a.to_i),
+        status_id: 1 # 1 = DISPONIVEL
+      )
+      flash[:notice] = "#{qtd_asset} - #{text_asset} com sucesso!"
+      # redirect_to '/ativo_pge/ativos'
+    end
+  end
+
+  private
+
+  def description_active(id)
+    active = Ativo.find(id)
+    [active.type, active.brand, active.model].join(' ')
+  end

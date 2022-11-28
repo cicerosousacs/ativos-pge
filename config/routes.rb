@@ -1,15 +1,7 @@
 Rails.application.routes.draw do
   namespace :ativo_pge do
     resources :admins
-    resources :ativos do
-      collection do
-        match :link_to_deposit, via: %i[get post]
-        get :link_to_deposit
-        match :gerar_pdf_ativo, via: %i[get post]
-        get 'gerar_pdf_ativo'
-        post 'gerar_pdf_ativo'
-      end
-    end
+    resources :ativos
     resources :users
     resources :areas
     resources :subareas
