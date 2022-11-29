@@ -32,13 +32,13 @@
           <% else %>
             <% @deposits.each do |dep| %>
               <tr>
-                <td><%= dep.ativo.tombo %></td>
-                <td><%= dep.description %></td>
-                <td><%= dep.status.description %></td>
-                <td><%= dep.observation %></td>
+                <td width="10%"><%= dep.ativo.tombo %></td>
+                <td width="30%"><%= dep.description %></td>
+                <td width="15%"><%= dep.status.description %></td>
+                <td width="50%"><%= dep.observation %></td>
                 <td style="width: 12px">
                 <%= link_to edit_ativo_pge_deposit_path(dep), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                  <i class="fa fa-edit"></i>
+                  <i  title="Editar" class="fa fa-edit"></i>
                 <% end %>
                 </td>
               </tr>

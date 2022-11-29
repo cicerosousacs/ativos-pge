@@ -14,28 +14,27 @@
             <th>Email</th>
             <th>Perfil</th>
             <th>Status</th>
-            <th>
-            <th>
+            <th colspan="2" class="text-center">Ações</th>
           </tr>
         </thead>
         <tbody>
           <% @admins.each do |admin| %>
             <tr>
-              <td><%= admin.name %></td>
-              <td><%= admin.email %></td>
-              <td><%= admin.profile %></td>
-              <td><%= admin.check_active %></td>
+              <td width="40%"><%= admin.name %></td>
+              <td width="40%"><%= admin.email %></td>
+              <td width="10%"><%= admin.profile %></td>
+              <td width="10%"><%= admin.check_active %></td>
               <td style="width: 12px">
                 <%= link_to edit_ativo_pge_admin_path(admin), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                  <i class="fa fa-edit"></i>
+                  <i  title="Editar" class="fa fa-edit"></i>
                 <% end %>
               <td style="width: 12px">
                 <% confirm_message = admin.active.present? ? "inativar" : "ativar" %>
                 <%= link_to ativo_pge_admin_path(admin), method: :delete, data: { confirm: "Você tem certeza que deseja #{confirm_message}:  #{admin.name}?"} do %>
                   <% if admin.active.present? %>
-                    <i class="fa fa-user-xmark inactive"></i>
+                    <i  title="Inativado" class="fa fa-user-xmark inactive"></i>
                   <% else %>
-                    <i class="fa fa-user-check active"></i>
+                    <i  title="Ativado" class="fa fa-user-check active"></i>
                   <% end %>
                 <% end %>  
               </td>

@@ -18,15 +18,15 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
+            <td width="50%"><%= user.name %></td>
+            <td width="50%"><%= user.email %></td>
             <td style="width: 10px">
               <%= link_to edit_ativo_pge_user_path(user), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                <i class="blue fa fa-edit"></i>
+                <i  title="Editar" class="blue fa fa-edit"></i>
               <% end %>
             <td style="width: 10px">
               <%= link_to ativo_pge_user_path(user), method: :delete, data: {confirm: "Certeza?"} do %>
-                <i class="red fa fa-trash"></i>
+                <i  title="Excluir" class="red fa fa-trash"></i>
               <% end %>  
             </td>
           </tr>

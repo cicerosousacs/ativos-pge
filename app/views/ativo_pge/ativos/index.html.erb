@@ -28,17 +28,17 @@
       <tbody>
         <% @ativos.each do |ativo| %>
           <tr>
-            <td><%= ativo.tombo %></td>
-            <td><%= ativo.ativo_description %></td>
-            <td><%= ativo.serial %></td>
+            <td width="10%"><%= ativo.tombo %></td>
+            <td width="50%"><%= ativo.ativo_description %></td>
+            <td width="50%"><%= ativo.serial %></td>
             <td style="width: 10px">
               <%= link_to edit_ativo_pge_ativo_path(ativo) do %>
-                <i class="blue fas fa-edit"></i>
+                <i  title="Editar" class="blue fas fa-edit"></i>
               <% end %>
             </td>
             <td style="width: 12px">
               <%= link_to ativo_pge_ativo_path(ativo), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover: #{ativo.ativo_description}?"} do %>
-                <i class="red fa fa-trash"></i>
+                <i  title="Excluir" class="red fa fa-trash"></i>
               <% end %>  
           </tr>
         <% end %>

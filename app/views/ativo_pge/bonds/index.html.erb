@@ -45,11 +45,11 @@
           <% @bonds.each do |bond| %>
             <tr>
               <td><%= check_box_tag("bonds_ids[]", bond.id, false, class:'marcar') %></td>
-              <td><%= bond.subarea.area.description %></td>
-              <td><%= bond.subarea.description %></td>
-              <td><%= bond.user.name %></td>
-              <td><%= bond.note %></td>
-              <td><%= bond.check_home_office %>
+              <td width="25%"><%= bond.subarea.area.description %></td>
+              <td width="25%"><%= bond.subarea.description %></td>
+              <td width="20%"><%= bond.user.name %></td>
+              <td width="20%"><%= bond.note %></td>
+              <td width="30%"><%= bond.check_home_office %>
                 <% if bond.homeoffice.present? %>
                   <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
                     <i title="Visualizar termo" class="fa-regular fa-file-pdf"></i>

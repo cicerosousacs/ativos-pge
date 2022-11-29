@@ -1,4 +1,4 @@
-<h1 class="h3 mb-2 text-gray-800">Aquisição</h1>
+<h1 class="h3 mb-2 text-gray-800">Aquisições</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">
@@ -21,10 +21,10 @@
       <tbody>
         <% @acquisitions.each do |acquisition| %>
           <tr>
-            <td><%= acquisition.contract_number %></td>
-            <td><%= acquisition.item %></td>
-            <td><%= acquisition.quantity %></td>
-            <td><%= acquisition.manager %></td>
+            <td width="10%"><%= acquisition.contract_number %></td>
+            <td width="40%"><%= acquisition.item %></td>
+            <td width="10%"><%= acquisition.quantity %></td>
+            <td width="30%"><%= acquisition.manager %></td>
             <td style="width: 12px">
               <%= link_to ativo_pge_acquisition_path(acquisition) do %>
                 <i title="Visualizar" class="gray fa fa-eye"></i>
