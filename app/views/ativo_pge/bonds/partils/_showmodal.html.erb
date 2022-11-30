@@ -2,7 +2,9 @@
   <h5 class="modal-title font-weight text-success" id="bondmodalLabel">
     Ultima movimentação: <%= last_movement(@bond) %> | Chamado: <%= last_call_number(@bond) %>
   </h5>
-  <button type="button" class="btn btn-sm btn-close btn-danger" data-dismiss="modal" aria-hidden="true">×</button>
+  <button type="button" class="btn btn-sm btn-light" data-dismiss="modal" aria-hidden="true">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
 </div>
 <div class="modal-body">
   <%= render partial: 'ativo_pge/bonds/partils/show' %>
