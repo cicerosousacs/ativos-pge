@@ -1,16 +1,16 @@
-<h1 class="h3 mb-2 text-gray-800">Áreas</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @areas.model_name.human(count: 2)) %></h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <%= link_to new_ativo_pge_area_path, remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-      <button class="btn btn-success" type="button">Nova Área</button>
+      <button class="btn btn-success" type="button"><%= t('button.new_a', model: @areas.model_name.human) %></button>
     <% end %>
   </div>
   <div class="card-body">
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Descrição
-          <th colspan="2" class="text-center">Ações</th> 
+          <th><%= translate_attribute(@areas, :description) %>
+          <th colspan="2" class="text-center"><%= t('action.shares') %></th> 
           </th>
         </tr>
       </thead>
@@ -20,11 +20,11 @@
             <td><%= area.description %></td>
             <td style="width: 10px">
             <%= link_to edit_ativo_pge_area_path(area), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                <i  title="Editar" class="blue fa fa-edit"></i>
+                <i  title=<%= t('button.edit') %> class="blue fa fa-edit"></i>
             <% end %>
             <td style="width: 10px">
-            <%= link_to ativo_pge_area_path(area), method: :delete, data: {confirm: "Certeza?"} do %>
-                <i  title="Excluir" class="red fa fa-trash"></i>
+            <%= link_to ativo_pge_area_path(area), method: :delete, data: {confirm: t('message.confirm', name: current_admin.name, item: area.description) } do %>
+                <i  title=<%= t('button.delete') %> class="red fa fa-trash"></i>
             <% end %>  
             </td>
           </tr>

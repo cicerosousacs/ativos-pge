@@ -1,17 +1,17 @@
-<h1 class="h3 mb-2 text-gray-800">Subareas</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @subareas.model_name.human(count: 2)) %></h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <%= link_to new_ativo_pge_subarea_path, remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-      <button class="btn btn-success" type="button">Nova Subarea</button>
+      <button class="btn btn-success" type="button"><%= t('button.new_a', model: @subareas.model_name.human) %></button>
     <% end %>
   </div>
   <div class="card-body">
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Descrição
-          <th>Área Mãe 
-          <th colspan="2" class="text-center">Ações</th>
+          <th><%= translate_attribute(@subareas, :description) %>
+          <th><%= translate_attribute(@subareas, :area) %> 
+          <th colspan="2" class="text-center"><%= t('action.shares') %></th>
           </th>
         </tr>
       </thead>
@@ -22,11 +22,11 @@
             <td width="50%"><%= subarea.area.description %></td>
             <td style="width: 10px">
               <%= link_to edit_ativo_pge_subarea_path(subarea), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                <i  title="Editar" class="blue fa fa-edit"></i>
+                <i  title=<%= t('button.edit') %> class="blue fa fa-edit"></i>
               <% end %>
             <td style="width: 10px">
-            <%= link_to ativo_pge_subarea_path(subarea), method: :delete, data: {confirm: "Certeza?"} do %>
-                <i  title="Excluir" class="red fa fa-trash"></i>
+            <%= link_to ativo_pge_subarea_path(subarea), method: :delete, data: {confirm: t('message.confirm', name: current_admin.name, item: subarea.description) } do %>
+                <i  title=<%= t('button.delete') %> class="red fa fa-trash"></i>
               <% end %>  
             </td>
           </tr>

@@ -1,11 +1,11 @@
-<h1 class="h3 mb-2 text-gray-800">Vínculos</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @bonds.model_name.human(count: 2)) %></h1>
 <div class="card shadow mb-3">
   <div class="card-header py-3">
     <div>
       <%= link_to new_ativo_pge_bond_path do %>
-        <button class="btn btn-success">Novo Vinculo</button>
+        <button class="btn btn-success"><%= t('button.new', model: @bonds.model_name.human) %></button>
       <% end %>
-      <button type="button" id="btn-termo" class="btn btn-info">Gerar Termo</button>
+      <button type="button" id="btn-termo" class="btn btn-info"><%= t('button.new_term') %></button>
     </div>
     <%= search_form_for @q, url: ativo_pge_bonds_path, method: :get,  class:"form-inline" do |f| %>
     <div class="form-inline col-md-6">
@@ -26,20 +26,20 @@
       <thead>
         <tr>
           <th style="width: 10px">
-            <input type="checkbox" id="all_bonds" title="Selecione um Vinculo"></input>
+            <input type="checkbox" id="all_bonds" title="Selecione um vinculo para gerar o Termo"></input>
           </th>
-          <th>Área</th>
-          <th>Subárea</th>
-          <th>Usuário</th>
-          <th>Observação</th>
-          <th>Modalidade</th>
-          <th colspan="4" class="text-center">Ações</th>
+          <th><%= translate_attribute(@bonds, :area) %></th>
+          <th><%= translate_attribute(@bonds, :subarea_id) %></th>
+          <th><%= translate_attribute(@bonds, :user_id) %></th>
+          <th><%= translate_attribute(@bonds, :note) %></th>
+          <th><%= translate_attribute(@bonds, :homeoffice) %></th>
+          <th colspan="4" class="text-center"><%= t('action.shares') %></th>
         </tr>
       </thead>
       <tbody>
         <% if @bonds.blank? %>
           <tr>
-            <td colspan="7" class="text-center text-info">VÍNCULO NÃO EXISTE!</td>
+            <td colspan="7" class="text-center text-info"><%= t('views.bond.not_found') %></td>
           </tr>
         <% else %>
           <% @bonds.each do |bond| %>
@@ -52,24 +52,24 @@
               <td width="30%"><%= bond.check_home_office %>
                 <% if bond.homeoffice.present? %>
                   <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                    <i title="Visualizar termo" class="fa-regular fa-file-pdf"></i>
+                    <i title=<%= t('subtitle.term') %> class="fa-regular fa-file-pdf"></i>
                   <% end %>
                 <% end %>
               <td style="width: 12px">
                 <%= link_to ativo_pge_bond_path(bond), remote: true, data: { target: '#bondmodal', toggle: 'modal' } do %>
-                  <i title="Visualizar ativos" class="gray fa fa-eye"></i>
+                  <i title=<%= t('subtitle.show') %> class="gray fa fa-eye"></i>
                 <% end %>
               <td style="width: 12px">
                 <%= link_to ativo_pge_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
-                  <i title="Ver histórico" class="orange fa fa-clock-rotate-left"></i>
+                  <i title=<%= t('subtitle.history') %>  class="orange fa fa-clock-rotate-left"></i>
                 <% end %>
               <td style="width: 12px">
                 <%= link_to edit_ativo_pge_bond_path(bond) do %>
-                  <i title="Editar" class="blue fa fa-edit"></i>
+                  <i title=<%= t('button.edit') %> class="blue fa fa-edit"></i>
                 <% end %>
               <td style="width: 12px">
-                <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: "#{current_admin.name}, você tem certeza que deseja remover o vínculo deste usuário: #{bond.user.name}?"} do %>
-                  <i title="Excluir" class="red fa fa-trash" id="errorAlert"></i>
+                <%= link_to ativo_pge_bond_path(bond), method: :delete, data: {confirm: t('message.confirm_bond', name: current_admin.name, item: bond.user.name) } do %>
+                  <i title=<%= t('button.delete') %> class="red fa fa-trash" id="errorAlert"></i>
                 <% end %>  
               </td>
             </tr>

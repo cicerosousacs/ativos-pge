@@ -1,9 +1,9 @@
-<h1 class="h3 mb-2 text-gray-800">Aquisições</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @acquisitions.model_name.human(count: 2)) %></h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">
       <%= link_to new_ativo_pge_acquisition_path do %>
-        <button class="btn btn-success" style="color:write">Nova Aquisição</button>
+        <button class="btn btn-success" style="color:write"><%= t('button.new_a', model: @acquisitions.model_name.human) %></button>
       <% end %> 
     </h6>
   </div>
@@ -11,11 +11,11 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th width="10%">Nº Contrato</th>
-          <th width="50%">Item</th>
-          <th width="12%">Quantidade</th>
-          <th width="30%">Gestor</th>
-          <th colspan="3" class="text-center">Ações</th>
+          <th width="10%"><%= translate_attribute(@acquisitions, :contract_number) %></th>
+          <th width="50%"><%= translate_attribute(@acquisitions, :item) %></th>
+          <th width="12%"><%= translate_attribute(@acquisitions, :quantity) %></th>
+          <th width="30%"><%= translate_attribute(@acquisitions, :manager) %></th>
+          <th colspan="3" class="text-center"><%= t('action.shares') %></th>
         </tr>
       </thead>
       <tbody>
@@ -31,11 +31,11 @@
               <% end %>
             <td style="width: 12px">
               <%= link_to edit_ativo_pge_acquisition_path(acquisition) do %>
-                <i title="Editar" class="blue fa fa-edit"></i>
+                <i title=<%= t('button.edit') %> class="blue fa fa-edit"></i>
               <% end %>
             <td style="width: 12px">
-              <%= link_to ativo_pge_acquisition_path(acquisition), method: :delete, data: {confirm: "Certeza?"} do %>
-                <i title="Excluir" class="red fa fa-trash"></i>
+              <%= link_to ativo_pge_acquisition_path(acquisition), method: :delete, data: {confirm: t('message.confirm', name: current_admin.name, item: acquisition.item) } do %>
+                <i title=<%= t('button.delete') %> class="red fa fa-trash"></i>
               <% end %>  
             </td>
           </tr>

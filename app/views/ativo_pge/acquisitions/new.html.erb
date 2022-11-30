@@ -1,1 +1,3 @@
-<%= render partial: 'ativo_pge/acquisitions/partils/form' %>
+<%= render partial: 'ativo_pge/acquisitions/partils/form', 
+          locals: { action_title: t('views.acquisition.title_form_new', model: @acquisition.model_name.human) } 
+%>

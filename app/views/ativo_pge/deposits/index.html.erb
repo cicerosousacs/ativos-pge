@@ -1,4 +1,4 @@
-<h1 class="h3 mb-2 text-gray-800">Depósito</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @deposits.model_name.human) %></h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3 text-success">
     <div>
@@ -17,17 +17,17 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Tombo</th>
-            <th>Descrição</th>
-            <th>Status</th>
-            <th>Observações</th>
+            <th><%= translate_attribute(@deposits, :tombo) %></th>
+            <th><%= translate_attribute(@deposits, :description) %></th>
+            <th><%= translate_attribute(@deposits, :status) %></th>
+            <th><%= translate_attribute(@deposits, :observation) %></th>
             <th>
           </tr>
         </thead>
         <tbody>
           <% if @deposits.blank? %>
             <tr>
-              <td colspan="5" class="text-center text-info">NENHUM ATIVO ENCONTRADO!</td>
+              <td colspan="5" class="text-center text-info"><%= t('views.deposit.not_found') %></td>
             </tr>
           <% else %>
             <% @deposits.each do |dep| %>
@@ -38,7 +38,7 @@
                 <td width="50%"><%= dep.observation %></td>
                 <td style="width: 12px">
                 <%= link_to edit_ativo_pge_deposit_path(dep), remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-                  <i  title="Editar" class="fa fa-edit"></i>
+                  <i  title=<%= t('button.edit') %> class="fa fa-edit"></i>
                 <% end %>
                 </td>
               </tr>

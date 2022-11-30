@@ -51,4 +51,40 @@ module ApplicationHelper
     subarea_name = subarea.area.description
     [subarea_name, area_name].join(' - ')
   end
+
+  def translate_attribute(object = nil, attribute = nil)
+    object && attribute ? object.model.human_attribute_name(attribute) : 'Sem tradução'
+  end
+
+  def inactivate_activate(admin)
+    admin.active.present? ? 'inativar' : 'ativar'
+  end
+
+  def form_title(action, model)
+    if action == 'new'
+      t(new_or_newa(model), model: model.model_name.human)
+    else
+      t('title.update_form', name: model_attribute(model))
+    end
+  end
+
+  def model_attribute(model)
+    if model.instance_of?(::Area)
+      model.description
+    elsif model.instance_of?(::Subarea)
+      model.description
+    else
+      model.name
+    end
+  end
+
+  def new_or_newa(model)
+    if model.instance_of?(::User)
+      'title.new_form'
+    elsif model.instance_of?(::Admin)
+      'title.new_form'
+    else
+      'title.newa_form'
+    end
+  end
 end

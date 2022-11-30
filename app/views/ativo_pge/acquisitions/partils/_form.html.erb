@@ -11,7 +11,7 @@
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-success">Nova aquisição</h6>
+    <h6 class="m-0 font-weight-bold text-success"><%= action_title %></h6>
   </div>
   <div class="card-body">
     <%= form_with(model: [ :ativo_pge, @acquisition ], local: true ) do |form| %>
@@ -88,9 +88,9 @@
       </div>
       <hr/>
       <div class="text-right">
-        <%= form.submit "Salvar", class:"btn btn-success" %>
+        <%= form.submit t('button.save'), class:"btn btn-success" %>
         <%= link_to ativo_pge_acquisitions_path do %>
-          <button class="btn btn-danger" type="button">Cancelar</button>
+          <button class="btn btn-danger" type="button"><%= t('button.cancel') %></button>
         <% end %>
       </div>
     <% end %>

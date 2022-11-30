@@ -10,7 +10,7 @@
 <%= form_with(model: [ :ativo_pge, @bond ], local: true ) do |form| %>
   <div class="card shadow mb-4 cascata">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-success">Novo Vinculo</h6>
+      <h6 class="m-0 font-weight-bold text-success"><%= action_title %></h6>
     </div>
     <div class="card-body">
       <div class="row g-3">
@@ -72,9 +72,9 @@
         </div>
       <hr>
       <div class="text-right">
-        <%= form.submit "Salvar", class:"btn btn-success", id:"btn_save", disabled: true %>
+        <%= form.submit t('button.save'), class:"btn btn-success", id:"btn_save", disabled: true %>
         <%= link_to ativo_pge_bonds_path do %>
-          <button class="btn btn-danger" type="button">Cancelar</button>
+          <button class="btn btn-danger" type="button"><%= t('button.cancel') %></button>
         <% end %>
       </div>
     </div>

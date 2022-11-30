@@ -19,9 +19,9 @@
     <%= form.text_area :observation, rows: 4, class:"form-control border-6 small" %>
   </div>
   <div class="text-right">
-    <%= form.submit "Salvar", class:"btn btn-success"%>
+    <%= form.submit t('button.save'), class:"btn btn-success"%>
     <%= link_to ativo_pge_deposits_path do %>
-      <div class="btn btn-xg btn-danger" data-dismiss="modal">Cancelar</div>
+      <div class="btn btn-xg btn-danger" data-dismiss="modal"><%= t('button.cancel') %></div>
     <% end %>
   </div>
 <% end %>

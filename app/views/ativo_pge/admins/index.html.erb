@@ -1,8 +1,8 @@
-<h1 class="h3 mb-2 text-gray-800">Administradores</h1>
+<h1 class="h3 mb-2 text-gray-800"><%= t('views.bond.title', model: @admins.model_name.human(count: 2)) %></h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <%= link_to new_ativo_pge_admin_path, remote: true, data: { target: '#form_modal', toggle: 'modal' } do %>
-      <button class="btn btn-success" type="button">Novo Administrador</button>
+      <button class="btn btn-success" type="button"><%= t('button.new', model: @admins.model_name.human) %></button>
     <% end %>
   </div>
   <div class="card-body">
@@ -10,11 +10,11 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Perfil</th>
-            <th>Status</th>
-            <th colspan="2" class="text-center">Ações</th>
+            <th><%= translate_attribute(@admins, :name) %></th>
+            <th><%= translate_attribute(@admins, :email) %></th>
+            <th><%= translate_attribute(@admins, :profile) %></th>
+            <th><%= translate_attribute(@admins, :active) %></th>
+            <th colspan="2" class="text-center"><%= t('action.shares') %></th>
           </tr>
         </thead>
         <tbody>
@@ -29,12 +29,11 @@
                   <i  title="Editar" class="fa fa-edit"></i>
                 <% end %>
               <td style="width: 12px">
-                <% confirm_message = admin.active.present? ? "inativar" : "ativar" %>
-                <%= link_to ativo_pge_admin_path(admin), method: :delete, data: { confirm: "Você tem certeza que deseja #{confirm_message}:  #{admin.name}?"} do %>
+                <%= link_to ativo_pge_admin_path(admin), method: :delete, data: { confirm: t('message.confirm_admin', name: admin.name, item: inactivate_activate(admin) ) } do %>
                   <% if admin.active.present? %>
-                    <i  title="Inativado" class="fa fa-user-xmark inactive"></i>
+                    <i  title=<%= t('subtitle.activated') %> class="fa fa-user-xmark inactive"></i>
                   <% else %>
-                    <i  title="Ativado" class="fa fa-user-check active"></i>
+                    <i  title=<%= t('subtitle.inactivated') %> class="fa fa-user-check active"></i>
                   <% end %>
                 <% end %>  
               </td>

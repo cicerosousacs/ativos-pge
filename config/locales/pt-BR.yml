@@ -1,4 +1,29 @@
 'pt-BR':
+  button:
+    save: Salvar
+    cancel: Cancelar
+    new: Novo %{model}
+    new_a: Nova %{model}
+    edit: Editar
+    back: Voltar
+    delete: Excluir
+    new_term: Gerar Termo
+  title:
+    new_form: Novo %{model}
+    newa_form: Nova %{model}
+    update_form: 'Atualizando: %{name}'
+  subtitle:
+    activated: Ativar
+    inactivated: Inativar
+    show: Visualizar
+    history: Histórico
+    term: Termo
+  action:
+    shares: Ações
+  message:
+    confirm: '%{name}, você tem certeza que deseja remover: %{item}?'
+    confirm_bond: '%{name}, você tem certeza que deseja remover o vínculo deste usuário: %{item}?'
+    confirm_admin: 'Você tem certeza que deseja %{item}: %{name}?'
   time:
     formats:
       default: "%d/%m/%Y"
@@ -11,11 +36,32 @@
       previous: '<i class="fas fa-angle-left"></i>'
       first: '<i class="fas fa-angle-double-left"></i>'
       last: '<i class="fas fa-angle-double-right"></i>'
+    bond:
+      not_found: VÍNCULO NÃO EXISTE!
+      term_text: Selecione um vinculo para gerar o Termo
+      title: '%{model}'
+    deposit:
+      title: '%{model}'
+      not_found: NENHUM ATIVO ENCONTRADO!
+    admin:
+      title: '%{model}'
+    ativo:
+      title: '%{model}'
+    acquisition:
+      title: '%{model}'
+      title_form_new: Nova %{model}
+      title_form_update: Atualizando %{model}
+    area:
+      title: '%{model}'
+    subarea:
+      title: '%{model}'
+    user:
+      title: '%{model}'
   activerecord:
     models:
       admin:
-        one: Administradores
-        other: Administradores
+        one: Usuário do Sistema
+        other: Usuários do Sistema
       ativo:
         one: Ativo
         other: Ativos
@@ -24,20 +70,29 @@
         other: Vinculos
       acquisition:
         one: Aquisição
-        other: Aquisiçãos
+        other: Aquisições
       attach_ativo:
         one: Ativo vinculado
         other: Ativos vinculados
       deposit:
         one: Depósito
         other: Depósitos
+      area:
+        one: Área
+        other: Áreas
+      subarea:
+        one: Subarea
+        other: Subareas
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       admin:
         id: ID
         login: "Logar-se"
         email: Email
         name: Nome
-        active: Ativo
+        active: Status
         profile: Perfil
         created_at: Criado em
         updated_at: Atualizado em
@@ -50,6 +105,7 @@
         model: Modelo
         serial: Serial
         tombo: Tombo
+        ativo_description: Descrição
         specification: Especificações
         contract_number: Nº Processo
         created_at: Criado em
@@ -58,7 +114,9 @@
         id: ID
         area: Área
         user_id: Usuário
+        subarea_id: Subarea
         note: Observações
+        homeoffice: Modalidade
         call_number: Número do chamado
         created_at: Criado em
         updated_at: Atualizado em
@@ -74,7 +132,7 @@
         modality: Modalidade da Aquisição
         source: Origem da Aquisição
         value_acquisition: Valor da Aquisição
-        contract_number: Número do Contrato
+        contract_number: Nº Contrato
         observations: Observações
         warranty_ends: Término da Garantia
         warranty_period: Duração da Garantia (em meses)
@@ -104,6 +162,7 @@
       subarea:
         id: ID
         area_id: Área
+        area: Área Mãe
         description: Descrição
         created_at: Criado em
         updated_at: Atualizado em
@@ -114,7 +173,8 @@
         updated_at: Atualizado em
       deposit:
         id: ID
-        descriptio: Descrição
+        tombo: Tombo
+        description: Descrição
         observation: Observações
         status: Status
         created_at: Criado em

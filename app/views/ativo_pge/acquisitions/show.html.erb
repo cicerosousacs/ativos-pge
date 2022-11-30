@@ -83,10 +83,10 @@
     <hr/>
     <div class="text-right">
       <%= link_to edit_ativo_pge_acquisition_path(@acquisition) do %>
-        <button class="btn btn-primary" type="button">Editar</button>
+        <button class="btn btn-primary" type="button"><%= t('button.edit') %></button>
       <% end %>
       <%= link_to ativo_pge_acquisitions_path do %>
-        <button class="btn btn-danger" type="button">Voltar</button>
+        <button class="btn btn-danger" type="button"><%= t('button.back') %></button>
       <% end %>
     </div>
   </form>
