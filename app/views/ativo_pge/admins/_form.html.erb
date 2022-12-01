@@ -1,12 +1,10 @@
 <% if @admin.errors.any? %>
-  <div class="alert alert-danger alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <ul>
-        <% @admin.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-  </div>
+  <% @admin.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <%= message %>
+    </div>
+  <% end %>
 <% end %>
 
 <%= form_with(model: [ :ativo_pge, @admin ], local: true ) do |form| %>
@@ -36,7 +34,7 @@
   <div class="text-right">
     <%= form.submit t('button.save'), class:"btn btn-xg btn-success" %>
     <%= link_to ativo_pge_admins_path do %>
-      <button class="btn btn-xg btn-danger" data-dismiss="modal"><%= t('button.cancel') %></button>
+      <button class="btn btn-danger" type="button"><%= t('button.cancel') %></button>
     <% end %>
   </div>
 <% end %>

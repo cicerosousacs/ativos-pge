@@ -1,10 +1,10 @@
 <% if @ativo.errors.any? %>
-  <div class="alert alert-danger alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <% @ativo.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
+  <% @ativo.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <%= message %>
+    </div>
+  <% end %>
 <% end %>
 
 <div class="card shadow mb-4">

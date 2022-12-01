@@ -106,6 +106,7 @@
         model: Modelo
         serial: Serial
         tombo: Tombo
+        acquisition: Nº do Processo
         ativo_description: Descrição
         specification: Especificações
         contract_number: Nº Processo
@@ -119,6 +120,7 @@
         note: Observações
         homeoffice: Home Office
         call_number: Número do chamado
+        attach_ativo: Ativo
         created_at: Criado em
         updated_at: Atualizado em
       acquisition:

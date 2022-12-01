@@ -210,7 +210,7 @@
     <%= javascript_include_tag 'application'%>
     <%= javascript_include_tag 'ativos'%>
     
-
+  
     <% if notice %>
       <%= javascript_tag do %>
         $.bootstrapGrowl('<%= notice %>',{
@@ -223,18 +223,15 @@
         });
       <% end %>
     <% end %>
-    
-    <% if alert %>
-      <%= javascript_tag do %>
-        $.bootstrapGrowl('<%= alert %>',{
-        type: 'danger', 
-        align: 'center',
-        width: 550,
-        delay: 3000, 
-        allow_dismiss: true, 
-        stackup_spacing: 10 
-        });
-      <% end %>
-    <% end %>
+
+    <script>
+      $(document).ready(function(){
+        setTimeout(function(){
+        $(".alert-danger").fadeTo(900,0,function(){
+          $(this).remove()
+          })
+        },2000)
+      });
+    </script>
   </body>
 </html>
