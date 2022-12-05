@@ -60,7 +60,7 @@
                   <i title=<%= t('subtitle.show') %> class="gray fa fa-eye"></i>
                 <% end %>
               <td style="width: 12px">
-                <%= link_to ativo_pge_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
+                <%= link_to ativo_pge_history_path(bond), remote: true, data: { target: '#historymodal', toggle: 'modal' } do  %>
                   <i title=<%= t('subtitle.history') %>  class="orange fa fa-clock-rotate-left"></i>
                 <% end %>
               <td style="width: 12px">

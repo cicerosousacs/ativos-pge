@@ -61,7 +61,7 @@ module ApplicationHelper
   end
 
   def form_title(action, model)
-    if action == 'new'
+    if action.eql? 'new'
       t(new_or_newa(model), model: model.model_name.human)
     else
       t('title.update_form', name: model_attribute(model))

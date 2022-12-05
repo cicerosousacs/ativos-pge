@@ -115,7 +115,7 @@ class AtivoPge::BondsController < AtivosController
 
   def set_description_ativo
     @description_ativo =
-      if action_name == 'new'
+      if action_name.eql? 'new'
         Deposit.joins(:ativo).status_warehouse.pluck(:ativo_id, :description)
       else
         Deposit.joins(:ativo).available_and_linked.pluck(:description, :ativo_id)
@@ -124,7 +124,7 @@ class AtivoPge::BondsController < AtivosController
 
   def set_tombo_ativo_select
     @tombo_ativo =
-      if action_name == 'new'
+      if action_name.eql? 'new'
         Deposit.joins(:ativo).status_warehouse.pluck('ativos.tombo', 'ativos.id')
       else
         Deposit.joins(:ativo).available_and_linked.pluck('ativos.tombo', 'ativos.id')
@@ -133,7 +133,7 @@ class AtivoPge::BondsController < AtivosController
 
   def set_status
     @status =
-      if action_name == 'new'
+      if action_name.eql? 'new'
         Status.linked_or_in_use.pluck(:description, :id)
       else
         Status.status_for_edition.pluck(:description, :id)

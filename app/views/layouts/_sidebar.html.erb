@@ -1,0 +1,74 @@
+<ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center">
+    <%= image_tag "service_desk_br.png", size: "200x40" %>
+  </a>
+  <hr class="sidebar-divider my-0">
+  <li class="nav-item active">
+    <%= link_to ativo_pge_welcome_index_path do %>
+      <i class="nav-link fas fa-fw fa-tachometer-alt">
+        <span style="font-family:Verdana;">Dashboard</span>
+      </i>
+    <% end %>     
+  </li>
+  <hr class="sidebar-divider my-0">
+  <li class="nav-item active">
+    <%= link_to ativo_pge_bonds_path do %>
+      <i class="nav-link fas fa-fw fa-sitemap">
+        <span style="font-family:Tahoma;">Vinculos</span></i>
+      <% end %>
+  </li>            
+  <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAtivos"
+      aria-expanded="true" aria-controls="collapseAtivos">
+      <i class="fas fa-fw fa-desktop"></i>
+      <span style="font-family:Tahoma;">Ativos</span>
+    </a>
+    <div id="collapseAtivos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <%= link_to ativo_pge_acquisitions_path do %>
+          <i class="collapse-item">Aquisição</i>
+        <% end %>
+        <%= link_to ativo_pge_ativos_path do %>
+          <i class="collapse-item ">Ativos</i>
+        <% end %>
+        <%= link_to ativo_pge_deposits_path do %>
+          <i class="collapse-item ">Depósito</i>
+        <% end %>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+      aria-expanded="true" aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-file"></i>
+      <span style="font-family:Tahoma;">Relatorios</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+
+      </div>
+    </div>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+      aria-expanded="true" aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span style="font-family:Tahoma;">Outros</span>
+    </a>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+      data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <%= link_to ativo_pge_areas_path do %>
+          <i class="collapse-item">Áreas</i>
+        <% end %>
+        <%= link_to ativo_pge_subareas_path do %>
+          <i class="collapse-item">Subareas</i>
+        <% end %>
+        <%= link_to ativo_pge_users_path do %>
+          <i class="collapse-item">Usuários</i>
+        <% end %>
+      </div>
+    </div>
+  </li>
+  <hr class="sidebar-divider d-none d-md-block">
+</ul>

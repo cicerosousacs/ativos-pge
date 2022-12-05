@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         post 'term_responsibility_asset'
       end
     end
-    get '/bonds/history/:id', to: 'bonds#history'
+    get '/bonds/history/:id', to: 'bonds#history', as: 'history'
   end
 
   namespace :ativo_pge do

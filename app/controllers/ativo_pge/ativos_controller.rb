@@ -15,7 +15,7 @@ class AtivoPge::AtivosController < AtivosController
     respond_to do |format|
       format.html
       format.pdf { @ativos = Ativo.pdf_ativo }
-      format.json { render json: @ativos}
+      format.json { render json: @ativos }
     end
   end
 

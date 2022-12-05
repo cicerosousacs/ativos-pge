@@ -1,7 +1,6 @@
 	TABLE MODEL ACQUISITION(aquisição)
 
-	rails g model Acquisition item:string quantity:string value:integer manager:string acquisition_date:date 
-	contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date observations:string
+	rails g model Acquisition item:string quantity:string value_acquisition:integer manager:string acquisition_date:date contract_number:string company:string interested_party:string modality:string source:string warranty_period:integer warranty_ends:date observations:string
 	
 	enum modality:{ 
 			CONCORRÊNCIA: 'CONCORRÊNCIA', 
@@ -20,8 +19,7 @@
 
 	TABLE MODEL ASSET(ativo)
 
-	rails g model Asset type:string brand:string model:string serial:string tombo:string
-	specification:text acquisition:references
+	rails g model Asset type:string brand:string model:string serial:string tombo:string specification:text acquisition:references
 	
   enum type: {
                 CAMERA: 'CAMERA',
@@ -53,34 +51,6 @@
                 WEBCAM: 'WEBCAM'
               }
 
-	TABLE MODEL DEPOSIT
-	
-	rails g model Deposit ativo:references status:references observation:string
-	
-	TABLE MODEL USER
-
-	rails g model User name:string email:string
-
-	TABLE MODEL AREA
-
-	rails g model Area description:string
-
-	TABLE MODEL SUBAREA
-
-	rails g model Subarea area:references description:string
-
-	TABLE MODEL BOND(vinculo)
-
-	rails g model Bond subarea:references user:references observation:string
-	
-	TABLE MODEL ORDER SERVICE
-
-	rails g model order_service bond:references number:integer(max 7 digitos) model: length: { is: 7 }
-
-	TABLE MODEL LINKED ASSET
-
-	rails g model linked_asset bond:references asset:references description:string status:references observation:string
-	
 	TABLE MODEL STATUS
 
 	rails g model Status description:string
@@ -90,40 +60,75 @@
 		INSERVÍVEL 
 		AGUARDANDO GARANTIA
 		VINCULADODISPONÍVEL
-	TABLE MODEL ADMIN
+
+	TABLE MODEL DEPOSIT
 	
-	rails g migration AddNameToAdmin name:string
-	rails g migration AddActiveToAdmin active:boolean, na migration adicionar default:true
-	rails g migration AddProfileToAdmin profile:integer
+	  rails g model Deposit asset:references status:references observation:string
+	
+	TABLE MODEL USER
+
+	  rails g model User name:string email:string
+
+	TABLE MODEL AREA
+
+	  rails g model Area description:string
+
+	TABLE MODEL SUBAREA
+
+	  rails g model Subarea area:references description:string
+
+	TABLE MODEL BOND(vinculo)
+
+	  rails g model Bond area:integer subarea:references user:references observation:string homeoffice:boolean
+	
+	TABLE MODEL BOND ASSET
+
+	  rails g model bond_asset bond:references asset:references description:string status:references observation:string homeoffice:boolean
+	
+  TABLE MODEL ORDER SERVICE
+
+	  rails g model order_service bond:references number:integer (max 7 digitos) model: length: { is: 7 }
 	
 	TABLE MODEL BOND_HISTORY( last_user, allocation_id, notice )
 	
-	rails g model bond_history bond:references allocation:jsonb received:jsonb removed:jsonb
-
+	  rails g model bond_history bond:references allocation:jsonb received:jsonb removed:jsonb
+		
+	TABLE MODEL ADMIN
+	
+    rails g migration AddNameToAdmin name:string
+    rails g migration AddActiveToAdmin active:boolean, na migration adicionar default:true
+    rails g migration AddProfileToAdmin profile:integer
 
 	#########################################
 
 	CONTROLLER
 
-	rails g controller ativo_pge::admins index
-	rails g controller ativo_pge::ativos index
-	rails g controller ativo_pge::acquisitions index
-	rails g controller ativo_pge::users index
-	rails g controller ativo_pge::areas index
-	rails g controller ativo_pge::subareas index
-	rails g controller ativo_pge::bonds index
-	rails g controller ativo_pge::deposits index
-	
+	rails g controller admins index
+  
+	rails g controller assets index
+	rails g controller acquisitions index
+	rails g controller users index
+	rails g controller areas index
+	rails g controller subareas index
+	rails g controller bonds index
+	rails g controller deposits index
+	rails g controller home index
+
 	################################################
 	
 	PAGINAÇÂO VIEW
-	rails g kaminari:views bootstrap4linked
+	rails g kaminari:views bootstrap4 linked
 
 
 	ENVIO DE EMAIL
 	rails g mailer SendEmail
 
+  rails g task setup
+  rails setup:add_acquisition
+  rails setup:add_status
 
+
+#########################################################################################
 
 RETORNAM O MESMO VALOR DE CONTAGEM
 
